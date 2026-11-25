@@ -52,10 +52,10 @@
   #plakat .pod { font-size: 24px; line-height: 1.4; margin: 24px 0 0; max-width: 30em; }
   #plakat .pod b { font-weight: 800; }
   #plakat .akce { display: flex; align-items: center; gap: 26px; margin-top: 28px; }
-  #plakat .ruka { position: absolute; right: 194px; top: 104px; font-size: 210px; }
+  #plakat .ruka { position: absolute; right: 149px; top: 112px; font-size: 300px; }
 
   /* Pole pro vlastní prezentaci a hudbu */
-  #soubory { position: absolute; right: 64px; top: 330px; width: 470px; display: flex; flex-direction: column; gap: 12px; }
+  #soubory { position: absolute; right: 64px; top: 452px; width: 470px; display: flex; flex-direction: column; gap: 12px; }
   .pole { display: flex; align-items: center; gap: 14px; height: 96px; padding: 14px 16px;
     border: 2.5px dashed var(--cerna); border-radius: 20px; cursor: pointer; }
   .pole > .ik { font-size: 44px; flex: none; stroke-width: 1.3; }
@@ -85,17 +85,6 @@
   #stavText.chyba { color: #8a0015; font-weight: 800; }
   body.bezi #plakat { display: none; }
 
-  /* Karta s QR kódem */
-  .qr { display: flex; gap: 20px; align-items: center; background: #fff; border-radius: 22px;
-    padding: 18px 24px 18px 18px; text-decoration: none; }
-  .qr .kod { width: 132px; height: 132px; flex: none; display: block; }
-  .qr b { display: block; font-weight: 800; font-size: 21px; line-height: 1.2; letter-spacing: -.02em; }
-  .qr small { display: block; font-size: 14px; opacity: .65; margin: 8px 0 2px; }
-  .qr u { font-weight: 800; font-size: 19px; text-underline-offset: 3px; }
-  .qr.velka { position: absolute; right: 64px; bottom: 96px; width: 470px; }
-  .qr.mala { margin-top: 20px; padding: 12px 18px 12px 12px; gap: 16px; border-radius: 18px; }
-  .qr.mala .kod { width: 92px; height: 92px; }
-  .qr.mala b { font-size: 17px; } .qr.mala small { font-size: 13px; margin: 5px 0 1px; } .qr.mala u { font-size: 16px; }
 
   /* Pracovní obrazovka po Startu: velká gesta a kamera */
   #pracovni { display: none; }
@@ -120,10 +109,54 @@
   .pripraveno { margin-top: 22px; font-weight: 900; font-size: 34px; line-height: 1.1; letter-spacing: -.035em; }
   .pripraveno small { display: block; font-weight: 600; font-size: 20px; letter-spacing: 0; opacity: .8; margin-top: 8px; }
 
+  /* Tlačítka s obrysem */
+  .obrys { font: inherit; font-weight: 800; font-size: 15px; padding: .5em 1.1em; border-radius: 999px;
+    border: 2px solid var(--cerna); background: none; color: var(--cerna); cursor: pointer; }
+  #plakat .ucit { font-size: 24px; border-width: 2.5px; padding: .75em 1.4em; }
+  footer .ucit { display: none; }
+  body.bezi footer .ucit { display: inline-block; }
+
+  /* Nauč se gesta: zkouška gest před kamerou, při které se nic nespouští */
+  #zkouska { display: none; }
+  body.zkouska #zkouska { display: block; }
+  body.zkouska #plakat, body.zkouska #pracovni, body.zkouska #zmenit, body.zkouska footer .ucit { display: none; }
+  #zkouska .nahore { display: flex; justify-content: space-between; align-items: center; }
+  #zkouska h2 { font-weight: 900; font-size: 44px; letter-spacing: -.045em; margin: 0; }
+  #zkouska .rozvrh { display: grid; grid-template-columns: 800px 1fr; gap: 48px; margin-top: 26px; }
+  #zkouskaKam { position: relative; aspect-ratio: 16 / 10; border-radius: 28px; }
+  #zkouska .rada { font-size: 17px; line-height: 1.45; margin: 16px 0 0; opacity: .85; }
+  #zkouskaIkona { display: flex; font-size: 190px; margin: 14px 0 0 -14px; height: 190px; }
+  #zkouskaIkona .ik { stroke-width: 1.1; }
+  #zkouskaIkona .ik + .ik { margin-left: -100px; }
+  #zkouskaUkol h3 { font-weight: 900; font-size: 58px; line-height: 1; letter-spacing: -.05em; margin: 6px 0 0; }
+  #zkouskaJak { font-size: 22px; line-height: 1.4; margin: 16px 0 0; }
+  #zkouskaCo { font-size: 18px; line-height: 1.4; margin: 10px 0 0; opacity: .75; }
+  #zkouskaHotovo { visibility: hidden; display: inline-flex; align-items: center; gap: .5em; margin-top: 18px;
+    font-weight: 900; font-size: 26px; background: var(--cerna); color: var(--zluta); padding: .4em 1em; border-radius: 999px; }
+  #zkouskaUkol.splneno #zkouskaHotovo { visibility: visible; }
+  #zkouskaUkol .tlacitka { margin-top: 18px; display: flex; gap: 12px; }
+  #zkouskaKonec { display: none; }
+  #zkouska.konec #zkouskaUkol > :not(#zkouskaKonec) { display: none; }
+  #zkouska.konec #zkouskaKonec { display: block; }
+  #zkouskaKonec h3 { font-size: 110px; margin-top: 40px; }
+  #zkouskaKonec p { font-size: 24px; line-height: 1.4; margin: 18px 0 26px; max-width: 22em; }
+  #zkouskaKonec .plne { font: inherit; font-weight: 900; font-size: 28px; letter-spacing: -.02em; padding: .6em 1.6em; border: 0;
+    border-radius: 999px; background: var(--cerna); color: var(--zluta); cursor: pointer; margin-right: 12px; }
+  #zkouskaKonec .obrys { font-size: 20px; padding: .75em 1.4em; }
+  #zkouskaKroky { position: absolute; left: 64px; right: 64px; bottom: 96px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  #zkouskaKroky div { display: flex; align-items: center; gap: 10px; height: 54px; padding: 0 16px; border: 2px solid var(--cerna);
+    border-radius: 999px; font-weight: 800; font-size: 15px; opacity: .45; white-space: nowrap; }
+  #zkouskaKroky div .ik { font-size: 28px; flex: none; }
+  #zkouskaKroky div.ted { opacity: 1; }
+  #zkouskaKroky div.hotovo { opacity: 1; background: var(--cerna); color: var(--zluta); }
+  body.zkouska #nahledBox { display: flex; }
+  body.zkouska #nahledZavrit { display: none; }
+
   /* Patička a nápověda ke klávesnici */
   footer { position: absolute; left: 64px; right: 64px; bottom: 26px; display: flex; justify-content: space-between;
     align-items: center; font-size: 15px; border-top: 2px solid var(--cerna); padding-top: 12px; }
   footer a { font-weight: 800; text-underline-offset: 3px; }
+  footer .oddelovac { margin: 0 .6em; opacity: .5; }
   #napoveda { width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 2px solid var(--cerna); background: none;
     color: var(--cerna); font: inherit; font-weight: 800; font-size: 18px; cursor: pointer; }
   #klavesy { position: absolute; right: 64px; bottom: 96px; z-index: 3; display: none; width: 470px; padding: 20px 24px;
@@ -179,7 +212,7 @@
 </head>
 <body>
 
-<!-- Sada obrysových ikon (Tabler Icons, licence MIT) a QR kód na webseoai.cz -->
+<!-- Sada obrysových ikon (Tabler Icons, licence MIT) -->
 <svg class="sada" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <symbol id="i-dlan" viewBox="0 0 24 24"><path d="M8 13v-7.5a1.5 1.5 0 0 1 3 0v6.5" /><path d="M11 5.5v-2a1.5 1.5 0 1 1 3 0v8.5" /><path d="M14 5.5a1.5 1.5 0 0 1 3 0v6.5" /><path d="M17 7.5a1.5 1.5 0 0 1 3 0v8.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7a69.74 69.74 0 0 1 -.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47" /></symbol>
   <symbol id="i-vpravo" viewBox="0 0 24 24"><path d="M12 8h8.5a1.5 1.5 0 0 1 0 3h-7.5" /><path d="M13.5 11h2a1.5 1.5 0 0 1 0 3h-2.5" /><path d="M14.5 14a1.5 1.5 0 0 1 0 3h-1.5" /><path d="M13.5 17a1.5 1.5 0 1 1 0 3h-4.5a6 6 0 0 1 -6 -6v-2v.208a6 6 0 0 1 2.7 -5.012l.3 -.196q .718 -.468 5.728 -3.286a1.5 1.5 0 0 1 2.022 .536c.44 .734 .325 1.674 -.28 2.28l-1.47 1.47" /></symbol>
@@ -193,7 +226,6 @@
   <symbol id="i-prezentace" viewBox="0 0 24 24"><path d="M3 4l18 0" /><path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10" /><path d="M12 16l0 4" /><path d="M9 20l6 0" /><path d="M8 12l3 -3l2 2l3 -3" /></symbol>
   <symbol id="i-hudba" viewBox="0 0 24 24"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M9 17v-13h10v13" /><path d="M9 8h10" /></symbol>
   <symbol id="i-kos" viewBox="0 0 24 24"><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></symbol>
-  <symbol id="i-qr" viewBox="0 0 25 25"><path stroke="#0b0b0b" stroke-width="1" stroke-linecap="butt" shape-rendering="crispEdges" d="M0 0.5h7m4 0h1m4 0h1m1 0h7M0 1.5h1m5 0h1m2 0h1m1 0h3m1 0h1m2 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h3m3 0h1m1 0h1m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h3m1 0h3m3 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m3 0h3m3 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h3m2 0h1m1 0h2m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m1 0h1m4 0h1M0 8.5h1m1 0h5m4 0h1m6 0h5M0 9.5h1m2 0h1m1 0h1m2 0h2m1 0h3m2 0h1m2 0h1m3 0h1M2 10.5h1m3 0h3m1 0h2m1 0h9m1 0h2M1 11.5h1m2 0h2m1 0h1m2 0h1m2 0h1m1 0h1m1 0h3m4 0h1M0 12.5h2m1 0h1m2 0h2m1 0h4m1 0h2m1 0h4m1 0h3M0 13.5h3m6 0h1m6 0h1m2 0h1m1 0h1m1 0h1M0 14.5h1m1 0h6m1 0h1m1 0h2m2 0h2m1 0h4m1 0h2M0 15.5h1m1 0h1m1 0h2m1 0h5m2 0h1m1 0h1m2 0h2m3 0h1M0 16.5h1m5 0h2m1 0h1m1 0h1m4 0h5m1 0h1M8 17.5h2m2 0h5m3 0h2M0 18.5h7m6 0h2m1 0h1m1 0h1m1 0h1m1 0h3M0 19.5h1m5 0h1m1 0h1m1 0h1m1 0h2m2 0h1m3 0h2m1 0h1M0 20.5h1m1 0h3m1 0h1m1 0h1m3 0h1m1 0h7m1 0h1m1 0h1M0 21.5h1m1 0h3m1 0h1m1 0h2m7 0h2m1 0h5M0 22.5h1m1 0h3m1 0h1m1 0h1m1 0h3m4 0h1m3 0h2m1 0h1M0 23.5h1m5 0h1m2 0h3m2 0h3m1 0h4m2 0h1M0 24.5h7m1 0h4m5 0h1m1 0h6"/></symbol>
 </svg>
 
 <div id="uvod">
@@ -208,6 +240,7 @@
         <b>Prezentace, hudba ani obraz z kamery neopouštějí tvůj počítač.</b></p>
       <div class="akce">
         <button id="start" disabled>Start</button>
+        <button class="obrys ucit">Nauč se gesta</button>
         <div id="stavText">Načítám...</div>
       </div>
       <div id="soubory">
@@ -227,10 +260,6 @@
         </div>
         <div id="poleZprava">Přetáhni sem vlastní PDF a MP3. Uloží se v tomto prohlížeči a příště tu budou.</div>
       </div>
-      <a class="qr velka" href="https://webseoai.cz" target="_blank" rel="noopener">
-        <svg class="kod"><use href="#i-qr"/></svg>
-        <span><b>Weby, o kterých ví Google i umělá inteligence.</b><small>Naskenuj telefonem</small><u>webseoai.cz</u></span>
-      </a>
     </section>
 
     <!-- Pracovní obrazovka po Startu -->
@@ -256,12 +285,35 @@
             </div>
           </div>
           <div class="pripraveno">Připraveno.<small>Ukaž otevřenou dlaň a prezentace se spustí.</small></div>
-          <a class="qr mala" href="https://webseoai.cz" target="_blank" rel="noopener">
-        <svg class="kod"><use href="#i-qr"/></svg>
-        <span><b>Weby, o kterých ví Google i umělá inteligence.</b><small>Naskenuj telefonem</small><u>webseoai.cz</u></span>
-      </a>
         </div>
       </div>
+    </section>
+
+    <!-- Nauč se gesta -->
+    <section id="zkouska">
+      <div class="nahore"><h2>Nauč se gesta</h2><button id="zkouskaZavrit" class="obrys">Zavřít</button></div>
+      <div class="rozvrh">
+        <div>
+          <div id="zkouskaKam"></div>
+          <p class="rada">Gesto chvíli podrž, dokud se kroužek vpravo dole nenaplní. Pod obrazem vidíš, co stránka právě rozpoznala. Při zkoušce se nic nespouští.</p>
+        </div>
+        <div id="zkouskaUkol">
+          <div class="stitek"><i></i><span id="zkouskaPoradi"></span></div>
+          <div id="zkouskaIkona"></div>
+          <h3 id="zkouskaNazev"></h3>
+          <p id="zkouskaJak"></p>
+          <p id="zkouskaCo"></p>
+          <div id="zkouskaHotovo">Výborně.</div>
+          <div class="tlacitka"><button id="zkouskaPreskocit" class="obrys">Přeskočit toto gesto</button></div>
+          <div id="zkouskaKonec">
+            <h3>Umíš to.</h3>
+            <p>Všechna gesta máš vyzkoušená. Teď můžeš pustit prezentaci.</p>
+            <button id="zkouskaPustit" class="plne">Pustit prezentaci</button>
+            <button id="zkouskaZnovu" class="obrys">Projít znovu</button>
+          </div>
+        </div>
+      </div>
+      <div id="zkouskaKroky"></div>
     </section>
 
     <div id="klavesy">
@@ -278,8 +330,11 @@
     </div>
 
     <footer>
-      <div>Vytvořil <a href="https://pprojects.cz" target="_blank" rel="author noopener">Pavel Horák</a></div>
+      <div>Vytvořil <a href="https://pprojects.cz" target="_blank" rel="author noopener">Pavel Horák</a>
+        <span class="oddelovac">·</span> Weby, o kterých ví Google i umělá inteligence:
+        <a href="https://webseoai.cz" target="_blank" rel="noopener">webseoai.cz</a></div>
       <div class="vpravo">
+        <button class="obrys ucit">Nauč se gesta</button>
         <button id="zmenit">Změnit prezentaci nebo hudbu</button>
         <button id="napoveda" title="Záloha na klávesnici" aria-label="Záloha na klávesnici">?</button>
       </div>
@@ -700,10 +755,27 @@ async function nactiVse() {
 // ---------------------------------------------------------------
 // START: kamera a celá obrazovka (prohlížeč k tomu vyžaduje kliknutí)
 // ---------------------------------------------------------------
-elStart.addEventListener("click", async () => {
+async function zapniKameru() {
+  if (!elKamera.srcObject) {
+    const proud = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" },
+      audio: false
+    });
+    elKamera.srcObject = proud;
+    await elKamera.play();
+    elNahled.width = elKamera.videoWidth || 640;
+    elNahled.height = elKamera.videoHeight || 360;
+    elNahledCekani.style.display = "none";
+    elNahled.style.display = "block";
+    elNahledText.style.display = "block";
+  }
+  if (!smyckaBezi) { smyckaBezi = true; requestAnimationFrame(smycka); }
+}
+
+async function spust() {
   elStart.disabled = true;
   try {
-    if (document.documentElement.requestFullscreen) {
+    if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(chyba => console.log(chyba));
     }
     // Odemknutí zvuku, aby ho později šlo spustit gestem
@@ -714,29 +786,125 @@ elStart.addEventListener("click", async () => {
       hudba.currentTime = 0;
       hudba.muted = false;
     }
-    if (!elKamera.srcObject) {
-      hlaseni("Zapínám kameru...");
-      const proud = await navigator.mediaDevices.getUserMedia({
-        video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" },
-        audio: false
-      });
-      elKamera.srcObject = proud;
-      await elKamera.play();
-      elNahled.width = elKamera.videoWidth || 640;
-      elNahled.height = elKamera.videoHeight || 360;
-      elNahledCekani.style.display = "none";
-      elNahled.style.display = "block";
-      elNahledText.style.display = "block";
-    }
+    hlaseni("Zapínám kameru...");
+    await zapniKameru();
     stav = "pripraveno";
     hlaseni("Připraveno. Ukaž otevřenou dlaň.", "ok");
     document.body.classList.add("bezi");   // plakát vystřídá pracovní obrazovka s gesty a kamerou
-    if (!smyckaBezi) { smyckaBezi = true; requestAnimationFrame(smycka); }
   } catch (chyba) {
     console.log(chyba);
     elStart.disabled = false;
     hlaseni("Kameru se nepodařilo zapnout: " + (chyba.message || chyba), "chyba");
   }
+}
+elStart.addEventListener("click", spust);
+
+// ---------------------------------------------------------------
+// NAUČ SE GESTA: zkouška gest, při které se nic nespouští
+// ---------------------------------------------------------------
+const ZKOUSKA_KROKY = [
+  { gesto: "dlan", ikona: "i-dlan", kratce: "Dlaň", nazev: "Ukaž otevřenou dlaň",
+    jak: "Zvedni ruku dlaní ke kameře, prsty natažené nahoru.", co: "V prezentaci: spustí promítání." },
+  { gesto: "vpravo", ikona: "i-vpravo", kratce: "Doprava", nazev: "Ukazovák doprava",
+    jak: "Natáhni ukazovák a miř jím k pravému okraji obrazovky. Je jedno, jestli je ruka ke kameře dlaní nebo hřbetem.",
+    co: "V prezentaci: další stránka." },
+  { gesto: "vlevo", ikona: "i-vlevo", kratce: "Doleva", nazev: "Ukazovák doleva",
+    jak: "Natáhni ukazovák a miř jím k levému okraji obrazovky.", co: "V prezentaci: předchozí stránka." },
+  { gesto: "ukazZapnout", ikona: "i-nahoru", dvojity: true, kratce: "Oba nahoru", nazev: "Oba ukazováky nahoru",
+    jak: "Zvedni obě ruce a na každé vztyč jen ukazovák.",
+    co: "V prezentaci: zapne ukazovátko. Červená tečka pak sleduje tvůj prst." },
+  { gesto: "ukazVypnout", ikona: "i-dolu", dvojity: true, kratce: "Oba dolů", nazev: "Oba ukazováky dolů",
+    jak: "Otoč obě ruce tak, aby ukazováky mířily dolů.", co: "V prezentaci: vypne ukazovátko." },
+  { gesto: "pest", ikona: "i-pest", kratce: "Pěst", nazev: "Sevři pěst",
+    jak: "Zvedni ruku a sevři všechny prsty.", co: "V prezentaci: ukončí promítání." }
+];
+const elZkouska = document.getElementById("zkouska");
+const elZkouskaUkol = document.getElementById("zkouskaUkol");
+const elZkouskaKroky = document.getElementById("zkouskaKroky");
+let zkouskaKrok = 0;          // který krok se právě zkouší
+let zkouskaPauza = false;     // krátká chvíle po splnění, než přijde další gesto
+let zkouskaNavrat = "ceka";   // kam se vrátit po zavření
+
+function ikonaZnacka(id, dvojity) {
+  const jedna = '<svg class="ik"><use href="#' + id + '"/></svg>';
+  return dvojity ? jedna + jedna : jedna;
+}
+
+elZkouskaKroky.innerHTML = ZKOUSKA_KROKY.map(krok =>
+  "<div>" + ikonaZnacka(krok.ikona, false) + "<span>" + krok.kratce + "</span></div>").join("");
+
+function zkouskaUkaz() {
+  const konec = zkouskaKrok >= ZKOUSKA_KROKY.length;
+  elZkouska.classList.toggle("konec", konec);
+  elZkouskaUkol.classList.remove("splneno");
+  Array.from(elZkouskaKroky.children).forEach((prvek, i) => {
+    prvek.classList.toggle("hotovo", i < zkouskaKrok);
+    prvek.classList.toggle("ted", i === zkouskaKrok);
+  });
+  if (konec) return;
+  const krok = ZKOUSKA_KROKY[zkouskaKrok];
+  document.getElementById("zkouskaPoradi").textContent = "Gesto " + (zkouskaKrok + 1) + " ze " + ZKOUSKA_KROKY.length;
+  document.getElementById("zkouskaIkona").innerHTML = ikonaZnacka(krok.ikona, krok.dvojity);
+  document.getElementById("zkouskaNazev").textContent = krok.nazev;
+  document.getElementById("zkouskaJak").textContent = krok.jak;
+  document.getElementById("zkouskaCo").textContent = krok.co;
+}
+
+function zkouskaDalsi() {
+  zkouskaPauza = false;
+  zkouskaKrok++;
+  zkouskaUkaz();
+}
+
+function zkouskaSplneno() {
+  zkouskaPauza = true;
+  elZkouskaUkol.classList.add("splneno");
+  elZkouskaKroky.children[zkouskaKrok].classList.add("hotovo");
+  const krokPriSplneni = zkouskaKrok;
+  setTimeout(() => {
+    if (stav === "zkouska" && zkouskaKrok === krokPriSplneni && zkouskaPauza) zkouskaDalsi();
+  }, 1100);
+}
+
+async function zkouskaOtevri() {
+  if (stav !== "ceka" && stav !== "pripraveno") return;
+  const odkud = stav;
+  try {
+    await zapniKameru();
+  } catch (chyba) {
+    console.log(chyba);
+    hlaseni("Kameru se nepodařilo zapnout: " + (chyba.message || chyba), "chyba");
+    return;
+  }
+  if (stav !== odkud) return;
+  zkouskaNavrat = odkud;
+  if (hudbaHraje) hudbaStop();
+  stav = "zkouska";
+  zkouskaKrok = 0;
+  zkouskaPauza = false;
+  document.body.classList.remove("sNapovedou");
+  document.body.classList.add("zkouska");
+  document.getElementById("zkouskaKam").appendChild(elNahledBox);
+  zkouskaUkaz();
+}
+
+function zkouskaZavri() {
+  if (stav !== "zkouska") return;
+  stav = zkouskaNavrat;
+  zkouskaPauza = false;
+  kruhSkryj();
+  document.body.classList.remove("zkouska");
+  elKamMisto.appendChild(elNahledBox);
+}
+
+for (const tlacitko of document.querySelectorAll(".ucit")) tlacitko.addEventListener("click", zkouskaOtevri);
+document.getElementById("zkouskaZavrit").addEventListener("click", zkouskaZavri);
+document.getElementById("zkouskaPreskocit").addEventListener("click", () => { if (stav === "zkouska") zkouskaDalsi(); });
+document.getElementById("zkouskaZnovu").addEventListener("click", () => { zkouskaKrok = 0; zkouskaPauza = false; zkouskaUkaz(); });
+document.getElementById("zkouskaPustit").addEventListener("click", () => {
+  const uzBezelo = zkouskaNavrat === "pripraveno";
+  zkouskaZavri();
+  if (!uzBezelo) spust();
 });
 
 // ---------------------------------------------------------------
@@ -796,6 +964,10 @@ function ukazStranu(cislo) {
 }
 
 function proved(gesto) {
+  if (stav === "zkouska") {          // ve zkoušce se gesto jen potvrdí, nic se nespouští
+    if (plati(gesto)) zkouskaSplneno();
+    return;
+  }
   if (gesto === "dlan" && stav === "pripraveno") {
     ukazStranu(0);
     elUvod.style.display = "none";
@@ -822,6 +994,9 @@ function proved(gesto) {
 }
 
 function plati(gesto) {
+  if (stav === "zkouska") {
+    return !zkouskaPauza && zkouskaKrok < ZKOUSKA_KROKY.length && gesto === ZKOUSKA_KROKY[zkouskaKrok].gesto;
+  }
   if (stav === "pripraveno") return gesto === "dlan";
   if (stav === "prezentace") {
     if (gesto === "pest") return true;
@@ -905,7 +1080,7 @@ let parohOd = 0, parohNaposled = 0;
 
 function krok(gesto, ted) {
   // Paroháč: hudba hraje, dokud gesto trvá
-  if (gesto === "parohac") {
+  if (gesto === "parohac" && stav !== "zkouska") {
     if (!parohOd) parohOd = ted;
     parohNaposled = ted;
     if (!hudbaHraje && ted - parohOd >= PAROHAC_NABEH) hudbaStart();
@@ -992,8 +1167,16 @@ let hudbaKlavesou = false;
 
 document.addEventListener("keydown", udalost => {
   const k = udalost.key;
+  if (stav === "zkouska") {
+    if (k === "Escape" || k === "Backspace") { udalost.preventDefault(); zkouskaZavri(); }
+    else if (k === "Enter" || k === " " || k === "ArrowRight") {
+      udalost.preventDefault();
+      if (zkouskaKrok < ZKOUSKA_KROKY.length) zkouskaDalsi();
+    }
+    return;
+  }
   if (stav === "ceka") {
-    if (k === "Enter") elStart.click();
+    if (k === "Enter" && !(document.activeElement && document.activeElement.tagName === "BUTTON")) elStart.click();
     return;
   }
   if (stav !== "pripraveno" && stav !== "prezentace") return;
