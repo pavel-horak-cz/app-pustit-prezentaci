@@ -73,9 +73,9 @@
   body.tahne .pole { border-style: solid; background: #fff; }
   #poleZprava { min-height: 44px; font-size: 15px; font-weight: 600; line-height: 1.4; }
   #poleZprava.chyba { color: #8a0015; font-weight: 800; }
-  #zmenit { display: none; font: inherit; font-weight: 800; font-size: 15px; padding: .5em 1.1em; border-radius: 999px;
-    border: 2px solid var(--cerna); background: none; color: var(--cerna); cursor: pointer; }
-  body.bezi #zmenit { display: inline-block; }
+  #pracovni .nahore .vlevo { display: flex; align-items: center; gap: 22px; }
+  #zmenit { display: inline-flex; align-items: center; gap: .4em; font-size: 18px; padding: .55em 1.2em .55em .9em; border-width: 2.5px; }
+  #zmenit .ik { font-size: 1.3em; stroke-width: 2.2; }
   footer .vpravo { display: flex; align-items: center; gap: 14px; }
   #plakat .ruka .ik { stroke-width: .9; }
   #start { font: inherit; font-size: 40px; font-weight: 900; letter-spacing: -.02em; padding: .55em 1.9em;
@@ -119,7 +119,7 @@
   /* Nauč se gesta: zkouška gest před kamerou, při které se nic nespouští */
   #zkouska { display: none; }
   body.zkouska #zkouska { display: block; }
-  body.zkouska #plakat, body.zkouska #pracovni, body.zkouska #zmenit, body.zkouska footer .ucit { display: none; }
+  body.zkouska #plakat, body.zkouska #pracovni, body.zkouska footer .ucit { display: none; }
   #zkouska .nahore { display: flex; justify-content: space-between; align-items: center; }
   #zkouska h2 { font-weight: 900; font-size: 44px; letter-spacing: -.045em; margin: 0; }
   #zkouska .rozvrh { display: grid; grid-template-columns: 800px 1fr; gap: 48px; margin-top: 26px; }
@@ -223,6 +223,7 @@
   <symbol id="i-parohac" viewBox="0 0 24 24"><path d="M11 11.5v-1a1.5 1.5 0 0 1 3 0v1.5" /><path d="M17 12v-6.5a1.5 1.5 0 0 1 3 0v10.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7a69.74 69.74 0 0 1 -.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47" /><path d="M14 10.5a1.5 1.5 0 0 1 3 0v1.5" /><path d="M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5" /></symbol>
   <symbol id="i-krizek" viewBox="0 0 24 24"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></symbol>
   <symbol id="i-kamera" viewBox="0 0 24 24"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" /><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></symbol>
+  <symbol id="i-zpet" viewBox="0 0 24 24"><path d="M5 12l14 0" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></symbol>
   <symbol id="i-prezentace" viewBox="0 0 24 24"><path d="M3 4l18 0" /><path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10" /><path d="M12 16l0 4" /><path d="M9 20l6 0" /><path d="M8 12l3 -3l2 2l3 -3" /></symbol>
   <symbol id="i-hudba" viewBox="0 0 24 24"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M9 17v-13h10v13" /><path d="M9 8h10" /></symbol>
   <symbol id="i-kos" viewBox="0 0 24 24"><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></symbol>
@@ -264,7 +265,13 @@
 
     <!-- Pracovní obrazovka po Startu -->
     <section id="pracovni">
-      <div class="nahore"><h2>Ovládej rukou</h2><div class="stitek"><i></i>Kamera běží</div></div>
+      <div class="nahore">
+        <div class="vlevo">
+          <button id="zmenit" class="obrys" title="Zpět na úvodní obrazovku"><svg class="ik"><use href="#i-zpet"/></svg>Zpět</button>
+          <h2>Ovládej rukou</h2>
+        </div>
+        <div class="stitek"><i></i>Kamera běží</div>
+      </div>
       <div class="rozvrh">
         <div id="gesta">
         <div class="karta"><div class="znak"><svg class="ik"><use href="#i-dlan"/></svg></div><div><b>Otevřená dlaň</b><span>Spustit prezentaci</span></div></div>
@@ -335,7 +342,6 @@
         <a href="https://webseoai.cz" target="_blank" rel="noopener">webseoai.cz</a></div>
       <div class="vpravo">
         <button class="obrys ucit">Nauč se gesta</button>
-        <button id="zmenit">Změnit prezentaci nebo hudbu</button>
         <button id="napoveda" title="Záloha na klávesnici" aria-label="Záloha na klávesnici">?</button>
       </div>
     </footer>
@@ -1216,7 +1222,7 @@ document.addEventListener("keyup", udalost => {
 let casSnimku = -1;
 let smyckaBezi = false;
 
-// Návrat z pracovní obrazovky na úvodní, kde se dá vyměnit prezentace a hudba. Kamera běží dál.
+// Tlačítko Zpět: návrat z pracovní obrazovky na úvodní, kde se dá vyměnit prezentace a hudba. Kamera běží dál.
 document.getElementById("zmenit").addEventListener("click", () => {
   if (stav !== "pripraveno") return;
   if (hudbaHraje) hudbaStop();
