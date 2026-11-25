@@ -564,7 +564,7 @@ const OTOCIT_SMER = false;
 // Jak dlouho se musí gesto držet (v milisekundách)
 const DRZENI = { dlan: 1000, vpravo: 900, vlevo: 900, pest: 1300, ukazZapnout: 800, ukazVypnout: 800 };
 const OPAKOVANI_LISTOVANI = 1200;  // při trvalém držení ukazováku listuje dál po této době
-const PAROHAC_NABEH = 200;         // paroháč musí vydržet tak dlouho, než začne hudba
+const PAROHAC_NABEH = 500;         // paroháč musí vydržet tak dlouho, než začne hudba
 const TOLERANCE_VYPADKU = 250;     // krátký výpadek rozpoznání se ignoruje
 
 // Ikona gesta v kroužku (názvy odpovídají značkám v sadě ikon na začátku stránky)
@@ -1116,6 +1116,25 @@ function jeNatazeny(body, koren, kloub, spicka) {
   return vzdalenost(body[spicka], body[koren]) > vzdalenost(body[kloub], body[koren]) * 1.6;
 }
 
+// Míří prst v obraze kamery jasně nahoru?
+function miriNahoru(bodyObraz, koren, spicka, pomerStran) {
+  const dx = (bodyObraz[spicka].x - bodyObraz[koren].x) * pomerStran;
+  const dy = bodyObraz[spicka].y - bodyObraz[koren].y;
+  return dy < 0 && Math.abs(dy) > Math.abs(dx) * 1.2;
+}
+
+// Paroháč spouští hudbu, proto se hlídá přísněji než ostatní gesta, aby se nespustil omylem
+// při ukazování: ruka musí být zvednutá, ukazovák i malíček jasně natažené a oba mířit nahoru,
+// prostředník a prsteníček jasně skrčené.
+function jeParohac(body3d, bodyObraz, pomerStran) {
+  const natazeni = (koren, kloub, spicka) =>
+    vzdalenost(body3d[spicka], body3d[koren]) / vzdalenost(body3d[kloub], body3d[koren]);
+  if (natazeni(5, 6, 8) < 1.75 || natazeni(17, 18, 20) < 1.75) return false;
+  if (natazeni(9, 10, 12) > 1.4 || natazeni(13, 14, 16) > 1.4) return false;
+  if (bodyObraz[0].y <= bodyObraz[9].y) return false;   // zápěstí musí být pod prsty
+  return miriNahoru(bodyObraz, 5, 8, pomerStran) && miriNahoru(bodyObraz, 17, 20, pomerStran);
+}
+
 // body3d: body ruky v prostoru, bodyObraz: body v obraze kamery (0 až 1), pomerStran: šířka / výška obrazu
 function urciGesto(body3d, bodyObraz, pomerStran) {
   const ukazovak    = jeNatazeny(body3d, 5, 6, 8);
@@ -1123,7 +1142,7 @@ function urciGesto(body3d, bodyObraz, pomerStran) {
   const prstenik    = jeNatazeny(body3d, 13, 14, 16);
   const malik       = jeNatazeny(body3d, 17, 18, 20);
 
-  if (ukazovak && malik && !prostrednik && !prstenik) return "parohac";
+  if (ukazovak && malik && !prostrednik && !prstenik && jeParohac(body3d, bodyObraz, pomerStran)) return "parohac";
 
   // Listování: stačí natažený ukazovák, který míří do strany. Ostatní prsty se
   // neposuzují, protože při ukázání do strany je ruka ke kameře bokem a skrčené
@@ -1276,7 +1295,8 @@ let parohOd = 0, parohNaposled = 0;
 
 function krok(gesto, ted) {
   // Paroháč: hudba hraje, dokud gesto trvá
-  if (gesto === "parohac" && stav !== "zkouska") {
+  // Paroháč neplatí při zkoušce gest a při zapnutém ukazovátku, kdy se rukou ukazuje a hrozí záměna
+  if (gesto === "parohac" && stav !== "zkouska" && !ukazovatko) {
     if (!parohOd) parohOd = ted;
     parohNaposled = ted;
     if (!hudbaHraje && ted - parohOd >= PAROHAC_NABEH) hudbaStart();
