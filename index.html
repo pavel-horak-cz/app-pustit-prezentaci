@@ -51,6 +51,8 @@
   #plakat h1 { font-weight: 900; font-size: 158px; line-height: .92; letter-spacing: -.06em; margin: 22px 0 0; }
   #plakat .pod { font-size: 24px; line-height: 1.4; margin: 24px 0 0; max-width: 30em; }
   #plakat .pod b { font-weight: 800; }
+  html[lang="en"] #plakat h1 { font-size: 150px; }
+  html[lang="en"] #plakat .pod { margin-top: 36px; }
   #plakat .akce { display: flex; align-items: center; gap: 26px; margin-top: 28px; }
   #plakat .ruka { position: absolute; right: 149px; top: 112px; font-size: 300px; }
 
@@ -157,6 +159,7 @@
     align-items: center; font-size: 15px; border-top: 2px solid var(--cerna); padding-top: 12px; }
   footer a { font-weight: 800; text-underline-offset: 3px; }
   footer .oddelovac { margin: 0 .6em; opacity: .5; }
+  #jazyk { height: 38px; padding: 0 .9em; letter-spacing: .06em; }
   #napoveda { width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 2px solid var(--cerna); background: none;
     color: var(--cerna); font: inherit; font-weight: 800; font-size: 18px; cursor: pointer; }
   #klavesy { position: absolute; right: 64px; bottom: 96px; z-index: 3; display: none; width: 470px; padding: 20px 24px;
@@ -342,6 +345,7 @@
         <a href="https://webseoai.cz" target="_blank" rel="noopener">webseoai.cz</a></div>
       <div class="vpravo">
         <button class="obrys ucit">Nauč se gesta</button>
+        <button id="jazyk" class="obrys" title="Přepnout jazyk" aria-label="Přepnout jazyk">EN</button>
         <button id="napoveda" title="Záloha na klávesnici" aria-label="Záloha na klávesnici">?</button>
       </div>
     </footer>
@@ -370,10 +374,185 @@ import { FilesetResolver, HandLandmarker } from "./lib/tasks-vision/vision_bundl
 import * as pdfjsLib from "./lib/pdfjs/pdf.min.mjs";
 
 // ---------------------------------------------------------------
+// JAZYK: čeština je v textech stránky, angličtina v tomto slovníku (klíčem je český text)
+// ---------------------------------------------------------------
+const EN = {
+  "Pusť prezentaci rukou": "Run your slides by hand",
+  "Ovládáno gesty": "Gesture controlled",
+  "Pusť": "Run your",
+  "prezentaci": "slides",
+  "rukou.": "by hand.",
+  "Žádné hledání oken, žádný ovladač. Stačí kamera notebooku a pár gest před obrazovkou.": "No hunting for windows, no clicker. All you need is a laptop camera and a few hand gestures.",
+  "Prezentace, hudba ani obraz z kamery neopouštějí tvůj počítač.": "Your slides, music and camera image never leave your computer.",
+  "Nauč se gesta": "Learn the gestures",
+  "Načítám...": "Loading...",
+  "Prezentace (PDF)": "Presentation (PDF)",
+  "Hudba (MP3)": "Music (MP3)",
+  "Ukázková prezentace": "Sample presentation",
+  "Ukázkový zvuk": "Sample sound",
+  "Bez hudby": "No music",
+  "Vybrat": "Choose",
+  "Přetáhni sem PDF nebo klikni": "Drop a PDF here or click",
+  "Přetáhni sem MP3 nebo klikni": "Drop an MP3 here or click",
+  "Odebrat a vrátit ukázku": "Remove and restore the sample",
+  "Odebrat prezentaci": "Remove presentation",
+  "Odebrat hudbu": "Remove music",
+  "Přetáhni sem vlastní PDF a MP3. Uloží se v tomto prohlížeči a příště tu budou.": "Drop your own PDF and MP3 here. They are saved in this browser and will be here next time.",
+  "Zpět": "Back",
+  "Zpět na úvodní obrazovku": "Back to the start screen",
+  "Ovládej rukou": "Control by hand",
+  "Kamera běží": "Camera on",
+  "Otevřená dlaň": "Open palm",
+  "Spustit prezentaci": "Start the presentation",
+  "Pěst": "Fist",
+  "Konec prezentace": "End the presentation",
+  "Ukazovák doleva": "Index finger left",
+  "Předchozí stránka": "Previous page",
+  "Ukazovák doprava": "Index finger right",
+  "Další stránka": "Next page",
+  "Ukazováky nahoru": "Index fingers up",
+  "Oběma rukama. Zapnou ukazovátko.": "Both hands. Turns the pointer on.",
+  "Ukazováky dolů": "Index fingers down",
+  "Oběma rukama. Vypnou ukazovátko.": "Both hands. Turns the pointer off.",
+  "Zobrazit kameru": "Show camera",
+  "Kamera se zapíná...": "Starting the camera...",
+  "Skrýt náhled kamery (klávesa K)": "Hide camera preview (K key)",
+  "Skrýt náhled kamery": "Hide camera preview",
+  "Zobrazit náhled kamery (klávesa K)": "Show camera preview (K key)",
+  "Zobrazit náhled kamery": "Show camera preview",
+  "Připraveno.": "Ready.",
+  "Ukaž otevřenou dlaň a prezentace se spustí.": "Show an open palm to start the presentation.",
+  "Ukazovátko zapnuto": "Pointer on",
+  "Zavřít": "Close",
+  "Gesto chvíli podrž, dokud se kroužek vpravo dole nenaplní. Pod obrazem vidíš, co stránka právě rozpoznala. Při zkoušce se nic nespouští.": "Hold the gesture until the ring in the bottom right corner fills up. Below the image you can see what the page has just recognized. Nothing is started while you practise.",
+  "Výborně.": "Well done.",
+  "Přeskočit toto gesto": "Skip this gesture",
+  "Umíš to.": "You got it.",
+  "Všechna gesta máš vyzkoušená. Teď můžeš pustit prezentaci.": "You have tried all the gestures. Now you can run your presentation.",
+  "Pustit prezentaci": "Run the presentation",
+  "Projít znovu": "Go through again",
+  "Gesto {0} ze {1}": "Gesture {0} of {1}",
+  "Dlaň": "Palm",
+  "Doprava": "Right",
+  "Doleva": "Left",
+  "Oba nahoru": "Both up",
+  "Oba dolů": "Both down",
+  "Ukaž otevřenou dlaň": "Show an open palm",
+  "Zvedni ruku dlaní ke kameře, prsty natažené nahoru.": "Raise your hand with the palm facing the camera and fingers pointing up.",
+  "V prezentaci: spustí promítání.": "In a presentation: starts the slides.",
+  "Natáhni ukazovák a miř jím k pravému okraji obrazovky. Je jedno, jestli je ruka ke kameře dlaní nebo hřbetem.": "Extend your index finger and point it at the right edge of the screen. It does not matter whether your palm or the back of your hand faces the camera.",
+  "V prezentaci: další stránka.": "In a presentation: next page.",
+  "Natáhni ukazovák a miř jím k levému okraji obrazovky.": "Extend your index finger and point it at the left edge of the screen.",
+  "V prezentaci: předchozí stránka.": "In a presentation: previous page.",
+  "Oba ukazováky nahoru": "Both index fingers up",
+  "Zvedni obě ruce a na každé vztyč jen ukazovák.": "Raise both hands and extend only the index finger on each.",
+  "V prezentaci: zapne ukazovátko. Červená tečka pak sleduje tvůj prst.": "In a presentation: turns the pointer on. A red dot then follows your finger.",
+  "Oba ukazováky dolů": "Both index fingers down",
+  "Otoč obě ruce tak, aby ukazováky mířily dolů.": "Turn both hands so that the index fingers point down.",
+  "V prezentaci: vypne ukazovátko.": "In a presentation: turns the pointer off.",
+  "Sevři pěst": "Make a fist",
+  "Zvedni ruku a sevři všechny prsty.": "Raise your hand and close all your fingers.",
+  "V prezentaci: ukončí promítání.": "In a presentation: ends the slides.",
+  "Záloha na klávesnici": "Keyboard backup",
+  "spustí prezentaci": "starts the presentation",
+  "Šipky": "Arrows",
+  "listují": "turn pages",
+  "ukončí prezentaci": "ends the presentation",
+  "(držet) hraje hudbu": "(hold) plays music",
+  "zapne a vypne ukazovátko": "turns the pointer on and off",
+  "skryje a zobrazí náhled kamery": "hides and shows the camera preview",
+  "celá obrazovka": "full screen",
+  "Skrytá funkce": "Hidden feature",
+  "Paroháč": "Rock horns",
+  "(ukazovák a malíček nahoru) hraje hudbu, dokud gesto trvá": "(index and little finger up) plays music for as long as you hold it",
+  "Vytvořil": "Made by",
+  "Weby, o kterých ví Google i umělá inteligence:": "Websites that Google and AI know about:",
+  "Přepnout jazyk": "Switch language",
+  "Vše je načteno.": "Everything is loaded.",
+  "Připravuji stránku {0} z {1}...": "Preparing page {0} of {1}...",
+  "Načítám hudbu...": "Loading music...",
+  "Načítám rozpoznávání rukou...": "Loading hand recognition...",
+  "Zapínám kameru...": "Starting the camera...",
+  "Připraveno. Ukaž otevřenou dlaň.": "Ready. Show an open palm.",
+  "Kameru se nepodařilo zapnout: {0}": "The camera could not be started: {0}",
+  "Soubor {0} se nepodařilo načíst ({1}).": "File {0} could not be loaded ({1}).",
+  "PDF nemá žádnou stránku.": "The PDF has no pages.",
+  "Zvuk se nepodařilo načíst.": "The sound could not be loaded.",
+  "Soubor nejde přehrát.": "The file cannot be played.",
+  "{0} stránka": "{0} page",
+  "{0} stránky": "{0} pages",
+  "{0} stránek": "{0} pages",
+  "Tohle je soubor z programu na prezentace, potřebuju PDF. V PowerPointu zvol Soubor, Uložit jako a vyber formát PDF.": "This is a slideshow file, but I need a PDF. In PowerPoint choose File, Save As and pick the PDF format.",
+  "Soubor {0} neumím použít. Prezentace musí být PDF, hudba MP3.": "I cannot use the file {0}. The presentation must be a PDF, the music an MP3.",
+  "Do pole Prezentace patří soubor PDF.": "The Presentation box takes a PDF file.",
+  "Do pole Hudba patří soubor MP3.": "The Music box takes an MP3 file.",
+  "Soubor {0} se nepodařilo otevřít jako PDF. Zůstává původní prezentace.": "The file {0} could not be opened as a PDF. The previous presentation stays.",
+  "Prezentace je připravená a uložená v tomto prohlížeči.": "The presentation is ready and saved in this browser.",
+  "Prezentace je připravená, ale uložit se nepodařilo. Platí do zavření stránky.": "The presentation is ready, but it could not be saved. It lasts until you close the page.",
+  "Soubor {0} se nepodařilo přehrát jako MP3. Zůstává původní hudba.": "The file {0} could not be played as an MP3. The previous music stays.",
+  "Hudba je připravená a uložená v tomto prohlížeči.": "The music is ready and saved in this browser.",
+  "Hudba je připravená, ale uložit se nepodařilo. Platí do zavření stránky.": "The music is ready, but it could not be saved. It lasts until you close the page.",
+  "Vidím: {0}": "I see: {0}",
+  "Vidím ruku, gesto nepoznáno": "I see a hand, gesture not recognized",
+  "Ruka není v záběru": "No hand in view",
+  "otevřená dlaň": "open palm",
+  "ukazovák doprava": "index finger right",
+  "ukazovák doleva": "index finger left",
+  "pěst": "fist",
+  "paroháč": "rock horns",
+  "ukazovák nahoru": "index finger up",
+  "ukazovák dolů": "index finger down",
+  "dva ukazováky nahoru": "two index fingers up",
+  "dva ukazováky dolů": "two index fingers down"
+};
+
+let jazyk = "cs";
+try { jazyk = localStorage.getItem("jazyk") || ""; } catch (chyba) { jazyk = ""; }
+if (jazyk !== "cs" && jazyk !== "en") {
+  const prohlizec = (navigator.language || "cs").toLowerCase();
+  jazyk = prohlizec.startsWith("cs") || prohlizec.startsWith("sk") ? "cs" : "en";
+}
+
+// Přeloží český text do zvoleného jazyka a doplní hodnoty na místa {0}, {1}...
+function tr(text, ...hodnoty) {
+  let vysledek = jazyk === "en" && EN[text] !== undefined ? EN[text] : text;
+  hodnoty.forEach((hodnota, i) => { vysledek = vysledek.split("{" + i + "}").join(hodnota); });
+  return vysledek;
+}
+
+// Pevné texty stránky: zapamatují se české originály a při změně jazyka se přepíšou
+const pevneTexty = [];
+const pevneAtributy = [];
+{
+  const pruchod = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (pruchod.nextNode()) {
+    const uzel = pruchod.currentNode;
+    const rodic = uzel.parentElement;
+    if (!rodic || rodic.closest("script, style")) continue;
+    const cesky = uzel.nodeValue.replace(/\s+/g, " ").trim();
+    if (cesky && EN[cesky] !== undefined) pevneTexty.push({ uzel, cesky, pred: /^\s/.test(uzel.nodeValue), po: /\s$/.test(uzel.nodeValue) });
+  }
+  for (const prvek of document.querySelectorAll("[title], [aria-label]")) {
+    for (const atribut of ["title", "aria-label"]) {
+      const cesky = prvek.getAttribute(atribut);
+      if (cesky && EN[cesky] !== undefined) pevneAtributy.push({ prvek, atribut, cesky });
+    }
+  }
+}
+
+function prelozPevneTexty() {
+  document.documentElement.lang = jazyk;
+  document.title = tr("Pusť prezentaci rukou");
+  for (const t of pevneTexty) t.uzel.nodeValue = (t.pred ? " " : "") + tr(t.cesky) + (t.po ? " " : "");
+  for (const a of pevneAtributy) a.prvek.setAttribute(a.atribut, tr(a.cesky));
+  document.getElementById("jazyk").textContent = jazyk === "cs" ? "EN" : "CS";
+}
+
+// ---------------------------------------------------------------
 // NASTAVENÍ
 // ---------------------------------------------------------------
 // Ukázkové soubory, které se použijí, dokud si uživatel nenahraje vlastní
-const UKAZKA_PREZENTACE = "ukazka-cs.pdf";
+const ukazkaPrezentace = () => "ukazka-" + jazyk + ".pdf";   // česká nebo anglická podle jazyka
 const UKAZKA_HUDBA      = "ukazka.mp3";
 const SOUBOR_MODEL      = "lib/hand_landmarker.task";
 
@@ -425,8 +604,11 @@ const elTecka = document.getElementById("tecka");
 const elUkazStav = document.getElementById("ukazStav");
 const OBVOD = 276.46;
 
-function hlaseni(text, trida) {
-  elStav.textContent = text;
+// Stavový řádek. Text je česká šablona s místy {0}, {1}; pamatuje se, aby šel při změně jazyka přeložit.
+let posledniHlaseni = null;
+function hlaseni(sablona, trida, ...hodnoty) {
+  posledniHlaseni = { sablona, trida, hodnoty };
+  elStav.textContent = tr(sablona, ...hodnoty);
   elStav.className = trida || "";
 }
 
@@ -447,7 +629,7 @@ let teckaX = null, teckaY = null, teckaNaposled = 0;
 // ---------------------------------------------------------------
 async function stahni(cesta) {
   const odpoved = await fetch(cesta, { cache: "no-cache" });
-  if (!odpoved.ok) throw new Error("Soubor " + cesta + " se nepodařilo načíst (" + odpoved.status + ").");
+  if (!odpoved.ok) throw new Error(tr("Soubor {0} se nepodařilo načíst ({1}).", cesta, odpoved.status));
   return odpoved;
 }
 
@@ -469,7 +651,7 @@ async function vykresliPdf(data) {
     const cilSirka = Math.min(2560, Math.max(screen.width, screen.height) * pomer);
     const cilVyska = Math.min(1600, Math.min(screen.width, screen.height) * pomer);
     for (let i = 1; i <= pdf.numPages; i++) {
-      hlaseni("Připravuji stránku " + i + " z " + pdf.numPages + "...");
+      hlaseni("Připravuji stránku {0} z {1}...", "", i, pdf.numPages);
       const strana = await pdf.getPage(i);
       const zaklad = strana.getViewport({ scale: 1 });
       const meritko = Math.min(cilSirka / zaklad.width, cilVyska / zaklad.height);
@@ -488,7 +670,7 @@ async function vykresliPdf(data) {
   } finally {
     await uloha.destroy();
   }
-  if (!seznam.length) throw new Error("PDF nemá žádnou stránku.");
+  if (!seznam.length) throw new Error(tr("PDF nemá žádnou stránku."));
   return seznam;
 }
 
@@ -498,9 +680,9 @@ function vytvorZvuk(blob) {
     const zvuk = new Audio();
     zvuk.loop = true;
     zvuk.preload = "auto";
-    const limit = setTimeout(() => selhalo(new Error("Zvuk se nepodařilo načíst.")), 10000);
+    const limit = setTimeout(() => selhalo(new Error(tr("Zvuk se nepodařilo načíst."))), 10000);
     zvuk.addEventListener("loadedmetadata", () => { clearTimeout(limit); hotovo(zvuk); }, { once: true });
-    zvuk.addEventListener("error", () => { clearTimeout(limit); selhalo(new Error("Soubor nejde přehrát.")); }, { once: true });
+    zvuk.addEventListener("error", () => { clearTimeout(limit); selhalo(new Error(tr("Soubor nejde přehrát."))); }, { once: true });
     zvuk.src = URL.createObjectURL(blob);
   });
 }
@@ -543,38 +725,43 @@ const ulozisteSmaz  = klic => ulozisteOperace("readwrite", sklad => sklad.delete
 // ---------------------------------------------------------------
 const elPole = { prezentace: document.getElementById("polePrezentace"), hudba: document.getElementById("poleHudba") };
 const elPoleZprava = document.getElementById("poleZprava");
-const ZPRAVA_VYCHOZI = elPoleZprava.textContent;
+const ZPRAVA_VYCHOZI = "Přetáhni sem vlastní PDF a MP3. Uloží se v tomto prohlížeči a příště tu budou.";
 
-function zpravaPole(text, chyba) {
-  elPoleZprava.textContent = text || ZPRAVA_VYCHOZI;
+let posledniZprava = null;
+function zpravaPole(sablona, chyba, ...hodnoty) {
+  posledniZprava = { sablona, chyba, hodnoty };
+  elPoleZprava.textContent = tr(sablona || ZPRAVA_VYCHOZI, ...hodnoty);
   elPoleZprava.className = chyba ? "chyba" : "";
 }
 
-function nastavPole(druh, nazev, info, vlastni) {
+function pocetStranek(n) {
+  return tr(n === 1 ? "{0} stránka" : n >= 2 && n <= 4 ? "{0} stránky" : "{0} stránek", n);
+}
+
+// Co je v polích: název (u ukázky český text k přeložení), počet stránek, a jestli je soubor vlastní
+const poleStav = { prezentace: null, hudba: null };
+function nastavPole(druh, nazev, pocet, vlastni) {
+  poleStav[druh] = { nazev, pocet, vlastni: !!vlastni };
   const pole = elPole[druh];
-  pole.querySelector(".nazev").textContent = nazev;
-  pole.querySelector(".info").textContent = info || "";
+  pole.querySelector(".nazev").textContent = vlastni ? nazev : tr(nazev);
+  pole.querySelector(".info").textContent = pocet ? pocetStranek(pocet) : "";
   pole.classList.toggle("vlastni", !!vlastni);
 }
 
-function pocetStranek(n) {
-  return n + (n === 1 ? " stránka" : n >= 2 && n <= 4 ? " stránky" : " stránek");
-}
-
 async function nactiUkazkuPrezentace() {
-  const data = await (await stahni(UKAZKA_PREZENTACE)).arrayBuffer();
+  const data = await (await stahni(ukazkaPrezentace())).arrayBuffer();
   pouzijStranky(await vykresliPdf(data));
-  nastavPole("prezentace", "Ukázková prezentace", pocetStranek(stranky.length), false);
+  nastavPole("prezentace", "Ukázková prezentace", stranky.length, false);
 }
 
 async function nactiUkazkuHudby() {
   try {
     pouzijHudbu(await vytvorZvuk(await (await stahni(UKAZKA_HUDBA)).blob()));
-    nastavPole("hudba", "Ukázkový zvuk", "", false);
+    nastavPole("hudba", "Ukázkový zvuk", 0, false);
   } catch (chyba) {
     console.log(chyba);
     pouzijHudbu(null);   // bez hudby se dá pokračovat, paroháč jen nic nepřehraje
-    nastavPole("hudba", "Bez hudby", "", false);
+    nastavPole("hudba", "Bez hudby", 0, false);
   }
 }
 
@@ -601,7 +788,7 @@ async function prijmiSoubor(soubor, druhPole) {
     return;
   }
   if (!jePdf && !jeMp3) {
-    zpravaPole("Soubor " + jmeno + " neumím použít. Prezentace musí být PDF, hudba MP3.", true);
+    zpravaPole("Soubor {0} neumím použít. Prezentace musí být PDF, hudba MP3.", true, jmeno);
     return;
   }
   if (druhPole === "prezentace" && !jePdf) { zpravaPole("Do pole Prezentace patří soubor PDF.", true); return; }
@@ -616,12 +803,12 @@ async function prijmiSoubor(soubor, druhPole) {
         seznam = await vykresliPdf(await soubor.arrayBuffer());
       } catch (chyba) {
         console.log(chyba);
-        zpravaPole("Soubor " + jmeno + " se nepodařilo otevřít jako PDF. Zůstává původní prezentace.", true);
+        zpravaPole("Soubor {0} se nepodařilo otevřít jako PDF. Zůstává původní prezentace.", true, jmeno);
         return;
       }
       pouzijStranky(seznam);
       const ulozeno = await ulozSoubor("prezentace", soubor);
-      nastavPole("prezentace", jmeno, pocetStranek(seznam.length), true);
+      nastavPole("prezentace", jmeno, seznam.length, true);
       zpravaPole(ulozeno ? "Prezentace je připravená a uložená v tomto prohlížeči."
                          : "Prezentace je připravená, ale uložit se nepodařilo. Platí do zavření stránky.", !ulozeno);
     } else {
@@ -630,12 +817,12 @@ async function prijmiSoubor(soubor, druhPole) {
         zvuk = await vytvorZvuk(soubor);
       } catch (chyba) {
         console.log(chyba);
-        zpravaPole("Soubor " + jmeno + " se nepodařilo přehrát jako MP3. Zůstává původní hudba.", true);
+        zpravaPole("Soubor {0} se nepodařilo přehrát jako MP3. Zůstává původní hudba.", true, jmeno);
         return;
       }
       pouzijHudbu(zvuk);
       const ulozeno = await ulozSoubor("hudba", soubor);
-      nastavPole("hudba", jmeno, "", true);
+      nastavPole("hudba", jmeno, 0, true);
       zpravaPole(ulozeno ? "Hudba je připravená a uložená v tomto prohlížeči."
                          : "Hudba je připravená, ale uložit se nepodařilo. Platí do zavření stránky.", !ulozeno);
     }
@@ -655,7 +842,7 @@ async function odeberSoubor(druh) {
     zpravaPole("");
   } catch (chyba) {
     console.log(chyba);
-    zpravaPole(chyba.message || String(chyba), true);
+    zpravaPole("{0}", true, chyba.message || String(chyba));
   } finally {
     elStart.disabled = !mohlStartovat;
     if (stav === "ceka") hlaseni(TEXT_NACTENO);
@@ -724,7 +911,7 @@ async function nactiVse() {
     if (vlastni) {
       try {
         pouzijStranky(await vykresliPdf(await vlastni.data.arrayBuffer()));
-        nastavPole("prezentace", vlastni.nazev, pocetStranek(stranky.length), true);
+        nastavPole("prezentace", vlastni.nazev, stranky.length, true);
       } catch (chyba) {
         console.log(chyba);
         vlastni = null;
@@ -739,7 +926,7 @@ async function nactiVse() {
     if (vlastniHudba) {
       try {
         pouzijHudbu(await vytvorZvuk(vlastniHudba.data));
-        nastavPole("hudba", vlastniHudba.nazev, "", true);
+        nastavPole("hudba", vlastniHudba.nazev, 0, true);
       } catch (chyba) {
         console.log(chyba);
         vlastniHudba = null;
@@ -754,7 +941,7 @@ async function nactiVse() {
     hlaseni(TEXT_NACTENO);
   } catch (chyba) {
     console.log(chyba);
-    hlaseni(chyba.message || String(chyba), "chyba");
+    hlaseni("{0}", "chyba", chyba.message || String(chyba));
   }
 }
 
@@ -800,7 +987,7 @@ async function spust() {
   } catch (chyba) {
     console.log(chyba);
     elStart.disabled = false;
-    hlaseni("Kameru se nepodařilo zapnout: " + (chyba.message || chyba), "chyba");
+    hlaseni("Kameru se nepodařilo zapnout: {0}", "chyba", chyba.message || String(chyba));
   }
 }
 elStart.addEventListener("click", spust);
@@ -836,8 +1023,11 @@ function ikonaZnacka(id, dvojity) {
   return dvojity ? jedna + jedna : jedna;
 }
 
-elZkouskaKroky.innerHTML = ZKOUSKA_KROKY.map(krok =>
-  "<div>" + ikonaZnacka(krok.ikona, false) + "<span>" + krok.kratce + "</span></div>").join("");
+function zkouskaVykresliKroky() {
+  elZkouskaKroky.innerHTML = ZKOUSKA_KROKY.map(krok =>
+    "<div>" + ikonaZnacka(krok.ikona, false) + "<span>" + tr(krok.kratce) + "</span></div>").join("");
+}
+zkouskaVykresliKroky();
 
 function zkouskaUkaz() {
   const konec = zkouskaKrok >= ZKOUSKA_KROKY.length;
@@ -849,11 +1039,11 @@ function zkouskaUkaz() {
   });
   if (konec) return;
   const krok = ZKOUSKA_KROKY[zkouskaKrok];
-  document.getElementById("zkouskaPoradi").textContent = "Gesto " + (zkouskaKrok + 1) + " ze " + ZKOUSKA_KROKY.length;
+  document.getElementById("zkouskaPoradi").textContent = tr("Gesto {0} ze {1}", zkouskaKrok + 1, ZKOUSKA_KROKY.length);
   document.getElementById("zkouskaIkona").innerHTML = ikonaZnacka(krok.ikona, krok.dvojity);
-  document.getElementById("zkouskaNazev").textContent = krok.nazev;
-  document.getElementById("zkouskaJak").textContent = krok.jak;
-  document.getElementById("zkouskaCo").textContent = krok.co;
+  document.getElementById("zkouskaNazev").textContent = tr(krok.nazev);
+  document.getElementById("zkouskaJak").textContent = tr(krok.jak);
+  document.getElementById("zkouskaCo").textContent = tr(krok.co);
 }
 
 function zkouskaDalsi() {
@@ -879,7 +1069,7 @@ async function zkouskaOtevri() {
     await zapniKameru();
   } catch (chyba) {
     console.log(chyba);
-    hlaseni("Kameru se nepodařilo zapnout: " + (chyba.message || chyba), "chyba");
+    hlaseni("Kameru se nepodařilo zapnout: {0}", "chyba", chyba.message || String(chyba));
     return;
   }
   if (stav !== odkud) return;
@@ -1258,14 +1448,49 @@ function smycka() {
     }
     pohniTeckou(seznamRukou, seznam3d, ted);
     kresliNahled(seznamRukou);
-    elNahledText.textContent = gesto ? "Vidím: " + NAZVY_GEST[gesto]
-      : (seznamRukou.length ? "Vidím ruku, gesto nepoznáno" : "Ruka není v záběru");
+    elNahledText.textContent = gesto ? tr("Vidím: {0}", tr(NAZVY_GEST[gesto]))
+      : tr(seznamRukou.length ? "Vidím ruku, gesto nepoznáno" : "Ruka není v záběru");
     krok(gesto, ted);
   }
   requestAnimationFrame(smycka);
 }
 
-nactiVse();
+// Přepnutí jazyka: přeloží pevné texty, stavové řádky, pole se soubory a zkoušku gest.
+// Ukázková prezentace existuje česky i anglicky, takže se při změně jazyka vymění.
+function nastavJazyk(novy, uzivatelem) {
+  jazyk = novy;
+  if (uzivatelem) { try { localStorage.setItem("jazyk", jazyk); } catch (chyba) { console.log(chyba); } }
+  prelozPevneTexty();
+  if (posledniHlaseni) hlaseni(posledniHlaseni.sablona, posledniHlaseni.trida, ...posledniHlaseni.hodnoty);
+  if (posledniZprava) zpravaPole(posledniZprava.sablona, posledniZprava.chyba, ...posledniZprava.hodnoty);
+  for (const druh of ["prezentace", "hudba"]) {
+    const p = poleStav[druh];
+    if (p) nastavPole(druh, p.nazev, p.pocet, p.vlastni);
+  }
+  const krokTed = zkouskaKrok, pauzaTed = zkouskaPauza;
+  zkouskaVykresliKroky();
+  zkouskaUkaz();
+  if (pauzaTed && krokTed < ZKOUSKA_KROKY.length) {
+    elZkouskaUkol.classList.add("splneno");
+    elZkouskaKroky.children[krokTed].classList.add("hotovo");
+  }
+  if (uzivatelem && poleStav.prezentace && !poleStav.prezentace.vlastni) {
+    doFronty(async () => {
+      const mohlStartovat = !elStart.disabled;
+      elStart.disabled = true;
+      try { await nactiUkazkuPrezentace(); }
+      finally {
+        elStart.disabled = !mohlStartovat;
+        if (stav === "ceka") hlaseni(TEXT_NACTENO);
+        else if (stav === "pripraveno" || stav === "zkouska") hlaseni("Připraveno. Ukaž otevřenou dlaň.", "ok");
+      }
+    });
+  }
+}
+document.getElementById("jazyk").addEventListener("click", () => nastavJazyk(jazyk === "cs" ? "en" : "cs", true));
+
+nastavJazyk(jazyk, false);
+doFronty(nactiVse);
 </script>
 </body>
 </html>
