@@ -2,10 +2,19 @@
 
 > SlidesByHand is a free web app that lets a speaker control a PDF presentation with hand gestures in front of a laptop camera. No clicker, no install, no account. Everything runs in the browser and nothing leaves the user's computer. Made by Pavel Horák. Open source under the MIT License.
 
-## What it is
+## Pages in English
 
-- [SlidesByHand (the app)](https://slidesbyhand.com/): Open the page, click Start, and control your slides by hand. Available in English and Czech.
-- [Source code on GitHub](https://github.com/pavel-horak-cz/app-slides-by-hand): The whole app is static files, MIT licensed. Anyone can fork it and run their own copy on GitHub Pages.
+- [SlidesByHand](https://slidesbyhand.com/): Free browser app that turns your laptop camera into a presentation remote. Add a PDF, show your palm and turn pages by hand. No install, no account.
+- [What is SlidesByHand?](https://slidesbyhand.com/about/): How SlidesByHand works: the six gestures, your own PDF and sound, what happens to the camera image, and answers to common questions.
+- [How to control slides with hand gestures](https://slidesbyhand.com/how-to-control-slides-with-hand-gestures/): Step by step: save your presentation as a PDF, open SlidesByHand, practise the gestures and present without a clicker. No install needed.
+- [A presentation clicker alternative that needs no hardware](https://slidesbyhand.com/presentation-clicker-alternative/): Forgot your clicker? SlidesByHand turns pages with hand gestures through the laptop camera. An honest comparison of a clicker and gesture control.
+
+## Stránky v češtině
+
+- [SlidesByHand](https://slidesbyhand.com/cs/): Bezplatná aplikace v prohlížeči, která z kamery notebooku udělá ovladač prezentace. Nahraj PDF, ukaž dlaň a listuj rukou. Bez instalace, bez účtu.
+- [Co je SlidesByHand?](https://slidesbyhand.com/cs/o-projektu/): Jak SlidesByHand funguje: šest gest, vlastní PDF a zvuk, co se děje s obrazem z kamery a odpovědi na časté otázky.
+- [Jak ovládat prezentaci gesty](https://slidesbyhand.com/cs/jak-ovladat-prezentaci-gesty/): Krok za krokem: ulož prezentaci jako PDF, otevři SlidesByHand, vyzkoušej si gesta a prezentuj bez ovladače. Bez instalace.
+- [Prezentace bez ovladače](https://slidesbyhand.com/cs/prezentace-bez-ovladace/): Zapomněl jsi prezentér? SlidesByHand listuje gesty přes kameru notebooku. Poctivé srovnání ovladače prezentace a ovládání rukou.
 
 ## Who it is for
 
@@ -29,7 +38,7 @@ Every gesture has to be held for about a second while a ring on the screen fills
 - Files are stored in the browser on the user's computer and stay there for the next visit.
 - "Learn the gestures": a guided practice of all six gestures with live feedback from the camera.
 - A sample presentation that teaches the gestures is built in.
-- English and Czech interface.
+- English and Czech interface, each on its own address.
 
 ## Privacy
 
@@ -43,6 +52,11 @@ Every gesture has to be held for about a second while a ring on the screen fills
 - Gesture recognition: plain geometry over those points (distances and directions of fingers).
 - Slides: PDF.js renders the pages in the browser.
 - Requirements: a modern browser (tested in Chrome), a camera, and an HTTPS connection. The first load is about 30 MB.
+
+## Source code
+
+- [Repository on GitHub](https://github.com/pavel-horak-cz/app-slides-by-hand): static files, MIT licensed. Anyone can fork it and run their own copy on GitHub Pages.
+- [Full text of all pages for AI](https://slidesbyhand.com/llms-full.txt)
 
 ## Author
 
@@ -58,3 +72,5 @@ Every gesture has to be held for about a second while a ring on the screen fills
 ## License
 
 MIT. If you use SlidesByHand or build on it, the author asks you to keep a visible link to https://slidesbyhand.com.
+
+Last updated: 2026-11-26

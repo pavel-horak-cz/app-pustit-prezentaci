@@ -1,0 +1,55 @@
+<p class="lead">SlidesByHand is a free web app that turns your laptop camera into a presentation remote. You open one page, show an open palm and your slides start. You turn pages by pointing a finger. There is nothing to install, no account to create, and nothing leaves your computer.</p>
+
+<h2>Why it exists</h2>
+<p>Every meetup has the same moment. A speaker connects a laptop to the TV, the room goes quiet, and everyone watches the search for the right window. SlidesByHand removes that moment. The presentation is one browser page that is already open, and from then on the speaker never touches the laptop.</p>
+
+<h2>The gestures</h2>
+<table>
+  <thead><tr><th>Gesture</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>{{ik:dlan}} Open palm</td><td>Starts the presentation</td></tr>
+    <tr><td>{{ik:vpravo}} Index finger right</td><td>Next page</td></tr>
+    <tr><td>{{ik:vlevo}} Index finger left</td><td>Previous page</td></tr>
+    <tr><td>{{ik:nahoru}} Both index fingers up</td><td>Turns the pointer on. A red dot follows your fingertip</td></tr>
+    <tr><td>{{ik:dolu}} Both index fingers down</td><td>Turns the pointer off</td></tr>
+    <tr><td>{{ik:pest}} Fist</td><td>Ends the presentation</td></tr>
+  </tbody>
+</table>
+<p>Every gesture has to be held for about a second. A ring on the screen fills up while you hold it, so nothing fires by accident and the audience can see what is happening. If you want a walkthrough, read <a href="{{howto}}">how to control slides with hand gestures</a>.</p>
+
+<h2>Your own slides and sound</h2>
+<p>Drag a PDF onto the page and it becomes your presentation. PowerPoint, Keynote and Google Slides can all export to PDF. You can also add an MP3. Both files are stored in your browser, on your computer, and they are still there the next time you open the page. Until you add your own, the app uses a short sample presentation that teaches the gestures.</p>
+
+<h2>Privacy</h2>
+<ul>
+  <li>The camera image is processed inside your browser. It is not recorded, stored or sent anywhere.</li>
+  <li>Your presentation and sound stay in your browser's storage on your computer.</li>
+  <li>There are no accounts, no cookies and no tracking.</li>
+  <li>The code is open source, so anyone can check all of the above.</li>
+</ul>
+
+<h2>How it works</h2>
+<p>The app uses MediaPipe Hand Landmarker, which runs in the browser and returns 21 points for each hand it sees. SlidesByHand then decides what gesture you are making with plain geometry: distances between the points and the directions your fingers point in. Slides are drawn by PDF.js. The whole app is a set of static files with no server behind it.</p>
+
+<h2>Questions and answers</h2>
+<div class="faq">
+  <h3>Is SlidesByHand free?</h3>
+  <p>Yes. It is free to use and open source under the MIT License. There is no paid version and no account.</p>
+  <h3>Do I need to install anything?</h3>
+  <p>No. It runs in the browser. You need a laptop with a camera and a modern browser. It has been tested in Chrome.</p>
+  <h3>Does it work with PowerPoint or Google Slides?</h3>
+  <p>It works with PDF files. Export your presentation to PDF first. In PowerPoint choose File, Save As and pick PDF. Animations and embedded videos are not kept in a PDF, so each page is shown as a still slide.</p>
+  <h3>Does the camera image go anywhere?</h3>
+  <p>No. The image is processed in your browser and never leaves your computer. Nothing is recorded.</p>
+  <h3>Does it work without an internet connection?</h3>
+  <p>You need a connection to open the page. The first load is about 30 MB. Once the page has loaded, it does not need the connection any more, so a weak Wi-Fi during the talk is not a problem.</p>
+  <h3>How far from the camera can I stand?</h3>
+  <p>The closer you are, the more reliable it is. Sitting or standing by the laptop works well. From the far end of a large room the camera will not see your hand clearly enough. Good light helps a lot.</p>
+  <h3>What if a gesture is not recognized?</h3>
+  <p>The keyboard always works as a backup: Enter starts, arrows turn pages and Backspace ends the presentation. The app also has a Learn the gestures mode where you can practise with live feedback.</p>
+  <h3>Can I run my own copy?</h3>
+  <p>Yes. The source code is on GitHub. Fork the repository, turn on GitHub Pages and you have your own copy. The author asks you to keep a visible link to slidesbyhand.com.</p>
+</div>
+
+<h2>Who made it</h2>
+<p>SlidesByHand was made by Pavel Horák, who builds websites and web apps. More of his projects are at <a href="https://pprojects.cz">pprojects.cz</a>. He makes websites that Google and AI know about at <a href="https://webseoai.cz">webseoai.cz</a>. If you want something like this built for your company, get in touch through <a href="https://hodinovyvibecoder.cz">hodinovyvibecoder.cz</a>.</p>

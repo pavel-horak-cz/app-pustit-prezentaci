@@ -1,0 +1,76 @@
+/* Vzhled obsahových stránek SlidesByHand. Aplikace má vlastní styl přímo ve své stránce. */
+@font-face { font-family: "Inter"; font-weight: 400; font-display: swap; src: url("lib/fonts/inter-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2020, U+20A0-20AB; }
+@font-face { font-family: "Inter"; font-weight: 400; font-display: swap; src: url("lib/fonts/inter-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "Inter"; font-weight: 600; font-display: swap; src: url("lib/fonts/inter-latin-ext-600-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2020, U+20A0-20AB; }
+@font-face { font-family: "Inter"; font-weight: 600; font-display: swap; src: url("lib/fonts/inter-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "Inter"; font-weight: 800; font-display: swap; src: url("lib/fonts/inter-latin-ext-800-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2020, U+20A0-20AB; }
+@font-face { font-family: "Inter"; font-weight: 800; font-display: swap; src: url("lib/fonts/inter-latin-800-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212; }
+@font-face { font-family: "Inter"; font-weight: 900; font-display: swap; src: url("lib/fonts/inter-latin-ext-900-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2020, U+20A0-20AB; }
+@font-face { font-family: "Inter"; font-weight: 900; font-display: swap; src: url("lib/fonts/inter-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212; }
+
+:root { --zluta: #FFB20F; --cerna: #0b0b0b; --papir: #FFFBF0; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--papir); color: var(--cerna); font-family: "Inter", system-ui, "Segoe UI", Arial, sans-serif;
+  font-size: 18px; line-height: 1.6; }
+a { color: inherit; text-underline-offset: 3px; }
+.obal { width: min(100% - 40px, 820px); margin-inline: auto; }
+.sada { position: absolute; width: 0; height: 0; overflow: hidden; }
+.ik { width: 1em; height: 1em; display: inline-block; vertical-align: -0.18em; fill: none; stroke: currentColor; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round; }
+
+/* Záhlaví */
+.zahlavi { background: var(--zluta); padding: 22px 0 54px; }
+.zahlavi .radek { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; width: min(100% - 40px, 1080px); }
+.znacka { display: inline-flex; align-items: center; gap: .35em; font-weight: 900; font-size: 22px; letter-spacing: -.03em; text-decoration: none; }
+.znacka .ik { font-size: 1.3em; stroke-width: 2; }
+nav { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; font-weight: 600; font-size: 16px; }
+nav a { text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+nav a:hover, nav a[aria-current="page"] { border-bottom-color: var(--cerna); }
+nav a.jazyk { border: 2px solid var(--cerna); border-radius: 999px; padding: 3px 14px; font-weight: 800; }
+.uvod { padding-top: 56px; }
+.drobecky { margin: 0 0 14px; font-size: 15px; font-weight: 600; opacity: .75; }
+h1 { margin: 0 0 28px; font-weight: 900; font-size: clamp(38px, 7vw, 68px); line-height: 1; letter-spacing: -.05em; }
+
+/* Tlačítka */
+.tlacitko { display: inline-block; background: var(--cerna); color: var(--zluta); font-weight: 900; font-size: 20px; letter-spacing: -.01em;
+  text-decoration: none; padding: .7em 1.6em; border-radius: 999px; border: 2.5px solid var(--cerna); }
+.tlacitko.obrys { background: none; color: var(--cerna); }
+
+/* Text */
+main { padding: 48px 0 72px; }
+article > :first-child { margin-top: 0; }
+.lead { font-size: 22px; line-height: 1.5; font-weight: 600; }
+h2 { margin: 52px 0 14px; font-weight: 900; font-size: clamp(26px, 4vw, 34px); line-height: 1.1; letter-spacing: -.035em; }
+h3 { margin: 30px 0 6px; font-weight: 800; font-size: 20px; letter-spacing: -.015em; }
+p { margin: 0 0 18px; }
+ul, ol { margin: 0 0 18px; padding-left: 1.3em; }
+li { margin-bottom: 8px; }
+ol.kroky { list-style: none; padding: 0; counter-reset: krok; }
+ol.kroky li { counter-increment: krok; position: relative; padding: 0 0 6px 58px; margin-bottom: 18px; }
+ol.kroky li::before { content: counter(krok); position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--cerna); color: var(--zluta); font-weight: 900; display: flex; align-items: center; justify-content: center; }
+table { width: 100%; border-collapse: collapse; margin: 0 0 22px; font-size: 17px; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1.5px solid rgba(11, 11, 11, .16); }
+th { font-weight: 800; border-bottom: 2.5px solid var(--cerna); }
+td .ik { font-size: 1.5em; margin-right: .3em; vertical-align: -0.3em; }
+.faq h3 { border-top: 1.5px solid rgba(11, 11, 11, .16); padding-top: 20px; margin-top: 20px; }
+
+/* Výzva na konci */
+.vyzva { margin-top: 64px; background: var(--zluta); border-radius: 28px; padding: 36px 32px; }
+.vyzva h2 { margin: 0 0 6px; }
+.vyzva p { margin-bottom: 22px; font-weight: 600; }
+
+/* Zápatí */
+.zapati { background: var(--cerna); color: #fff; padding: 30px 0; font-size: 15px; }
+.zapati p { margin: 0 0 6px; }
+.zapati a { color: var(--zluta); font-weight: 600; }
+.zapati span { opacity: .5; margin: 0 .4em; }
+
+@media (max-width: 560px) {
+  body { font-size: 17px; }
+  .lead { font-size: 19px; }
+  .uvod { padding-top: 36px; }
+  table { font-size: 15px; }
+  ol.kroky li { padding-left: 50px; }
+}

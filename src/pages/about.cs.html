@@ -1,0 +1,55 @@
+<p class="lead">SlidesByHand je bezplatná webová aplikace, která z kamery notebooku udělá ovladač prezentace. Otevřeš jednu stránku, ukážeš otevřenou dlaň a prezentace se spustí. Listuješ ukázáním prstu. Nic se neinstaluje, nezakládá se žádný účet a nic neopouští tvůj počítač.</p>
+
+<h2>Proč to vzniklo</h2>
+<p>Každé setkání zná tu chvíli. Řečník připojí notebook k televizi, místnost ztichne a všichni se dívají, jak hledá správné okno. SlidesByHand tuhle chvíli odstraňuje. Prezentace je jedna stránka v prohlížeči, která už je otevřená, a řečník pak na notebook vůbec nesáhne.</p>
+
+<h2>Gesta</h2>
+<table>
+  <thead><tr><th>Gesto</th><th>Co dělá</th></tr></thead>
+  <tbody>
+    <tr><td>{{ik:dlan}} Otevřená dlaň</td><td>Spustí prezentaci</td></tr>
+    <tr><td>{{ik:vpravo}} Ukazovák doprava</td><td>Další stránka</td></tr>
+    <tr><td>{{ik:vlevo}} Ukazovák doleva</td><td>Předchozí stránka</td></tr>
+    <tr><td>{{ik:nahoru}} Oba ukazováky nahoru</td><td>Zapne ukazovátko. Červená tečka sleduje špičku prstu</td></tr>
+    <tr><td>{{ik:dolu}} Oba ukazováky dolů</td><td>Vypne ukazovátko</td></tr>
+    <tr><td>{{ik:pest}} Pěst</td><td>Ukončí prezentaci</td></tr>
+  </tbody>
+</table>
+<p>Každé gesto je potřeba zhruba vteřinu podržet. Na obrazovce se přitom plní kroužek, takže se nic nespustí omylem a publikum vidí, co se děje. Podrobný postup najdeš v návodu <a href="{{howto}}">jak ovládat prezentaci gesty</a>.</p>
+
+<h2>Vlastní prezentace a zvuk</h2>
+<p>Přetáhni do stránky PDF a máš svou prezentaci. PowerPoint, Keynote i Google Slides umí prezentaci uložit jako PDF. Přidat můžeš i MP3. Oba soubory se uloží v tvém prohlížeči na tvém počítači a při příštím otevření stránky tam budou. Dokud nenahraješ vlastní, aplikace používá krátkou ukázkovou prezentaci, která učí gesta.</p>
+
+<h2>Soukromí</h2>
+<ul>
+  <li>Obraz z kamery se zpracovává v tvém prohlížeči. Nenahrává se, neukládá a nikam se neposílá.</li>
+  <li>Prezentace i zvuk zůstávají v úložišti prohlížeče na tvém počítači.</li>
+  <li>Žádné účty, žádné cookies, žádné sledování.</li>
+  <li>Kód je otevřený, takže si to všechno může kdokoli ověřit.</li>
+</ul>
+
+<h2>Jak to funguje</h2>
+<p>Aplikace používá MediaPipe Hand Landmarker, který běží v prohlížeči a pro každou ruku v záběru vrací 21 bodů. SlidesByHand pak určí gesto čistou geometrií: podle vzdáleností mezi body a směru prstů. Stránky prezentace vykresluje PDF.js. Celá aplikace jsou statické soubory, žádný server za ní není.</p>
+
+<h2>Otázky a odpovědi</h2>
+<div class="faq">
+  <h3>Je SlidesByHand zdarma?</h3>
+  <p>Ano. Je zdarma a má otevřený kód pod licencí MIT. Žádná placená verze ani účet neexistuje.</p>
+  <h3>Musím něco instalovat?</h3>
+  <p>Ne. Běží v prohlížeči. Potřebuješ notebook s kamerou a moderní prohlížeč. Vyzkoušeno je to v Chromu.</p>
+  <h3>Funguje to s PowerPointem nebo Google Slides?</h3>
+  <p>Funguje to se soubory PDF. Prezentaci nejdřív ulož jako PDF. V PowerPointu zvol Soubor, Uložit jako a vyber PDF. Animace a vložená videa se do PDF nepřenesou, každá stránka se zobrazí jako statický snímek.</p>
+  <h3>Posílá se někam obraz z kamery?</h3>
+  <p>Ne. Obraz se zpracovává v tvém prohlížeči a tvůj počítač neopustí. Nic se nenahrává.</p>
+  <h3>Funguje to bez připojení k internetu?</h3>
+  <p>K otevření stránky připojení potřebuješ. První načtení má asi 30 MB. Jakmile je stránka načtená, připojení už nepotřebuje, takže slabá wifi během přednášky nevadí.</p>
+  <h3>Jak daleko od kamery můžu stát?</h3>
+  <p>Čím blíž, tím spolehlivěji to funguje. Vsedě nebo vestoje u notebooku je to v pořádku. Z druhého konce velké místnosti už kamera ruku nevidí dost zřetelně. Hodně pomáhá dobré světlo.</p>
+  <h3>Co když se gesto nerozpozná?</h3>
+  <p>Jako záloha vždy funguje klávesnice: Enter spustí, šipky listují a Backspace prezentaci ukončí. V aplikaci je taky režim Nauč se gesta, kde si je vyzkoušíš s okamžitou odezvou.</p>
+  <h3>Můžu si pustit vlastní kopii?</h3>
+  <p>Ano. Zdrojový kód je na GitHubu. Udělej si fork repozitáře, zapni GitHub Pages a máš vlastní kopii. Autor prosí, abys nechal na viditelném místě odkaz na slidesbyhand.com.</p>
+</div>
+
+<h2>Kdo to vytvořil</h2>
+<p>SlidesByHand vytvořil Pavel Horák, který staví weby a webové aplikace. Další jeho projekty jsou na <a href="https://pprojects.cz">pprojects.cz</a>. Weby, o kterých ví Google i umělá inteligence, dělá na <a href="https://webseoai.cz">webseoai.cz</a>. Pokud chceš něco podobného pro svou firmu, ozvi se přes <a href="https://hodinovyvibecoder.cz">hodinovyvibecoder.cz</a>.</p>

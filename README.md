@@ -54,11 +54,14 @@ The start screen has a **Learn the gestures** button. It walks you through all s
 - The first load is about 30 MB, mostly the hand recognition model. After the page has loaded it needs no connection.
 - The laptop camera has to see the speaker. Turn the laptop towards yourself.
 - Gestures need reasonable light. If recognition fails, the keyboard works as a backup: Enter starts, arrows turn pages, Backspace ends, U toggles the pointer.
-- Czech and English, switchable in the footer.
+- English at [slidesbyhand.com](https://slidesbyhand.com) and Czech at [slidesbyhand.com/cs/](https://slidesbyhand.com/cs/).
+- More reading: [what it is and FAQ](https://slidesbyhand.com/about/), [step by step guide](https://slidesbyhand.com/how-to-control-slides-with-hand-gestures/), [clicker comparison](https://slidesbyhand.com/presentation-clicker-alternative/).
 
 ## Run your own copy
 
-The whole app is static files. Fork the repository, turn on GitHub Pages for the `main` branch and you have your own copy. No build step, no server, no dependencies to install.
+The whole site is static files. Fork the repository, turn on GitHub Pages for the `main` branch and you have your own copy. No server, no dependencies to install.
+
+The English version lives at the root and the Czech one in `/cs/`. Both, together with the content pages, the sitemap and `llms.txt`, are generated from one source by `build.py`. The generated files are committed, so you only need to run `python3 build.py` after you change something in `src/`.
 
 ## Built with
 

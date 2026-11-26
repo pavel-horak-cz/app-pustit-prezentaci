@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="cs">
+<!-- VYGENEROVÁNO skriptem build.py ze souboru src/app.html. Neupravuj ručně, uprav zdroj a spusť generátor. -->
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FFB20F">
 <!-- Základní SEO -->
-<title>SlidesByHand | Run your slides by hand</title>
-<meta name="description" content="Control your presentation with hand gestures in front of a laptop camera. No clicker, no install, no account. Runs in the browser and nothing leaves your computer.">
-<meta name="keywords" content="SlidesByHand, hand gestures, gesture control, presentation, slides, PDF, webcam, hand tracking, no clicker, ovládání prezentace gesty, Pavel Horák">
+<title>SlidesByHand: Control Your Slides with Hand Gestures</title>
+<meta name="description" content="Free browser app that turns your laptop camera into a presentation remote. Add a PDF, show your palm and turn pages by hand. No install, no account.">
+<meta name="keywords" content="SlidesByHand, control slides with hand gestures, gesture controlled presentation, presentation clicker alternative, hand tracking, webcam presentation remote, PDF presentation, Pavel Horák">
 <meta name="author" content="Pavel Horák">
 <meta name="creator" content="Pavel Horák">
 <meta name="publisher" content="Pavel Horák">
 <meta name="copyright" content="© 2026 Pavel Horák">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="canonical" href="https://slidesbyhand.com/">
+<!-- Jazykové verze téže stránky -->
+<link rel="alternate" hreflang="en" href="https://slidesbyhand.com/">
+<link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/">
+<link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
 <link rel="license" href="https://opensource.org/licenses/MIT">
+<link rel="alternate" type="text/plain" title="llms.txt" href="llms.txt">
 <!-- Časové údaje -->
 <meta name="date" content="2026-11-25">
 <meta name="dcterms.modified" content="2026-11-26">
 <!-- Open Graph / Facebook / LinkedIn -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SlidesByHand">
-<meta property="og:title" content="SlidesByHand | Run your slides by hand">
-<meta property="og:description" content="Control your presentation with hand gestures. No clicker, no install, nothing leaves your computer.">
+<meta property="og:title" content="SlidesByHand: Control Your Slides with Hand Gestures">
+<meta property="og:description" content="Free browser app that turns your laptop camera into a presentation remote. Add a PDF, show your palm and turn pages by hand. No install, no account.">
 <meta property="og:image" content="https://slidesbyhand.com/og-image.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
@@ -34,11 +40,11 @@
 <meta property="article:author" content="https://phorak.cz/#pavel-horak">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SlidesByHand | Run your slides by hand">
-<meta name="twitter:description" content="Control your presentation with hand gestures. No clicker, no install, nothing leaves your computer.">
+<meta name="twitter:title" content="SlidesByHand: Control Your Slides with Hand Gestures">
+<meta name="twitter:description" content="Free browser app that turns your laptop camera into a presentation remote. Add a PDF, show your palm and turn pages by hand. No install, no account.">
 <meta name="twitter:image" content="https://slidesbyhand.com/og-image.png">
 <meta name="twitter:creator" content="@PavelHorakCZ">
-<!-- Schema.org: webová aplikace, zdrojový kód a web. Autor odkazuje na centrální identitu na phorak.cz. -->
+<!-- Schema.org. Autor odkazuje na centrální identitu na phorak.cz. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,12 +55,45 @@
       "url": "https://slidesbyhand.com/",
       "name": "SlidesByHand",
       "description": "Run your slides with hand gestures in front of a laptop camera.",
-      "inLanguage": ["en", "cs"],
-      "publisher": {"@id": "https://phorak.cz/#pavel-horak"},
+      "inLanguage": [
+        "en",
+        "cs"
+      ],
+      "publisher": {
+        "@id": "https://phorak.cz/#pavel-horak"
+      },
       "copyrightYear": 2026,
-      "copyrightHolder": {"@id": "https://phorak.cz/#pavel-horak"},
+      "copyrightHolder": {
+        "@id": "https://phorak.cz/#pavel-horak"
+      },
       "dateCreated": "2026-11-25T00:00:00+01:00",
       "dateModified": "2026-11-26T00:00:00+01:00"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://slidesbyhand.com/#webpage",
+      "url": "https://slidesbyhand.com/",
+      "name": "SlidesByHand: Control Your Slides with Hand Gestures",
+      "description": "Free browser app that turns your laptop camera into a presentation remote. Add a PDF, show your palm and turn pages by hand. No install, no account.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://slidesbyhand.com/#website"
+      },
+      "about": {
+        "@id": "https://slidesbyhand.com/#app"
+      },
+      "primaryImageOfPage": "https://slidesbyhand.com/og-image.png",
+      "datePublished": "2026-11-25",
+      "dateModified": "2026-11-26T00:00:00+01:00",
+      "author": {
+        "@type": "Person",
+        "@id": "https://phorak.cz/#pavel-horak",
+        "name": "Pavel Horák",
+        "url": "https://phorak.cz"
+      },
+      "publisher": {
+        "@id": "https://phorak.cz/#pavel-horak"
+      }
     },
     {
       "@type": "WebApplication",
@@ -65,9 +104,16 @@
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Any (runs in a web browser)",
       "browserRequirements": "Requires JavaScript, a camera and a modern browser. Tested in Chrome.",
-      "inLanguage": ["en", "cs"],
+      "inLanguage": [
+        "en",
+        "cs"
+      ],
       "isAccessibleForFree": true,
-      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
       "featureList": [
         "Start, page through and end a presentation with hand gestures",
         "Pointer that follows the fingertip",
@@ -80,11 +126,20 @@
       "image": "https://slidesbyhand.com/og-image.png",
       "screenshot": "https://slidesbyhand.com/docs/screenshot.png",
       "license": "https://opensource.org/licenses/MIT",
-      "isPartOf": {"@id": "https://slidesbyhand.com/#website"},
+      "isPartOf": {
+        "@id": "https://slidesbyhand.com/#website"
+      },
       "datePublished": "2026-11-25",
       "dateModified": "2026-11-26",
-      "author": {"@type": "Person", "@id": "https://phorak.cz/#pavel-horak", "name": "Pavel Horák", "url": "https://phorak.cz"},
-      "creator": {"@id": "https://phorak.cz/#pavel-horak"}
+      "author": {
+        "@type": "Person",
+        "@id": "https://phorak.cz/#pavel-horak",
+        "name": "Pavel Horák",
+        "url": "https://phorak.cz"
+      },
+      "creator": {
+        "@id": "https://phorak.cz/#pavel-horak"
+      }
     },
     {
       "@type": "SoftwareSourceCode",
@@ -95,8 +150,15 @@
       "codeRepository": "https://github.com/pavel-horak-cz/app-slides-by-hand",
       "license": "https://opensource.org/licenses/MIT",
       "programmingLanguage": "JavaScript",
-      "targetProduct": {"@id": "https://slidesbyhand.com/#app"},
-      "author": {"@type": "Person", "@id": "https://phorak.cz/#pavel-horak", "name": "Pavel Horák", "url": "https://phorak.cz"}
+      "targetProduct": {
+        "@id": "https://slidesbyhand.com/#app"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://phorak.cz/#pavel-horak",
+        "name": "Pavel Horák",
+        "url": "https://phorak.cz"
+      }
     }
   ]
 }
@@ -254,7 +316,8 @@
     align-items: center; font-size: 15px; border-top: 2px solid var(--cerna); padding-top: 12px; }
   footer a { font-weight: 800; text-underline-offset: 3px; }
   footer .oddelovac { margin: 0 .6em; opacity: .5; }
-  #jazyk { height: 38px; padding: 0 .9em; letter-spacing: .06em; }
+  #jazyk { height: 38px; padding: 0 .9em; letter-spacing: .06em; display: inline-flex; align-items: center; text-decoration: none; }
+  footer .patickaOdkaz { font-weight: 800; margin-right: 6px; }
   #napoveda { width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 2px solid var(--cerna); background: none;
     color: var(--cerna); font: inherit; font-weight: 800; font-size: 18px; cursor: pointer; }
   #klavesy { position: absolute; right: 64px; bottom: 96px; z-index: 3; display: none; width: 470px; padding: 20px 24px;
@@ -333,33 +396,33 @@
     <section id="plakat">
       <div class="nahore">
         <div class="znacka"><svg class="ik"><use href="#i-dlan"/></svg>SlidesByHand</div>
-        <div class="stitek"><i></i>Ovládáno gesty</div>
+        <div class="stitek"><i></i>Gesture controlled</div>
       </div>
       <div class="ruka"><svg class="ik"><use href="#i-dlan"/></svg></div>
-      <h1>Pusť<br>prezentaci<br>rukou.</h1>
-      <p class="pod">Žádné hledání oken, žádný ovladač. Stačí kamera notebooku a pár gest před obrazovkou.
-        <b>Prezentace, hudba ani obraz z kamery neopouštějí tvůj počítač.</b></p>
+      <h1>Run your<br>slides<br>by hand.</h1>
+      <p class="pod">No hunting for windows, no clicker. All you need is a laptop camera and a few hand gestures.
+        <b>Your slides, music and camera image never leave your computer.</b></p>
       <div class="akce">
         <button id="start" disabled>Start</button>
-        <button class="obrys ucit">Nauč se gesta</button>
-        <div id="stavText">Načítám...</div>
+        <button class="obrys ucit">Learn the gestures</button>
+        <div id="stavText">Loading...</div>
       </div>
       <div id="soubory">
-        <div class="pole" id="polePrezentace" data-druh="prezentace" title="Přetáhni sem PDF nebo klikni">
+        <div class="pole" id="polePrezentace" data-druh="prezentace" title="Drop a PDF here or click">
           <svg class="ik"><use href="#i-prezentace"/></svg>
-          <div class="popis"><small>Prezentace (PDF)</small><b class="nazev">Ukázková prezentace</b><span class="info"></span></div>
-          <button class="vybrat">Vybrat</button>
-          <button class="odebrat" title="Odebrat a vrátit ukázku" aria-label="Odebrat prezentaci"><svg class="ik"><use href="#i-kos"/></svg></button>
+          <div class="popis"><small>Presentation (PDF)</small><b class="nazev">Sample presentation</b><span class="info"></span></div>
+          <button class="vybrat">Choose</button>
+          <button class="odebrat" title="Remove and restore the sample" aria-label="Remove presentation"><svg class="ik"><use href="#i-kos"/></svg></button>
           <input type="file" accept=".pdf,application/pdf" hidden>
         </div>
-        <div class="pole" id="poleHudba" data-druh="hudba" title="Přetáhni sem MP3 nebo klikni">
+        <div class="pole" id="poleHudba" data-druh="hudba" title="Drop an MP3 here or click">
           <svg class="ik"><use href="#i-hudba"/></svg>
-          <div class="popis"><small>Hudba (MP3)</small><b class="nazev">Ukázkový zvuk</b><span class="info"></span></div>
-          <button class="vybrat">Vybrat</button>
-          <button class="odebrat" title="Odebrat a vrátit ukázku" aria-label="Odebrat hudbu"><svg class="ik"><use href="#i-kos"/></svg></button>
+          <div class="popis"><small>Music (MP3)</small><b class="nazev">Sample sound</b><span class="info"></span></div>
+          <button class="vybrat">Choose</button>
+          <button class="odebrat" title="Remove and restore the sample" aria-label="Remove music"><svg class="ik"><use href="#i-kos"/></svg></button>
           <input type="file" accept=".mp3,audio/mpeg" hidden>
         </div>
-        <div id="poleZprava">Přetáhni sem vlastní PDF a MP3. Uloží se v tomto prohlížeči a příště tu budou.</div>
+        <div id="poleZprava">Drop your own PDF and MP3 here. They are saved in this browser and will be here next time.</div>
       </div>
     </section>
 
@@ -367,42 +430,42 @@
     <section id="pracovni">
       <div class="nahore">
         <div class="vlevo">
-          <button id="zmenit" class="obrys" title="Zpět na úvodní obrazovku"><svg class="ik"><use href="#i-zpet"/></svg>Zpět</button>
-          <h2>Ovládej rukou</h2>
+          <button id="zmenit" class="obrys" title="Back to the start screen"><svg class="ik"><use href="#i-zpet"/></svg>Back</button>
+          <h2>Control by hand</h2>
         </div>
-        <div class="stitek"><i></i>Kamera běží</div>
+        <div class="stitek"><i></i>Camera on</div>
       </div>
       <div class="rozvrh">
         <div id="gesta">
-        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-dlan"/></svg></div><div><b>Otevřená dlaň</b><span>Spustit prezentaci</span></div></div>
-        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-pest"/></svg></div><div><b>Pěst</b><span>Konec prezentace</span></div></div>
-        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-vlevo"/></svg></div><div><b>Ukazovák doleva</b><span>Předchozí stránka</span></div></div>
-        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-vpravo"/></svg></div><div><b>Ukazovák doprava</b><span>Další stránka</span></div></div>
-        <div class="karta"><div class="znak dvojity"><svg class="ik"><use href="#i-nahoru"/></svg><svg class="ik"><use href="#i-nahoru"/></svg></div><div><b>Ukazováky nahoru</b><span>Oběma rukama. Zapnou ukazovátko.</span></div></div>
-        <div class="karta"><div class="znak dvojity"><svg class="ik"><use href="#i-dolu"/></svg><svg class="ik"><use href="#i-dolu"/></svg></div><div><b>Ukazováky dolů</b><span>Oběma rukama. Vypnou ukazovátko.</span></div></div>
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-dlan"/></svg></div><div><b>Open palm</b><span>Start the presentation</span></div></div>
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-pest"/></svg></div><div><b>Fist</b><span>End the presentation</span></div></div>
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-vlevo"/></svg></div><div><b>Index finger left</b><span>Previous page</span></div></div>
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-vpravo"/></svg></div><div><b>Index finger right</b><span>Next page</span></div></div>
+        <div class="karta"><div class="znak dvojity"><svg class="ik"><use href="#i-nahoru"/></svg><svg class="ik"><use href="#i-nahoru"/></svg></div><div><b>Index fingers up</b><span>Both hands. Turns the pointer on.</span></div></div>
+        <div class="karta"><div class="znak dvojity"><svg class="ik"><use href="#i-dolu"/></svg><svg class="ik"><use href="#i-dolu"/></svg></div><div><b>Index fingers down</b><span>Both hands. Turns the pointer off.</span></div></div>
         </div>
         <div>
           <div id="kamMisto">
-            <button id="nahledObnovit"><svg class="ik"><use href="#i-kamera"/></svg>Zobrazit kameru</button>
+            <button id="nahledObnovit"><svg class="ik"><use href="#i-kamera"/></svg>Show camera</button>
             <div id="nahledBox">
-              <div class="cekani" id="nahledCekani">Kamera se zapíná...</div>
+              <div class="cekani" id="nahledCekani">Starting the camera...</div>
               <canvas id="nahled" width="640" height="360"></canvas>
               <div id="nahledText"></div>
-              <button id="nahledZavrit" title="Skrýt náhled kamery (klávesa K)" aria-label="Skrýt náhled kamery"><svg class="ik"><use href="#i-krizek"/></svg></button>
+              <button id="nahledZavrit" title="Hide camera preview (K key)" aria-label="Hide camera preview"><svg class="ik"><use href="#i-krizek"/></svg></button>
             </div>
           </div>
-          <div class="pripraveno">Připraveno.<small>Ukaž otevřenou dlaň a prezentace se spustí.</small></div>
+          <div class="pripraveno">Ready.<small>Show an open palm to start the presentation.</small></div>
         </div>
       </div>
     </section>
 
     <!-- Nauč se gesta -->
     <section id="zkouska">
-      <div class="nahore"><h2>Nauč se gesta</h2><button id="zkouskaZavrit" class="obrys">Zavřít</button></div>
+      <div class="nahore"><h2>Learn the gestures</h2><button id="zkouskaZavrit" class="obrys">Close</button></div>
       <div class="rozvrh">
         <div>
           <div id="zkouskaKam"></div>
-          <p class="rada">Gesto chvíli podrž, dokud se kroužek vpravo dole nenaplní. Pod obrazem vidíš, co stránka právě rozpoznala. Při zkoušce se nic nespouští.</p>
+          <p class="rada">Hold the gesture until the ring in the bottom right corner fills up. Below the image you can see what the page has just recognized. Nothing is started while you practise.</p>
         </div>
         <div id="zkouskaUkol">
           <div class="stitek"><i></i><span id="zkouskaPoradi"></span></div>
@@ -410,13 +473,13 @@
           <h3 id="zkouskaNazev"></h3>
           <p id="zkouskaJak"></p>
           <p id="zkouskaCo"></p>
-          <div id="zkouskaHotovo">Výborně.</div>
-          <div class="tlacitka"><button id="zkouskaPreskocit" class="obrys">Přeskočit toto gesto</button></div>
+          <div id="zkouskaHotovo">Well done.</div>
+          <div class="tlacitka"><button id="zkouskaPreskocit" class="obrys">Skip this gesture</button></div>
           <div id="zkouskaKonec">
-            <h3>Umíš to.</h3>
-            <p>Všechna gesta máš vyzkoušená. Teď můžeš pustit prezentaci.</p>
-            <button id="zkouskaPustit" class="plne">Pustit prezentaci</button>
-            <button id="zkouskaZnovu" class="obrys">Projít znovu</button>
+            <h3>You got it.</h3>
+            <p>You have tried all the gestures. Now you can run your presentation.</p>
+            <button id="zkouskaPustit" class="plne">Run the presentation</button>
+            <button id="zkouskaZnovu" class="obrys">Go through again</button>
           </div>
         </div>
       </div>
@@ -424,26 +487,27 @@
     </section>
 
     <div id="klavesy">
-      <h3>Záloha na klávesnici</h3>
-      <b>Enter</b> spustí prezentaci<br>
-      <b>Šipky</b> listují<br>
-      <b>Backspace</b> ukončí prezentaci<br>
-      <b>M</b> (držet) hraje hudbu<br>
-      <b>U</b> zapne a vypne ukazovátko<br>
-      <b>K</b> skryje a zobrazí náhled kamery<br>
-      <b>F</b> celá obrazovka
-      <h3 class="skryte">Skrytá funkce</h3>
-      <b>Srdce</b> (oběma rukama, ze dvou ukazováků a dvou palců) hraje hudbu, dokud gesto trvá
+      <h3>Keyboard backup</h3>
+      <b>Enter</b> starts the presentation<br>
+      <b>Arrows</b> turn pages<br>
+      <b>Backspace</b> ends the presentation<br>
+      <b>M</b> (hold) plays music<br>
+      <b>U</b> turns the pointer on and off<br>
+      <b>K</b> hides and shows the camera preview<br>
+      <b>F</b> full screen
+      <h3 class="skryte">Hidden feature</h3>
+      <b>Heart</b> (both hands, made of two index fingers and two thumbs) plays music for as long as you hold it
     </div>
 
     <footer>
-      <div>Vytvořil <a href="https://pprojects.cz" target="_blank" rel="author noopener">Pavel Horák</a>
-        <span class="oddelovac">·</span> Weby, o kterých ví Google i umělá inteligence:
+      <div>Made by <a href="https://pprojects.cz" target="_blank" rel="author noopener">Pavel Horák</a>
+        <span class="oddelovac">·</span> Websites that Google and AI know about:
         <a href="https://webseoai.cz" target="_blank" rel="noopener">webseoai.cz</a></div>
       <div class="vpravo">
-        <button class="obrys ucit">Nauč se gesta</button>
-        <button id="jazyk" class="obrys" title="Přepnout jazyk" aria-label="Přepnout jazyk">EN</button>
-        <button id="napoveda" title="Záloha na klávesnici" aria-label="Záloha na klávesnici">?</button>
+        <button class="obrys ucit">Learn the gestures</button>
+        <a class="patickaOdkaz" href="about/">About</a>
+        <a id="jazyk" class="obrys" href="cs/" hreflang="cs" title="Switch language" aria-label="Switch language">CS</a>
+        <button id="napoveda" title="Keyboard backup" aria-label="Keyboard backup">?</button>
       </div>
     </footer>
   </div>
@@ -452,7 +516,7 @@
 <div id="prezentace"><img id="strana" alt=""></div>
 
 <div id="tecka"></div>
-<div id="ukazStav" class="stitek"><i></i>Ukazovátko zapnuto</div>
+<div id="ukazStav" class="stitek"><i></i>Pointer on</div>
 
 <div id="kruh">
   <svg class="obvod" viewBox="0 0 100 100">
@@ -462,7 +526,7 @@
   <div id="kruhZnak"></div>
 </div>
 
-<button id="nahledIkona" title="Zobrazit náhled kamery (klávesa K)" aria-label="Zobrazit náhled kamery"><svg class="ik"><use href="#i-kamera"/></svg></button>
+<button id="nahledIkona" title="Show camera preview (K key)" aria-label="Show camera preview"><svg class="ik"><use href="#i-kamera"/></svg></button>
 
 <video id="kamera" playsinline muted></video>
 
@@ -566,6 +630,7 @@ const EN = {
   "Vytvořil": "Made by",
   "Weby, o kterých ví Google i umělá inteligence:": "Websites that Google and AI know about:",
   "Přepnout jazyk": "Switch language",
+  "O projektu": "About",
   "Vše je načteno.": "Everything is loaded.",
   "Připravuji stránku {0} z {1}...": "Preparing page {0} of {1}...",
   "Načítám hudbu...": "Loading music...",
@@ -604,12 +669,17 @@ const EN = {
   "dva ukazováky dolů": "two index fingers down"
 };
 
-let jazyk = "cs";
-try { jazyk = localStorage.getItem("jazyk") || ""; } catch (chyba) { jazyk = ""; }
-if (jazyk !== "cs" && jazyk !== "en") {
-  const prohlizec = (navigator.language || "cs").toLowerCase();
-  jazyk = prohlizec.startsWith("cs") || prohlizec.startsWith("sk") ? "cs" : "en";
-}
+// Jazyk je daný adresou: anglická verze je v kořeni webu, česká ve složce /cs/.
+const jazyk = document.documentElement.lang === "cs" ? "cs" : "en";
+
+// První návštěva z českého nebo slovenského prohlížeče na anglické adrese: nabídne se rovnou česká verze.
+// Jakmile si uživatel jazyk jednou vybere odkazem v patičce, už se nepřesměrovává.
+try {
+  if (jazyk === "en" && !localStorage.getItem("jazyk")) {
+    const prohlizec = (navigator.language || "").toLowerCase();
+    if (prohlizec.startsWith("cs") || prohlizec.startsWith("sk")) location.replace("cs/");
+  }
+} catch (chyba) { console.log(chyba); }
 
 // Přeloží český text do zvoleného jazyka a doplní hodnoty na místa {0}, {1}...
 function tr(text, ...hodnoty) {
@@ -639,12 +709,8 @@ const pevneAtributy = [];
 }
 
 function prelozPevneTexty() {
-  document.documentElement.lang = jazyk;
-  document.title = "SlidesByHand | " + tr("Pusť prezentaci rukou");
-  document.querySelector('meta[name="description"]').setAttribute("content", tr("Ovládej prezentaci gesty ruky před kamerou notebooku. Bez ovladače, bez instalace, bez účtu. Běží v prohlížeči a nic neopouští tvůj počítač."));
   for (const t of pevneTexty) t.uzel.nodeValue = (t.pred ? " " : "") + tr(t.cesky) + (t.po ? " " : "");
   for (const a of pevneAtributy) a.prvek.setAttribute(a.atribut, tr(a.cesky));
-  document.getElementById("jazyk").textContent = jazyk === "cs" ? "EN" : "CS";
 }
 
 // ---------------------------------------------------------------
@@ -1582,41 +1648,13 @@ function smycka() {
   requestAnimationFrame(smycka);
 }
 
-// Přepnutí jazyka: přeloží pevné texty, stavové řádky, pole se soubory a zkoušku gest.
-// Ukázková prezentace existuje česky i anglicky, takže se při změně jazyka vymění.
-function nastavJazyk(novy, uzivatelem) {
-  jazyk = novy;
-  if (uzivatelem) { try { localStorage.setItem("jazyk", jazyk); } catch (chyba) { console.log(chyba); } }
-  prelozPevneTexty();
-  if (posledniHlaseni) hlaseni(posledniHlaseni.sablona, posledniHlaseni.trida, ...posledniHlaseni.hodnoty);
-  if (posledniZprava) zpravaPole(posledniZprava.sablona, posledniZprava.chyba, ...posledniZprava.hodnoty);
-  for (const druh of ["prezentace", "hudba"]) {
-    const p = poleStav[druh];
-    if (p) nastavPole(druh, p.nazev, p.pocet, p.vlastni);
-  }
-  const krokTed = zkouskaKrok, pauzaTed = zkouskaPauza;
-  zkouskaVykresliKroky();
-  zkouskaUkaz();
-  if (pauzaTed && krokTed < ZKOUSKA_KROKY.length) {
-    elZkouskaUkol.classList.add("splneno");
-    elZkouskaKroky.children[krokTed].classList.add("hotovo");
-  }
-  if (uzivatelem && poleStav.prezentace && !poleStav.prezentace.vlastni) {
-    doFronty(async () => {
-      const mohlStartovat = !elStart.disabled;
-      elStart.disabled = true;
-      try { await nactiUkazkuPrezentace(); }
-      finally {
-        elStart.disabled = !mohlStartovat;
-        if (stav === "ceka") hlaseni(TEXT_NACTENO);
-        else if (stav === "pripraveno" || stav === "zkouska") hlaseni("Připraveno. Ukaž otevřenou dlaň.", "ok");
-      }
-    });
-  }
-}
-document.getElementById("jazyk").addEventListener("click", () => nastavJazyk(jazyk === "cs" ? "en" : "cs", true));
+// Přepnutí jazyka je odkaz na druhou jazykovou verzi. Volba se zapamatuje, aby se příště nepřesměrovávalo.
+document.getElementById("jazyk").addEventListener("click", () => {
+  try { localStorage.setItem("jazyk", "cs"); } catch (chyba) { console.log(chyba); }
+});
 
-nastavJazyk(jazyk, false);
+prelozPevneTexty();
+
 doFronty(nactiVse);
 </script>
 </body>

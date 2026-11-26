@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFB20F">
+{{head}}
+<style>
+  @font-face { font-family: "Inter"; font-weight: 400; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "Inter"; font-weight: 400; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Inter"; font-weight: 600; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-ext-600-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "Inter"; font-weight: 600; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Inter"; font-weight: 800; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-ext-800-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "Inter"; font-weight: 800; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-800-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Inter"; font-weight: 900; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-ext-900-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: "Inter"; font-weight: 900; font-display: swap;
+    src: url("{{root}}lib/fonts/inter-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
+  :root { --zluta: #FFB20F; --cerna: #0b0b0b; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--zluta); color: var(--cerna);
+    font-family: "Inter", system-ui, "Segoe UI", Arial, sans-serif; overflow: hidden; }
+  a { color: inherit; }
+
+  /* Obrysové ikony */
+  .sada { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .ik { width: 1em; height: 1em; display: block; fill: none; stroke: currentColor; stroke-width: 1.5;
+    stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Úvod: scéna 1600 x 900, která se celá přizpůsobí velikosti okna */
+  #uvod { position: fixed; inset: 0; background: var(--zluta); }
+  #scena { position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; padding: 48px 64px;
+    transform-origin: center center; }
+  .stitek { display: inline-flex; align-items: center; gap: .6em; background: var(--cerna); color: var(--zluta);
+    font-weight: 800; font-size: 15px; letter-spacing: .08em; text-transform: uppercase;
+    padding: .75em 1.5em; border-radius: 999px; }
+  .stitek i { width: .6em; height: .6em; border-radius: 50%; background: var(--zluta); display: block; }
+
+  /* Plakát před kliknutím na Start */
+  #plakat .nahore { display: flex; justify-content: space-between; align-items: center; }
+  #plakat .znacka { display: flex; align-items: center; gap: .35em; font-weight: 900; font-size: 28px; letter-spacing: -.03em; }
+  #plakat .znacka .ik { font-size: 1.3em; stroke-width: 2; }
+  #plakat h1 { font-weight: 900; font-size: 158px; line-height: .92; letter-spacing: -.06em; margin: 22px 0 0; }
+  #plakat .pod { font-size: 24px; line-height: 1.4; margin: 24px 0 0; max-width: 30em; }
+  #plakat .pod b { font-weight: 800; }
+  html[lang="en"] #plakat h1 { font-size: 150px; }
+  html[lang="en"] #plakat .pod { margin-top: 36px; }
+  #plakat .akce { display: flex; align-items: center; gap: 26px; margin-top: 28px; }
+  #plakat .ruka { position: absolute; right: 149px; top: 112px; font-size: 300px; }
+
+  /* Pole pro vlastní prezentaci a hudbu */
+  #soubory { position: absolute; right: 64px; top: 452px; width: 470px; display: flex; flex-direction: column; gap: 12px; }
+  .pole { display: flex; align-items: center; gap: 14px; height: 96px; padding: 14px 16px;
+    border: 2.5px dashed var(--cerna); border-radius: 20px; cursor: pointer; }
+  .pole > .ik { font-size: 44px; flex: none; stroke-width: 1.3; }
+  .pole .popis { flex: 1; min-width: 0; }
+  .pole small { display: block; font-weight: 800; font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+  .pole b { display: block; font-weight: 900; font-size: 20px; letter-spacing: -.02em; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; }
+  .pole span { display: block; font-size: 14px; opacity: .8; }
+  .pole button { font: inherit; font-weight: 800; font-size: 15px; padding: .5em 1em; border-radius: 999px; cursor: pointer;
+    border: 2px solid var(--cerna); background: var(--cerna); color: var(--zluta); flex: none; }
+  .pole button.odebrat { width: 38px; height: 38px; padding: 0; display: none; align-items: center; justify-content: center;
+    background: none; color: var(--cerna); font-size: 20px; }
+  .pole.vlastni { border-style: solid; background: rgba(255, 255, 255, .28); }
+  .pole.vlastni button.odebrat { display: flex; }
+  body.tahne .pole { border-style: solid; background: #fff; }
+  #poleZprava { min-height: 44px; font-size: 15px; font-weight: 600; line-height: 1.4; }
+  #poleZprava.chyba { color: #8a0015; font-weight: 800; }
+  #pracovni .nahore .vlevo { display: flex; align-items: center; gap: 22px; }
+  #zmenit { display: inline-flex; align-items: center; gap: .4em; font-size: 18px; padding: .55em 1.2em .55em .9em; border-width: 2.5px; }
+  #zmenit .ik { font-size: 1.3em; stroke-width: 2.2; }
+  footer .vpravo { display: flex; align-items: center; gap: 14px; }
+  #plakat .ruka .ik { stroke-width: .9; }
+  #start { font: inherit; font-size: 40px; font-weight: 900; letter-spacing: -.02em; padding: .55em 1.9em;
+    border: 0; border-radius: 999px; background: var(--cerna); color: var(--zluta); cursor: pointer; }
+  #start:disabled { opacity: .35; cursor: default; }
+  #stavText { font-weight: 600; font-size: 20px; max-width: 24em; }
+  #stavText.chyba { color: #8a0015; font-weight: 800; }
+  body.bezi #plakat { display: none; }
+
+
+  /* Pracovní obrazovka po Startu: velká gesta a kamera */
+  #pracovni { display: none; }
+  body.bezi #pracovni { display: block; }
+  #pracovni .nahore { display: flex; justify-content: space-between; align-items: center; }
+  #pracovni h2 { font-weight: 900; font-size: 44px; letter-spacing: -.045em; margin: 0; }
+  #pracovni .rozvrh { display: grid; grid-template-columns: 1fr 520px; gap: 40px; margin-top: 30px; }
+  #gesta { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .karta { display: flex; gap: 20px; align-items: center; border: 2.5px solid var(--cerna); border-radius: 24px;
+    padding: 18px 24px; height: 196px; }
+  .karta .znak { display: flex; font-size: 112px; flex: none; }
+  .karta .znak .ik { stroke-width: 1.3; }
+  .karta .znak.dvojity .ik + .ik { margin-left: -58px; }
+  .karta b { display: block; font-weight: 900; font-size: 31px; line-height: 1.05; letter-spacing: -.035em; }
+  .karta span { display: block; font-size: 20px; line-height: 1.3; opacity: .8; margin-top: 8px; }
+  #kamMisto { position: relative; aspect-ratio: 16 / 10; border-radius: 28px; border: 2.5px dashed rgba(11, 11, 11, .35); }
+  #nahledObnovit { position: absolute; inset: 0; margin: auto; width: fit-content; height: fit-content; display: none;
+    align-items: center; gap: .5em; font: inherit; font-weight: 800; font-size: 18px; padding: .6em 1.2em;
+    border: 2.5px solid var(--cerna); border-radius: 999px; background: none; color: var(--cerna); cursor: pointer; }
+  #nahledObnovit .ik { font-size: 1.4em; }
+  body.bezNahledu #nahledObnovit { display: inline-flex; }
+  .pripraveno { margin-top: 22px; font-weight: 900; font-size: 34px; line-height: 1.1; letter-spacing: -.035em; }
+  .pripraveno small { display: block; font-weight: 600; font-size: 20px; letter-spacing: 0; opacity: .8; margin-top: 8px; }
+
+  /* Tlačítka s obrysem */
+  .obrys { font: inherit; font-weight: 800; font-size: 15px; padding: .5em 1.1em; border-radius: 999px;
+    border: 2px solid var(--cerna); background: none; color: var(--cerna); cursor: pointer; }
+  #plakat .ucit { font-size: 24px; border-width: 2.5px; padding: .75em 1.4em; }
+  footer .ucit { display: none; }
+  body.bezi footer .ucit { display: inline-block; }
+
+  /* Nauč se gesta: zkouška gest před kamerou, při které se nic nespouští */
+  #zkouska { display: none; }
+  body.zkouska #zkouska { display: block; }
+  body.zkouska #plakat, body.zkouska #pracovni, body.zkouska footer .ucit { display: none; }
+  #zkouska .nahore { display: flex; justify-content: space-between; align-items: center; }
+  #zkouska h2 { font-weight: 900; font-size: 44px; letter-spacing: -.045em; margin: 0; }
+  #zkouska .rozvrh { display: grid; grid-template-columns: 800px 1fr; gap: 48px; margin-top: 26px; }
+  #zkouskaKam { position: relative; aspect-ratio: 16 / 10; border-radius: 28px; }
+  #zkouska .rada { font-size: 17px; line-height: 1.45; margin: 16px 0 0; opacity: .85; }
+  #zkouskaIkona { display: flex; font-size: 190px; margin: 14px 0 0 -14px; height: 190px; }
+  #zkouskaIkona .ik { stroke-width: 1.1; }
+  #zkouskaIkona .ik + .ik { margin-left: -100px; }
+  #zkouskaUkol h3 { font-weight: 900; font-size: 58px; line-height: 1; letter-spacing: -.05em; margin: 6px 0 0; }
+  #zkouskaJak { font-size: 22px; line-height: 1.4; margin: 16px 0 0; }
+  #zkouskaCo { font-size: 18px; line-height: 1.4; margin: 10px 0 0; opacity: .75; }
+  #zkouskaHotovo { visibility: hidden; display: inline-flex; align-items: center; gap: .5em; margin-top: 18px;
+    font-weight: 900; font-size: 26px; background: var(--cerna); color: var(--zluta); padding: .4em 1em; border-radius: 999px; }
+  #zkouskaUkol.splneno #zkouskaHotovo { visibility: visible; }
+  #zkouskaUkol .tlacitka { margin-top: 18px; display: flex; gap: 12px; }
+  #zkouskaKonec { display: none; }
+  #zkouska.konec #zkouskaUkol > :not(#zkouskaKonec) { display: none; }
+  #zkouska.konec #zkouskaKonec { display: block; }
+  #zkouskaKonec h3 { font-size: 110px; margin-top: 40px; }
+  #zkouskaKonec p { font-size: 24px; line-height: 1.4; margin: 18px 0 26px; max-width: 22em; }
+  #zkouskaKonec .plne { font: inherit; font-weight: 900; font-size: 28px; letter-spacing: -.02em; padding: .6em 1.6em; border: 0;
+    border-radius: 999px; background: var(--cerna); color: var(--zluta); cursor: pointer; margin-right: 12px; }
+  #zkouskaKonec .obrys { font-size: 20px; padding: .75em 1.4em; }
+  #zkouskaKroky { position: absolute; left: 64px; right: 64px; bottom: 96px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  #zkouskaKroky div { display: flex; align-items: center; gap: 10px; height: 54px; padding: 0 16px; border: 2px solid var(--cerna);
+    border-radius: 999px; font-weight: 800; font-size: 15px; opacity: .45; white-space: nowrap; }
+  #zkouskaKroky div .ik { font-size: 28px; flex: none; }
+  #zkouskaKroky div.ted { opacity: 1; }
+  #zkouskaKroky div.hotovo { opacity: 1; background: var(--cerna); color: var(--zluta); }
+  body.zkouska #nahledBox { display: flex; }
+  body.zkouska #nahledZavrit { display: none; }
+
+  /* Patička a nápověda ke klávesnici */
+  footer { position: absolute; left: 64px; right: 64px; bottom: 26px; display: flex; justify-content: space-between;
+    align-items: center; font-size: 15px; border-top: 2px solid var(--cerna); padding-top: 12px; }
+  footer a { font-weight: 800; text-underline-offset: 3px; }
+  footer .oddelovac { margin: 0 .6em; opacity: .5; }
+  #jazyk { height: 38px; padding: 0 .9em; letter-spacing: .06em; display: inline-flex; align-items: center; text-decoration: none; }
+  footer .patickaOdkaz { font-weight: 800; margin-right: 6px; }
+  #napoveda { width: 38px; height: 38px; padding: 0; border-radius: 50%; border: 2px solid var(--cerna); background: none;
+    color: var(--cerna); font: inherit; font-weight: 800; font-size: 18px; cursor: pointer; }
+  #klavesy { position: absolute; right: 64px; bottom: 96px; z-index: 3; display: none; width: 470px; padding: 20px 24px;
+    background: var(--cerna); color: #fff; border-radius: 22px; font-size: 16px; line-height: 1.7; }
+  #klavesy b { color: var(--zluta); font-weight: 800; }
+  #klavesy h3.skryte { margin-top: 14px; }
+  #klavesy h3 { margin: 0 0 6px; font-size: 18px; font-weight: 900; color: var(--zluta); }
+  body.sNapovedou #klavesy { display: block; }
+
+  /* Náhled kamery: v pracovní obrazovce vyplní své místo, při prezentaci je malý v rohu */
+  #kamera { position: fixed; width: 2px; height: 2px; opacity: 0; pointer-events: none; }
+  #nahledBox { position: absolute; inset: -2.5px; background: var(--cerna); border-radius: 28px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; }
+  #nahledBox canvas { width: 100%; height: 100%; object-fit: cover; display: none; }
+  #nahledBox .cekani { color: #8b8b8b; font-size: 18px; padding: 1em; text-align: center; }
+  #nahledText { position: absolute; left: 0; right: 0; bottom: 0; display: none; padding: .7em .8em;
+    background: rgba(11, 11, 11, .78); color: var(--zluta); font-weight: 600; font-size: 18px; text-align: center; }
+  #nahledZavrit { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; padding: 0; display: flex;
+    align-items: center; justify-content: center; border: 2px solid var(--zluta); border-radius: 50%;
+    background: rgba(11, 11, 11, .6); color: var(--zluta); font-size: 20px; cursor: pointer; }
+  #nahledZavrit .ik { stroke-width: 2.4; }
+  body.bezNahledu #nahledBox { display: none; }
+  body.prezentace #nahledBox { position: fixed; inset: auto; z-index: 5; left: 2vh; bottom: 2vh; width: 18vw;
+    aspect-ratio: 16 / 9; border: 3px solid var(--zluta); border-radius: 1.4vh; }
+  body.prezentace #nahledText { font-size: clamp(10px, .85vw, 15px); padding: .4em; }
+  body.prezentace #nahledZavrit { top: .6vh; right: .6vh; width: 3vh; height: 3vh; font-size: 1.8vh; border-width: 1.5px; }
+
+  /* Ikona, kterou se při prezentaci vrátí skrytý náhled kamery */
+  #nahledIkona { position: fixed; z-index: 5; left: 2vh; bottom: 2vh; width: 6vh; height: 6vh; padding: 0;
+    display: none; align-items: center; justify-content: center; border: 2px solid var(--zluta); border-radius: 50%;
+    background: rgba(11, 11, 11, .8); color: var(--zluta); font-size: 3.2vh; cursor: pointer; opacity: .55; }
+  #nahledIkona:hover { opacity: 1; }
+  body.bezNahledu.prezentace #nahledIkona { display: flex; }
+
+  /* Prezentace */
+  #prezentace { position: fixed; inset: 0; background: #000; display: none; }
+  #prezentace img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+  /* Ukazovátko: červená tečka, která sleduje špičku ukazováku */
+  #tecka { position: fixed; left: 0; top: 0; z-index: 9; width: 2.6vh; height: 2.6vh; margin: -1.3vh 0 0 -1.3vh;
+    border-radius: 50%; background: #ff2d2d; box-shadow: 0 0 1.2vh .5vh rgba(255, 45, 45, .7);
+    pointer-events: none; display: none; }
+  #ukazStav { position: fixed; z-index: 9; top: 2.5vh; right: 2.5vh; display: none; font-size: clamp(11px, 1vw, 16px); }
+
+  /* Kroužek, který se plní při držení gesta */
+  #kruh { position: fixed; right: 3vh; bottom: 3vh; width: 16vh; height: 16vh; display: none; z-index: 10; }
+  #kruh svg.obvod { width: 100%; height: 100%; transform: rotate(-90deg); }
+  #kruh .podklad { fill: var(--cerna); stroke: #3a2c06; stroke-width: 8; }
+  #kruh .postup { fill: none; stroke: var(--zluta); stroke-width: 8; stroke-linecap: round; }
+  #kruhZnak { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 7.5vh; }
+</style>
+</head>
+<body>
+
+<!-- Sada obrysových ikon (Tabler Icons, licence MIT) -->
+<svg class="sada" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="i-dlan" viewBox="0 0 24 24"><path d="M8 13v-7.5a1.5 1.5 0 0 1 3 0v6.5" /><path d="M11 5.5v-2a1.5 1.5 0 1 1 3 0v8.5" /><path d="M14 5.5a1.5 1.5 0 0 1 3 0v6.5" /><path d="M17 7.5a1.5 1.5 0 0 1 3 0v8.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7a69.74 69.74 0 0 1 -.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47" /></symbol>
+  <symbol id="i-vpravo" viewBox="0 0 24 24"><path d="M12 8h8.5a1.5 1.5 0 0 1 0 3h-7.5" /><path d="M13.5 11h2a1.5 1.5 0 0 1 0 3h-2.5" /><path d="M14.5 14a1.5 1.5 0 0 1 0 3h-1.5" /><path d="M13.5 17a1.5 1.5 0 1 1 0 3h-4.5a6 6 0 0 1 -6 -6v-2v.208a6 6 0 0 1 2.7 -5.012l.3 -.196q .718 -.468 5.728 -3.286a1.5 1.5 0 0 1 2.022 .536c.44 .734 .325 1.674 -.28 2.28l-1.47 1.47" /></symbol>
+  <symbol id="i-vlevo" viewBox="0 0 24 24"><path d="M12 8h-8.5a1.5 1.5 0 0 0 0 3h7.5" /><path d="M10.5 11h-2a1.5 1.5 0 1 0 0 3h2.5" /><path d="M9.5 14a1.5 1.5 0 0 0 0 3h1.5" /><path d="M10.5 17a1.5 1.5 0 0 0 0 3h4.5a6 6 0 0 0 6 -6v-2v.208a6 6 0 0 0 -2.7 -5.012l-.3 -.196q -.718 -.468 -5.728 -3.286a1.5 1.5 0 0 0 -2.022 .536a1.87 1.87 0 0 0 .28 2.28l1.47 1.47" /></symbol>
+  <symbol id="i-nahoru" viewBox="0 0 24 24"><path d="M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5" /><path d="M11 11.5v-2a1.5 1.5 0 1 1 3 0v2.5" /><path d="M14 10.5a1.5 1.5 0 0 1 3 0v1.5" /><path d="M17 11.5a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7a69.74 69.74 0 0 1 -.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47" /></symbol>
+  <symbol id="i-dolu" viewBox="0 0 24 24"><path d="M8 12v8.5a1.5 1.5 0 0 0 3 0v-7.5" /><path d="M11 13.5v2a1.5 1.5 0 0 0 3 0v-2.5" /><path d="M14 14.5a1.5 1.5 0 0 0 3 0v-1.5" /><path d="M17 13.5a1.5 1.5 0 0 0 3 0v-4.5a6 6 0 0 0 -6 -6h-2h.208a6 6 0 0 0 -5.012 2.7l-.196 .3q -.468 .718 -3.286 5.728a1.5 1.5 0 0 0 .536 2.022c.734 .44 1.674 .325 2.28 -.28l1.47 -1.47" /></symbol>
+  <symbol id="i-pest" viewBox="0 0 24 24"><path d="M8 11v-3.5a1.5 1.5 0 0 1 3 0v2.5" /><path d="M11 9.5v-3a1.5 1.5 0 0 1 3 0v3.5" /><path d="M14 7.5a1.5 1.5 0 0 1 3 0v2.5" /><path d="M17 9.5a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1 -6 6h-2h.208a6 6 0 0 1 -5.012 -2.7l-.196 -.3c-.312 -.479 -1.407 -2.388 -3.286 -5.728a1.5 1.5 0 0 1 .536 -2.022a1.867 1.867 0 0 1 2.28 .28l1.47 1.47" /></symbol>
+  <symbol id="i-krizek" viewBox="0 0 24 24"><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></symbol>
+  <symbol id="i-kamera" viewBox="0 0 24 24"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" /><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></symbol>
+  <symbol id="i-zpet" viewBox="0 0 24 24"><path d="M5 12l14 0" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></symbol>
+  <symbol id="i-prezentace" viewBox="0 0 24 24"><path d="M3 4l18 0" /><path d="M4 4v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-10" /><path d="M12 16l0 4" /><path d="M9 20l6 0" /><path d="M8 12l3 -3l2 2l3 -3" /></symbol>
+  <symbol id="i-hudba" viewBox="0 0 24 24"><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M9 17v-13h10v13" /><path d="M9 8h10" /></symbol>
+  <symbol id="i-kos" viewBox="0 0 24 24"><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></symbol>
+</svg>
+
+<div id="uvod">
+  <div id="scena">
+
+    <!-- Plakát před kliknutím na Start -->
+    <section id="plakat">
+      <div class="nahore">
+        <div class="znacka"><svg class="ik"><use href="#i-dlan"/></svg>SlidesByHand</div>
+        <div class="stitek"><i></i>Ovládáno gesty</div>
+      </div>
+      <div class="ruka"><svg class="ik"><use href="#i-dlan"/></svg></div>
+      <h1>Pusť<br>prezentaci<br>rukou.</h1>
+      <p class="pod">Žádné hledání oken, žádný ovladač. Stačí kamera notebooku a pár gest před obrazovkou.
+        <b>Prezentace, hudba ani obraz z kamery neopouštějí tvůj počítač.</b></p>
+      <div class="akce">
+        <button id="start" disabled>Start</button>
+        <button class="obrys ucit">Nauč se gesta</button>
+        <div id="stavText">Načítám...</div>
+      </div>
+      <div id="soubory">
+        <div class="pole" id="polePrezentace" data-druh="prezentace" title="Přetáhni sem PDF nebo klikni">
+          <svg class="ik"><use href="#i-prezentace"/></svg>
+          <div class="popis"><small>Prezentace (PDF)</small><b class="nazev">Ukázková prezentace</b><span class="info"></span></div>
+          <button class="vybrat">Vybrat</button>
+          <button class="odebrat" title="Odebrat a vrátit ukázku" aria-label="Odebrat prezentaci"><svg class="ik"><use href="#i-kos"/></svg></button>
+          <input type="file" accept=".pdf,application/pdf" hidden>
+        </div>
+        <div class="pole" id="poleHudba" data-druh="hudba" title="Přetáhni sem MP3 nebo klikni">
+          <svg class="ik"><use href="#i-hudba"/></svg>
+          <div class="popis"><small>Hudba (MP3)</small><b class="nazev">Ukázkový zvuk</b><span class="info"></span></div>
+          <button class="vybrat">Vybrat</button>
+          <button class="odebrat" title="Odebrat a vrátit ukázku" aria-label="Odebrat hudbu"><svg class="ik"><use href="#i-kos"/></svg></button>
+          <input type="file" accept=".mp3,audio/mpeg" hidden>
+        </div>
+        <div id="poleZprava">Přetáhni sem vlastní PDF a MP3. Uloží se v tomto prohlížeči a příště tu budou.</div>
+      </div>
+    </section>
+
+    <!-- Pracovní obrazovka po Startu -->
+    <section id="pracovni">
+      <div class="nahore">
+        <div class="vlevo">
+          <button id="zmenit" class="obrys" title="Zpět na úvodní obrazovku"><svg class="ik"><use href="#i-zpet"/></svg>Zpět</button>
+          <h2>Ovládej rukou</h2>
+        </div>
+        <div class="stitek"><i></i>Kamera běží</div>
+      </div>
+      <div class="rozvrh">
+        <div id="gesta">
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-dlan"/></svg></div><div><b>Otevřená dlaň</b><span>Spustit prezentaci</span></div></div>
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-pest"/></svg></div><div><b>Pěst</b><span>Konec prezentace</span></div></div>
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-vlevo"/></svg></div><div><b>Ukazovák doleva</b><span>Předchozí stránka</span></div></div>
+        <div class="karta"><div class="znak"><svg class="ik"><use href="#i-vpravo"/></svg></div><div><b>Ukazovák doprava</b><span>Další stránka</span></div></div>
+        <div class="karta"><div class="znak dvojity"><svg class="ik"><use href="#i-nahoru"/></svg><svg class="ik"><use href="#i-nahoru"/></svg></div><div><b>Ukazováky nahoru</b><span>Oběma rukama. Zapnou ukazovátko.</span></div></div>
+        <div class="karta"><div class="znak dvojity"><svg class="ik"><use href="#i-dolu"/></svg><svg class="ik"><use href="#i-dolu"/></svg></div><div><b>Ukazováky dolů</b><span>Oběma rukama. Vypnou ukazovátko.</span></div></div>
+        </div>
+        <div>
+          <div id="kamMisto">
+            <button id="nahledObnovit"><svg class="ik"><use href="#i-kamera"/></svg>Zobrazit kameru</button>
+            <div id="nahledBox">
+              <div class="cekani" id="nahledCekani">Kamera se zapíná...</div>
+              <canvas id="nahled" width="640" height="360"></canvas>
+              <div id="nahledText"></div>
+              <button id="nahledZavrit" title="Skrýt náhled kamery (klávesa K)" aria-label="Skrýt náhled kamery"><svg class="ik"><use href="#i-krizek"/></svg></button>
+            </div>
+          </div>
+          <div class="pripraveno">Připraveno.<small>Ukaž otevřenou dlaň a prezentace se spustí.</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nauč se gesta -->
+    <section id="zkouska">
+      <div class="nahore"><h2>Nauč se gesta</h2><button id="zkouskaZavrit" class="obrys">Zavřít</button></div>
+      <div class="rozvrh">
+        <div>
+          <div id="zkouskaKam"></div>
+          <p class="rada">Gesto chvíli podrž, dokud se kroužek vpravo dole nenaplní. Pod obrazem vidíš, co stránka právě rozpoznala. Při zkoušce se nic nespouští.</p>
+        </div>
+        <div id="zkouskaUkol">
+          <div class="stitek"><i></i><span id="zkouskaPoradi"></span></div>
+          <div id="zkouskaIkona"></div>
+          <h3 id="zkouskaNazev"></h3>
+          <p id="zkouskaJak"></p>
+          <p id="zkouskaCo"></p>
+          <div id="zkouskaHotovo">Výborně.</div>
+          <div class="tlacitka"><button id="zkouskaPreskocit" class="obrys">Přeskočit toto gesto</button></div>
+          <div id="zkouskaKonec">
+            <h3>Umíš to.</h3>
+            <p>Všechna gesta máš vyzkoušená. Teď můžeš pustit prezentaci.</p>
+            <button id="zkouskaPustit" class="plne">Pustit prezentaci</button>
+            <button id="zkouskaZnovu" class="obrys">Projít znovu</button>
+          </div>
+        </div>
+      </div>
+      <div id="zkouskaKroky"></div>
+    </section>
+
+    <div id="klavesy">
+      <h3>Záloha na klávesnici</h3>
+      <b>Enter</b> spustí prezentaci<br>
+      <b>Šipky</b> listují<br>
+      <b>Backspace</b> ukončí prezentaci<br>
+      <b>M</b> (držet) hraje hudbu<br>
+      <b>U</b> zapne a vypne ukazovátko<br>
+      <b>K</b> skryje a zobrazí náhled kamery<br>
+      <b>F</b> celá obrazovka
+      <h3 class="skryte">Skrytá funkce</h3>
+      <b>Srdce</b> (oběma rukama, ze dvou ukazováků a dvou palců) hraje hudbu, dokud gesto trvá
+    </div>
+
+    <footer>
+      <div>Vytvořil <a href="https://pprojects.cz" target="_blank" rel="author noopener">Pavel Horák</a>
+        <span class="oddelovac">·</span> Weby, o kterých ví Google i umělá inteligence:
+        <a href="https://webseoai.cz" target="_blank" rel="noopener">webseoai.cz</a></div>
+      <div class="vpravo">
+        <button class="obrys ucit">Nauč se gesta</button>
+        <a class="patickaOdkaz" href="{{url_about}}">O projektu</a>
+        <a id="jazyk" class="obrys" href="{{url_other}}" hreflang="{{lang_other}}" title="Přepnout jazyk" aria-label="Přepnout jazyk">{{label_other}}</a>
+        <button id="napoveda" title="Záloha na klávesnici" aria-label="Záloha na klávesnici">?</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div id="prezentace"><img id="strana" alt=""></div>
+
+<div id="tecka"></div>
+<div id="ukazStav" class="stitek"><i></i>Ukazovátko zapnuto</div>
+
+<div id="kruh">
+  <svg class="obvod" viewBox="0 0 100 100">
+    <circle class="podklad" cx="50" cy="50" r="44"></circle>
+    <circle class="postup" id="kruhPostup" cx="50" cy="50" r="44" stroke-dasharray="276.46" stroke-dashoffset="276.46"></circle>
+  </svg>
+  <div id="kruhZnak"></div>
+</div>
+
+<button id="nahledIkona" title="Zobrazit náhled kamery (klávesa K)" aria-label="Zobrazit náhled kamery"><svg class="ik"><use href="#i-kamera"/></svg></button>
+
+<video id="kamera" playsinline muted></video>
+
+<script type="module">
+import { FilesetResolver, HandLandmarker } from "./{{root}}lib/tasks-vision/vision_bundle.mjs";
+import * as pdfjsLib from "./{{root}}lib/pdfjs/pdf.min.mjs";
+
+// ---------------------------------------------------------------
+// JAZYK: čeština je v textech stránky, angličtina v tomto slovníku (klíčem je český text)
+// ---------------------------------------------------------------
+const EN = {
+  "Pusť prezentaci rukou": "Run your slides by hand",
+  "Ovládej prezentaci gesty ruky před kamerou notebooku. Bez ovladače, bez instalace, bez účtu. Běží v prohlížeči a nic neopouští tvůj počítač.": "Control your presentation with hand gestures in front of a laptop camera. No clicker, no install, no account. Runs in the browser and nothing leaves your computer.",
+  "Ovládáno gesty": "Gesture controlled",
+  "Pusť": "Run your",
+  "prezentaci": "slides",
+  "rukou.": "by hand.",
+  "Žádné hledání oken, žádný ovladač. Stačí kamera notebooku a pár gest před obrazovkou.": "No hunting for windows, no clicker. All you need is a laptop camera and a few hand gestures.",
+  "Prezentace, hudba ani obraz z kamery neopouštějí tvůj počítač.": "Your slides, music and camera image never leave your computer.",
+  "Nauč se gesta": "Learn the gestures",
+  "Načítám...": "Loading...",
+  "Prezentace (PDF)": "Presentation (PDF)",
+  "Hudba (MP3)": "Music (MP3)",
+  "Ukázková prezentace": "Sample presentation",
+  "Ukázkový zvuk": "Sample sound",
+  "Bez hudby": "No music",
+  "Vybrat": "Choose",
+  "Přetáhni sem PDF nebo klikni": "Drop a PDF here or click",
+  "Přetáhni sem MP3 nebo klikni": "Drop an MP3 here or click",
+  "Odebrat a vrátit ukázku": "Remove and restore the sample",
+  "Odebrat prezentaci": "Remove presentation",
+  "Odebrat hudbu": "Remove music",
+  "Přetáhni sem vlastní PDF a MP3. Uloží se v tomto prohlížeči a příště tu budou.": "Drop your own PDF and MP3 here. They are saved in this browser and will be here next time.",
+  "Zpět": "Back",
+  "Zpět na úvodní obrazovku": "Back to the start screen",
+  "Ovládej rukou": "Control by hand",
+  "Kamera běží": "Camera on",
+  "Otevřená dlaň": "Open palm",
+  "Spustit prezentaci": "Start the presentation",
+  "Pěst": "Fist",
+  "Konec prezentace": "End the presentation",
+  "Ukazovák doleva": "Index finger left",
+  "Předchozí stránka": "Previous page",
+  "Ukazovák doprava": "Index finger right",
+  "Další stránka": "Next page",
+  "Ukazováky nahoru": "Index fingers up",
+  "Oběma rukama. Zapnou ukazovátko.": "Both hands. Turns the pointer on.",
+  "Ukazováky dolů": "Index fingers down",
+  "Oběma rukama. Vypnou ukazovátko.": "Both hands. Turns the pointer off.",
+  "Zobrazit kameru": "Show camera",
+  "Kamera se zapíná...": "Starting the camera...",
+  "Skrýt náhled kamery (klávesa K)": "Hide camera preview (K key)",
+  "Skrýt náhled kamery": "Hide camera preview",
+  "Zobrazit náhled kamery (klávesa K)": "Show camera preview (K key)",
+  "Zobrazit náhled kamery": "Show camera preview",
+  "Připraveno.": "Ready.",
+  "Ukaž otevřenou dlaň a prezentace se spustí.": "Show an open palm to start the presentation.",
+  "Ukazovátko zapnuto": "Pointer on",
+  "Zavřít": "Close",
+  "Gesto chvíli podrž, dokud se kroužek vpravo dole nenaplní. Pod obrazem vidíš, co stránka právě rozpoznala. Při zkoušce se nic nespouští.": "Hold the gesture until the ring in the bottom right corner fills up. Below the image you can see what the page has just recognized. Nothing is started while you practise.",
+  "Výborně.": "Well done.",
+  "Přeskočit toto gesto": "Skip this gesture",
+  "Umíš to.": "You got it.",
+  "Všechna gesta máš vyzkoušená. Teď můžeš pustit prezentaci.": "You have tried all the gestures. Now you can run your presentation.",
+  "Pustit prezentaci": "Run the presentation",
+  "Projít znovu": "Go through again",
+  "Gesto {0} ze {1}": "Gesture {0} of {1}",
+  "Dlaň": "Palm",
+  "Doprava": "Right",
+  "Doleva": "Left",
+  "Oba nahoru": "Both up",
+  "Oba dolů": "Both down",
+  "Ukaž otevřenou dlaň": "Show an open palm",
+  "Zvedni ruku dlaní ke kameře, prsty natažené nahoru.": "Raise your hand with the palm facing the camera and fingers pointing up.",
+  "V prezentaci: spustí promítání.": "In a presentation: starts the slides.",
+  "Natáhni ukazovák a miř jím k pravému okraji obrazovky. Je jedno, jestli je ruka ke kameře dlaní nebo hřbetem.": "Extend your index finger and point it at the right edge of the screen. It does not matter whether your palm or the back of your hand faces the camera.",
+  "V prezentaci: další stránka.": "In a presentation: next page.",
+  "Natáhni ukazovák a miř jím k levému okraji obrazovky.": "Extend your index finger and point it at the left edge of the screen.",
+  "V prezentaci: předchozí stránka.": "In a presentation: previous page.",
+  "Oba ukazováky nahoru": "Both index fingers up",
+  "Zvedni obě ruce a na každé vztyč jen ukazovák.": "Raise both hands and extend only the index finger on each.",
+  "V prezentaci: zapne ukazovátko. Červená tečka pak sleduje tvůj prst.": "In a presentation: turns the pointer on. A red dot then follows your finger.",
+  "Oba ukazováky dolů": "Both index fingers down",
+  "Otoč obě ruce tak, aby ukazováky mířily dolů.": "Turn both hands so that the index fingers point down.",
+  "V prezentaci: vypne ukazovátko.": "In a presentation: turns the pointer off.",
+  "Sevři pěst": "Make a fist",
+  "Zvedni ruku a sevři všechny prsty.": "Raise your hand and close all your fingers.",
+  "V prezentaci: ukončí promítání.": "In a presentation: ends the slides.",
+  "Záloha na klávesnici": "Keyboard backup",
+  "spustí prezentaci": "starts the presentation",
+  "Šipky": "Arrows",
+  "listují": "turn pages",
+  "ukončí prezentaci": "ends the presentation",
+  "(držet) hraje hudbu": "(hold) plays music",
+  "zapne a vypne ukazovátko": "turns the pointer on and off",
+  "skryje a zobrazí náhled kamery": "hides and shows the camera preview",
+  "celá obrazovka": "full screen",
+  "Skrytá funkce": "Hidden feature",
+  "Srdce": "Heart",
+  "(oběma rukama, ze dvou ukazováků a dvou palců) hraje hudbu, dokud gesto trvá": "(both hands, made of two index fingers and two thumbs) plays music for as long as you hold it",
+  "Vytvořil": "Made by",
+  "Weby, o kterých ví Google i umělá inteligence:": "Websites that Google and AI know about:",
+  "Přepnout jazyk": "Switch language",
+  "O projektu": "About",
+  "Vše je načteno.": "Everything is loaded.",
+  "Připravuji stránku {0} z {1}...": "Preparing page {0} of {1}...",
+  "Načítám hudbu...": "Loading music...",
+  "Načítám rozpoznávání rukou...": "Loading hand recognition...",
+  "Zapínám kameru...": "Starting the camera...",
+  "Připraveno. Ukaž otevřenou dlaň.": "Ready. Show an open palm.",
+  "Kameru se nepodařilo zapnout: {0}": "The camera could not be started: {0}",
+  "Soubor {0} se nepodařilo načíst ({1}).": "File {0} could not be loaded ({1}).",
+  "PDF nemá žádnou stránku.": "The PDF has no pages.",
+  "Zvuk se nepodařilo načíst.": "The sound could not be loaded.",
+  "Soubor nejde přehrát.": "The file cannot be played.",
+  "{0} stránka": "{0} page",
+  "{0} stránky": "{0} pages",
+  "{0} stránek": "{0} pages",
+  "Tohle je soubor z programu na prezentace, potřebuju PDF. V PowerPointu zvol Soubor, Uložit jako a vyber formát PDF.": "This is a slideshow file, but I need a PDF. In PowerPoint choose File, Save As and pick the PDF format.",
+  "Soubor {0} neumím použít. Prezentace musí být PDF, hudba MP3.": "I cannot use the file {0}. The presentation must be a PDF, the music an MP3.",
+  "Do pole Prezentace patří soubor PDF.": "The Presentation box takes a PDF file.",
+  "Do pole Hudba patří soubor MP3.": "The Music box takes an MP3 file.",
+  "Soubor {0} se nepodařilo otevřít jako PDF. Zůstává původní prezentace.": "The file {0} could not be opened as a PDF. The previous presentation stays.",
+  "Prezentace je připravená a uložená v tomto prohlížeči.": "The presentation is ready and saved in this browser.",
+  "Prezentace je připravená, ale uložit se nepodařilo. Platí do zavření stránky.": "The presentation is ready, but it could not be saved. It lasts until you close the page.",
+  "Soubor {0} se nepodařilo přehrát jako MP3. Zůstává původní hudba.": "The file {0} could not be played as an MP3. The previous music stays.",
+  "Hudba je připravená a uložená v tomto prohlížeči.": "The music is ready and saved in this browser.",
+  "Hudba je připravená, ale uložit se nepodařilo. Platí do zavření stránky.": "The music is ready, but it could not be saved. It lasts until you close the page.",
+  "Vidím: {0}": "I see: {0}",
+  "Vidím ruku, gesto nepoznáno": "I see a hand, gesture not recognized",
+  "Ruka není v záběru": "No hand in view",
+  "otevřená dlaň": "open palm",
+  "ukazovák doprava": "index finger right",
+  "ukazovák doleva": "index finger left",
+  "pěst": "fist",
+  "srdce": "heart",
+  "ukazovák nahoru": "index finger up",
+  "ukazovák dolů": "index finger down",
+  "dva ukazováky nahoru": "two index fingers up",
+  "dva ukazováky dolů": "two index fingers down"
+};
+
+// Jazyk je daný adresou: anglická verze je v kořeni webu, česká ve složce /cs/.
+const jazyk = document.documentElement.lang === "cs" ? "cs" : "en";
+
+// První návštěva z českého nebo slovenského prohlížeče na anglické adrese: nabídne se rovnou česká verze.
+// Jakmile si uživatel jazyk jednou vybere odkazem v patičce, už se nepřesměrovává.
+try {
+  if (jazyk === "en" && !localStorage.getItem("jazyk")) {
+    const prohlizec = (navigator.language || "").toLowerCase();
+    if (prohlizec.startsWith("cs") || prohlizec.startsWith("sk")) location.replace("{{url_other}}");
+  }
+} catch (chyba) { console.log(chyba); }
+
+// Přeloží český text do zvoleného jazyka a doplní hodnoty na místa {0}, {1}...
+function tr(text, ...hodnoty) {
+  let vysledek = jazyk === "en" && EN[text] !== undefined ? EN[text] : text;
+  hodnoty.forEach((hodnota, i) => { vysledek = vysledek.split("{" + i + "}").join(hodnota); });
+  return vysledek;
+}
+
+// Pevné texty stránky: zapamatují se české originály a při změně jazyka se přepíšou
+const pevneTexty = [];
+const pevneAtributy = [];
+{
+  const pruchod = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (pruchod.nextNode()) {
+    const uzel = pruchod.currentNode;
+    const rodic = uzel.parentElement;
+    if (!rodic || rodic.closest("script, style")) continue;
+    const cesky = uzel.nodeValue.replace(/\s+/g, " ").trim();
+    if (cesky && EN[cesky] !== undefined) pevneTexty.push({ uzel, cesky, pred: /^\s/.test(uzel.nodeValue), po: /\s$/.test(uzel.nodeValue) });
+  }
+  for (const prvek of document.querySelectorAll("[title], [aria-label]")) {
+    for (const atribut of ["title", "aria-label"]) {
+      const cesky = prvek.getAttribute(atribut);
+      if (cesky && EN[cesky] !== undefined) pevneAtributy.push({ prvek, atribut, cesky });
+    }
+  }
+}
+
+function prelozPevneTexty() {
+  for (const t of pevneTexty) t.uzel.nodeValue = (t.pred ? " " : "") + tr(t.cesky) + (t.po ? " " : "");
+  for (const a of pevneAtributy) a.prvek.setAttribute(a.atribut, tr(a.cesky));
+}
+
+// ---------------------------------------------------------------
+// NASTAVENÍ
+// ---------------------------------------------------------------
+// Ukázkové soubory, které se použijí, dokud si uživatel nenahraje vlastní
+const ukazkaPrezentace = () => "{{root}}ukazka-" + jazyk + ".pdf";   // česká nebo anglická podle jazyka
+const UKAZKA_HUDBA      = "{{root}}ukazka.mp3";
+const SOUBOR_MODEL      = "{{root}}lib/hand_landmarker.task";
+
+// Směr listování. false: ukazovák k pravému okraji obrazovky (z pohledu
+// řečníka, který stojí čelem ke kameře) znamená další stránku.
+// Pokud by to v sále vycházelo obráceně, přepněte na true.
+const OTOCIT_SMER = false;
+
+// Jak dlouho se musí gesto držet (v milisekundách)
+const DRZENI = { dlan: 1000, vpravo: 900, vlevo: 900, pest: 1300, ukazZapnout: 800, ukazVypnout: 800 };
+const OPAKOVANI_LISTOVANI = 1200;  // při trvalém držení ukazováku listuje dál po této době
+const SRDCE_NABEH = 500;           // srdce musí vydržet tak dlouho, než začne hudba
+const SRDCE_TOLERANCE = 400;       // ruce těsně u sebe kamera občas na okamžik ztratí, hudba kvůli tomu nepřestane
+const TOLERANCE_VYPADKU = 250;     // krátký výpadek rozpoznání se ignoruje
+
+// Ikona gesta v kroužku (názvy odpovídají značkám v sadě ikon na začátku stránky)
+const ZNAKY = { dlan: "i-dlan", vpravo: "i-vpravo", vlevo: "i-vlevo", pest: "i-pest",
+  ukazZapnout: "i-nahoru", ukazVypnout: "i-dolu" };
+
+// Ukazovátko: jaká část obrazu kamery se roztáhne na celou obrazovku
+// (aby nebylo nutné sahat rukou až do rohů záběru) a jak moc se pohyb vyhlazuje.
+const UKAZ_OKRAJ_X = 0.15;   // vynechaný okraj záběru vlevo a vpravo
+const UKAZ_OKRAJ_NAHORE = 0.10;
+const UKAZ_OKRAJ_DOLE = 0.25;
+const UKAZ_VYHLAZENI = 0.35; // 1 = bez vyhlazení, menší číslo = klidnější a pomalejší tečka
+
+// ---------------------------------------------------------------
+// PRVKY STRÁNKY
+// ---------------------------------------------------------------
+const elUvod = document.getElementById("uvod");
+const elStav = document.getElementById("stavText");
+const elStart = document.getElementById("start");
+const elPrezentace = document.getElementById("prezentace");
+const elStrana = document.getElementById("strana");
+const elKruh = document.getElementById("kruh");
+const elKruhPostup = document.getElementById("kruhPostup");
+const elKruhZnak = document.getElementById("kruhZnak");
+const elKamera = document.getElementById("kamera");
+const elNahled = document.getElementById("nahled");
+const elNahledCekani = document.getElementById("nahledCekani");
+const kresba = elNahled.getContext("2d");
+const elNahledText = document.getElementById("nahledText");
+const elNahledBox = document.getElementById("nahledBox");
+const elKamMisto = document.getElementById("kamMisto");
+const elScena = document.getElementById("scena");
+const NAZVY_GEST = { dlan: "otevřená dlaň", vpravo: "ukazovák doprava", vlevo: "ukazovák doleva",
+  pest: "pěst", srdce: "srdce", nahoru: "ukazovák nahoru", dolu: "ukazovák dolů",
+  ukazZapnout: "dva ukazováky nahoru", ukazVypnout: "dva ukazováky dolů" };
+const elTecka = document.getElementById("tecka");
+const elUkazStav = document.getElementById("ukazStav");
+const OBVOD = 276.46;
+
+// Stavový řádek. Text je česká šablona s místy {0}, {1}; pamatuje se, aby šel při změně jazyka přeložit.
+let posledniHlaseni = null;
+function hlaseni(sablona, trida, ...hodnoty) {
+  posledniHlaseni = { sablona, trida, hodnoty };
+  elStav.textContent = tr(sablona, ...hodnoty);
+  elStav.className = trida || "";
+}
+
+// ---------------------------------------------------------------
+// STAV
+// ---------------------------------------------------------------
+let stav = "nacitani";      // nacitani -> ceka -> pripraveno <-> prezentace
+let stranky = [];           // adresy vykreslených stránek uložených v paměti
+let cisloStrany = 0;
+let hudba = null;
+let hudbaHraje = false;
+let ruce = null;
+let ukazovatko = false;     // režim ukazovátka zapnutý
+let teckaX = null, teckaY = null, teckaNaposled = 0;
+
+// ---------------------------------------------------------------
+// NAČTENÍ VŠEHO DO PAMĚTI
+// ---------------------------------------------------------------
+async function stahni(cesta) {
+  const odpoved = await fetch(cesta, { cache: "no-cache" });
+  if (!odpoved.ok) throw new Error(tr("Soubor {0} se nepodařilo načíst ({1}).", cesta, odpoved.status));
+  return odpoved;
+}
+
+// Vykreslí PDF (z paměti) na obrázky stránek a vrátí jejich adresy.
+// Stránky se vykreslí předem, aby listování bylo okamžité a nic se už nestahovalo.
+async function vykresliPdf(data) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "{{root}}lib/pdfjs/pdf.worker.min.mjs";
+  const uloha = pdfjsLib.getDocument({
+    data,
+    cMapUrl: "{{root}}lib/pdfjs/cmaps/",
+    standardFontDataUrl: "{{root}}lib/pdfjs/standard_fonts/",
+    wasmUrl: "{{root}}lib/pdfjs/wasm/",
+    iccUrl: "{{root}}lib/pdfjs/iccs/"
+  });
+  const seznam = [];
+  try {
+    const pdf = await uloha.promise;
+    const pomer = window.devicePixelRatio || 1;
+    const cilSirka = Math.min(2560, Math.max(screen.width, screen.height) * pomer);
+    const cilVyska = Math.min(1600, Math.min(screen.width, screen.height) * pomer);
+    for (let i = 1; i <= pdf.numPages; i++) {
+      hlaseni("Připravuji stránku {0} z {1}...", "", i, pdf.numPages);
+      const strana = await pdf.getPage(i);
+      const zaklad = strana.getViewport({ scale: 1 });
+      const meritko = Math.min(cilSirka / zaklad.width, cilVyska / zaklad.height);
+      const viewport = strana.getViewport({ scale: meritko });
+      const platno = document.createElement("canvas");
+      platno.width = Math.round(viewport.width);
+      platno.height = Math.round(viewport.height);
+      await strana.render({ canvas: platno, canvasContext: platno.getContext("2d"), viewport }).promise;
+      const blob = await new Promise(hotovo => platno.toBlob(hotovo, "image/jpeg", 0.93));
+      seznam.push(URL.createObjectURL(blob));
+      strana.cleanup();
+    }
+  } catch (chyba) {
+    seznam.forEach(adresa => URL.revokeObjectURL(adresa));
+    throw chyba;
+  } finally {
+    await uloha.destroy();
+  }
+  if (!seznam.length) throw new Error(tr("PDF nemá žádnou stránku."));
+  return seznam;
+}
+
+// Připraví zvuk ze souboru v paměti a ověří, že ho prohlížeč umí přehrát.
+function vytvorZvuk(blob) {
+  return new Promise((hotovo, selhalo) => {
+    const zvuk = new Audio();
+    zvuk.loop = true;
+    zvuk.preload = "auto";
+    const limit = setTimeout(() => selhalo(new Error(tr("Zvuk se nepodařilo načíst."))), 10000);
+    zvuk.addEventListener("loadedmetadata", () => { clearTimeout(limit); hotovo(zvuk); }, { once: true });
+    zvuk.addEventListener("error", () => { clearTimeout(limit); selhalo(new Error(tr("Soubor nejde přehrát."))); }, { once: true });
+    zvuk.src = URL.createObjectURL(blob);
+  });
+}
+
+function pouzijStranky(seznam) {
+  stranky.forEach(adresa => URL.revokeObjectURL(adresa));
+  stranky = seznam;
+  cisloStrany = 0;
+}
+
+function pouzijHudbu(zvuk) {
+  if (hudba) { hudba.pause(); URL.revokeObjectURL(hudba.src); }
+  hudba = zvuk;
+  hudbaHraje = false;
+}
+
+// ---------------------------------------------------------------
+// ÚLOŽIŠTĚ V PROHLÍŽEČI: vlastní prezentace a hudba zůstávají na počítači uživatele
+// ---------------------------------------------------------------
+function ulozisteOperace(rezim, operace) {
+  return new Promise((hotovo, selhalo) => {
+    const otevreni = indexedDB.open("pustit-prezentaci", 1);
+    otevreni.onupgradeneeded = () => otevreni.result.createObjectStore("soubory");
+    otevreni.onerror = () => selhalo(otevreni.error);
+    otevreni.onsuccess = () => {
+      const db = otevreni.result;
+      const transakce = db.transaction("soubory", rezim);
+      const pozadavek = operace(transakce.objectStore("soubory"));
+      transakce.oncomplete = () => { db.close(); hotovo(pozadavek.result); };
+      transakce.onerror = transakce.onabort = () => { db.close(); selhalo(transakce.error); };
+    };
+  });
+}
+const ulozisteCti   = klic => ulozisteOperace("readonly", sklad => sklad.get(klic));
+const ulozisteZapis = (klic, hodnota) => ulozisteOperace("readwrite", sklad => sklad.put(hodnota, klic));
+const ulozisteSmaz  = klic => ulozisteOperace("readwrite", sklad => sklad.delete(klic));
+
+// ---------------------------------------------------------------
+// POLE PRO VLASTNÍ PREZENTACI A HUDBU
+// ---------------------------------------------------------------
+const elPole = { prezentace: document.getElementById("polePrezentace"), hudba: document.getElementById("poleHudba") };
+const elPoleZprava = document.getElementById("poleZprava");
+const ZPRAVA_VYCHOZI = "Přetáhni sem vlastní PDF a MP3. Uloží se v tomto prohlížeči a příště tu budou.";
+
+let posledniZprava = null;
+function zpravaPole(sablona, chyba, ...hodnoty) {
+  posledniZprava = { sablona, chyba, hodnoty };
+  elPoleZprava.textContent = tr(sablona || ZPRAVA_VYCHOZI, ...hodnoty);
+  elPoleZprava.className = chyba ? "chyba" : "";
+}
+
+function pocetStranek(n) {
+  return tr(n === 1 ? "{0} stránka" : n >= 2 && n <= 4 ? "{0} stránky" : "{0} stránek", n);
+}
+
+// Co je v polích: název (u ukázky český text k přeložení), počet stránek, a jestli je soubor vlastní
+const poleStav = { prezentace: null, hudba: null };
+function nastavPole(druh, nazev, pocet, vlastni) {
+  poleStav[druh] = { nazev, pocet, vlastni: !!vlastni };
+  const pole = elPole[druh];
+  pole.querySelector(".nazev").textContent = vlastni ? nazev : tr(nazev);
+  pole.querySelector(".info").textContent = pocet ? pocetStranek(pocet) : "";
+  pole.classList.toggle("vlastni", !!vlastni);
+}
+
+async function nactiUkazkuPrezentace() {
+  const data = await (await stahni(ukazkaPrezentace())).arrayBuffer();
+  pouzijStranky(await vykresliPdf(data));
+  nastavPole("prezentace", "Ukázková prezentace", stranky.length, false);
+}
+
+async function nactiUkazkuHudby() {
+  try {
+    pouzijHudbu(await vytvorZvuk(await (await stahni(UKAZKA_HUDBA)).blob()));
+    nastavPole("hudba", "Ukázkový zvuk", 0, false);
+  } catch (chyba) {
+    console.log(chyba);
+    pouzijHudbu(null);   // bez hudby se dá pokračovat, srdce jen nic nepřehraje
+    nastavPole("hudba", "Bez hudby", 0, false);
+  }
+}
+
+// Uloží soubor do prohlížeče. Když to nejde (plný disk, anonymní okno), soubor platí aspoň do zavření stránky.
+async function ulozSoubor(druh, soubor) {
+  try {
+    await ulozisteZapis(druh, { nazev: soubor.name, data: soubor });
+    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+    return true;
+  } catch (chyba) {
+    console.log(chyba);
+    return false;
+  }
+}
+
+async function prijmiSoubor(soubor, druhPole) {
+  const jmeno = soubor.name || "";
+  const pripona = (jmeno.split(".").pop() || "").toLowerCase();
+  const jePdf = pripona === "pdf" || soubor.type === "application/pdf";
+  const jeMp3 = pripona === "mp3" || soubor.type === "audio/mpeg";
+
+  if (["ppt", "pptx", "pps", "ppsx", "odp", "key"].includes(pripona)) {
+    zpravaPole("Tohle je soubor z programu na prezentace, potřebuju PDF. V PowerPointu zvol Soubor, Uložit jako a vyber formát PDF.", true);
+    return;
+  }
+  if (!jePdf && !jeMp3) {
+    zpravaPole("Soubor {0} neumím použít. Prezentace musí být PDF, hudba MP3.", true, jmeno);
+    return;
+  }
+  if (druhPole === "prezentace" && !jePdf) { zpravaPole("Do pole Prezentace patří soubor PDF.", true); return; }
+  if (druhPole === "hudba" && !jeMp3) { zpravaPole("Do pole Hudba patří soubor MP3.", true); return; }
+
+  const mohlStartovat = !elStart.disabled;
+  elStart.disabled = true;
+  try {
+    if (jePdf) {
+      let seznam;
+      try {
+        seznam = await vykresliPdf(await soubor.arrayBuffer());
+      } catch (chyba) {
+        console.log(chyba);
+        zpravaPole("Soubor {0} se nepodařilo otevřít jako PDF. Zůstává původní prezentace.", true, jmeno);
+        return;
+      }
+      pouzijStranky(seznam);
+      const ulozeno = await ulozSoubor("prezentace", soubor);
+      nastavPole("prezentace", jmeno, seznam.length, true);
+      zpravaPole(ulozeno ? "Prezentace je připravená a uložená v tomto prohlížeči."
+                         : "Prezentace je připravená, ale uložit se nepodařilo. Platí do zavření stránky.", !ulozeno);
+    } else {
+      let zvuk;
+      try {
+        zvuk = await vytvorZvuk(soubor);
+      } catch (chyba) {
+        console.log(chyba);
+        zpravaPole("Soubor {0} se nepodařilo přehrát jako MP3. Zůstává původní hudba.", true, jmeno);
+        return;
+      }
+      pouzijHudbu(zvuk);
+      const ulozeno = await ulozSoubor("hudba", soubor);
+      nastavPole("hudba", jmeno, 0, true);
+      zpravaPole(ulozeno ? "Hudba je připravená a uložená v tomto prohlížeči."
+                         : "Hudba je připravená, ale uložit se nepodařilo. Platí do zavření stránky.", !ulozeno);
+    }
+  } finally {
+    elStart.disabled = !mohlStartovat;
+    if (stav === "ceka") hlaseni(TEXT_NACTENO);
+  }
+}
+
+async function odeberSoubor(druh) {
+  const mohlStartovat = !elStart.disabled;
+  elStart.disabled = true;
+  try {
+    await ulozisteSmaz(druh).catch(chyba => console.log(chyba));
+    if (druh === "prezentace") await nactiUkazkuPrezentace();
+    else await nactiUkazkuHudby();
+    zpravaPole("");
+  } catch (chyba) {
+    console.log(chyba);
+    zpravaPole("{0}", true, chyba.message || String(chyba));
+  } finally {
+    elStart.disabled = !mohlStartovat;
+    if (stav === "ceka") hlaseni(TEXT_NACTENO);
+  }
+}
+
+// Všechny změny souborů jdou za sebou ve frontě, aby se nepřekrývaly s načítáním
+let fronta = Promise.resolve();
+function doFronty(ukol) {
+  fronta = fronta.then(ukol).catch(chyba => console.log(chyba));
+  return fronta;
+}
+
+for (const druh of ["prezentace", "hudba"]) {
+  const pole = elPole[druh];
+  const vstup = pole.querySelector("input");
+  pole.addEventListener("click", udalost => {
+    if (udalost.target.closest(".odebrat")) { doFronty(() => odeberSoubor(druh)); return; }
+    if (udalost.target !== vstup) vstup.click();
+  });
+  vstup.addEventListener("change", () => {
+    const soubor = vstup.files[0];
+    vstup.value = "";
+    if (soubor) doFronty(() => prijmiSoubor(soubor, druh));
+  });
+}
+
+// Přetažení souboru kamkoli na stránku: PDF je prezentace, MP3 je hudba
+let tazeni = 0;
+window.addEventListener("dragenter", udalost => { udalost.preventDefault(); tazeni++; document.body.classList.add("tahne"); });
+window.addEventListener("dragleave", () => { if (--tazeni <= 0) { tazeni = 0; document.body.classList.remove("tahne"); } });
+window.addEventListener("dragover", udalost => udalost.preventDefault());
+window.addEventListener("drop", udalost => {
+  udalost.preventDefault();
+  tazeni = 0;
+  document.body.classList.remove("tahne");
+  if (stav !== "ceka" && stav !== "nacitani") return;   // soubory se mění na úvodní obrazovce
+  for (const soubor of Array.from(udalost.dataTransfer.files || []).slice(0, 2)) {
+    doFronty(() => prijmiSoubor(soubor, null));
+  }
+});
+
+async function nactiRuce() {
+  const model = new Uint8Array(await (await stahni(SOUBOR_MODEL)).arrayBuffer());
+  const vision = await FilesetResolver.forVisionTasks("{{root}}lib/tasks-vision/wasm");
+  const volby = delegat => ({
+    baseOptions: { modelAssetBuffer: model, delegate: delegat },
+    runningMode: "VIDEO",
+    numHands: 2
+  });
+  try {
+    return await HandLandmarker.createFromOptions(vision, volby("GPU"));
+  } catch (chyba) {
+    console.log("GPU není k dispozici, používám procesor.", chyba);
+    return await HandLandmarker.createFromOptions(vision, volby("CPU"));
+  }
+}
+
+const TEXT_NACTENO = "Vše je načteno.";
+
+async function nactiVse() {
+  try {
+    // Prezentace: uložená vlastní, jinak ukázková
+    let vlastni = null;
+    try { vlastni = await ulozisteCti("prezentace"); } catch (chyba) { console.log(chyba); }
+    if (vlastni) {
+      try {
+        pouzijStranky(await vykresliPdf(await vlastni.data.arrayBuffer()));
+        nastavPole("prezentace", vlastni.nazev, stranky.length, true);
+      } catch (chyba) {
+        console.log(chyba);
+        vlastni = null;
+      }
+    }
+    if (!vlastni) await nactiUkazkuPrezentace();
+
+    // Hudba: uložená vlastní, jinak ukázková
+    hlaseni("Načítám hudbu...");
+    let vlastniHudba = null;
+    try { vlastniHudba = await ulozisteCti("hudba"); } catch (chyba) { console.log(chyba); }
+    if (vlastniHudba) {
+      try {
+        pouzijHudbu(await vytvorZvuk(vlastniHudba.data));
+        nastavPole("hudba", vlastniHudba.nazev, 0, true);
+      } catch (chyba) {
+        console.log(chyba);
+        vlastniHudba = null;
+      }
+    }
+    if (!vlastniHudba) await nactiUkazkuHudby();
+
+    hlaseni("Načítám rozpoznávání rukou...");
+    ruce = await nactiRuce();
+    stav = "ceka";
+    elStart.disabled = false;
+    hlaseni(TEXT_NACTENO);
+  } catch (chyba) {
+    console.log(chyba);
+    hlaseni("{0}", "chyba", chyba.message || String(chyba));
+  }
+}
+
+// ---------------------------------------------------------------
+// START: kamera a celá obrazovka (prohlížeč k tomu vyžaduje kliknutí)
+// ---------------------------------------------------------------
+async function zapniKameru() {
+  if (!elKamera.srcObject) {
+    const proud = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: "user" },
+      audio: false
+    });
+    elKamera.srcObject = proud;
+    await elKamera.play();
+    elNahled.width = elKamera.videoWidth || 640;
+    elNahled.height = elKamera.videoHeight || 360;
+    elNahledCekani.style.display = "none";
+    elNahled.style.display = "block";
+    elNahledText.style.display = "block";
+  }
+  if (!smyckaBezi) { smyckaBezi = true; requestAnimationFrame(smycka); }
+}
+
+async function spust() {
+  elStart.disabled = true;
+  try {
+    if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(chyba => console.log(chyba));
+    }
+    // Odemknutí zvuku, aby ho později šlo spustit gestem
+    if (hudba) {
+      hudba.muted = true;
+      try { await hudba.play(); } catch (chyba) { console.log(chyba); }
+      hudba.pause();
+      hudba.currentTime = 0;
+      hudba.muted = false;
+    }
+    hlaseni("Zapínám kameru...");
+    await zapniKameru();
+    stav = "pripraveno";
+    hlaseni("Připraveno. Ukaž otevřenou dlaň.", "ok");
+    document.body.classList.add("bezi");   // plakát vystřídá pracovní obrazovka s gesty a kamerou
+  } catch (chyba) {
+    console.log(chyba);
+    elStart.disabled = false;
+    hlaseni("Kameru se nepodařilo zapnout: {0}", "chyba", chyba.message || String(chyba));
+  }
+}
+elStart.addEventListener("click", spust);
+
+// ---------------------------------------------------------------
+// NAUČ SE GESTA: zkouška gest, při které se nic nespouští
+// ---------------------------------------------------------------
+const ZKOUSKA_KROKY = [
+  { gesto: "dlan", ikona: "i-dlan", kratce: "Dlaň", nazev: "Ukaž otevřenou dlaň",
+    jak: "Zvedni ruku dlaní ke kameře, prsty natažené nahoru.", co: "V prezentaci: spustí promítání." },
+  { gesto: "vpravo", ikona: "i-vpravo", kratce: "Doprava", nazev: "Ukazovák doprava",
+    jak: "Natáhni ukazovák a miř jím k pravému okraji obrazovky. Je jedno, jestli je ruka ke kameře dlaní nebo hřbetem.",
+    co: "V prezentaci: další stránka." },
+  { gesto: "vlevo", ikona: "i-vlevo", kratce: "Doleva", nazev: "Ukazovák doleva",
+    jak: "Natáhni ukazovák a miř jím k levému okraji obrazovky.", co: "V prezentaci: předchozí stránka." },
+  { gesto: "ukazZapnout", ikona: "i-nahoru", dvojity: true, kratce: "Oba nahoru", nazev: "Oba ukazováky nahoru",
+    jak: "Zvedni obě ruce a na každé vztyč jen ukazovák.",
+    co: "V prezentaci: zapne ukazovátko. Červená tečka pak sleduje tvůj prst." },
+  { gesto: "ukazVypnout", ikona: "i-dolu", dvojity: true, kratce: "Oba dolů", nazev: "Oba ukazováky dolů",
+    jak: "Otoč obě ruce tak, aby ukazováky mířily dolů.", co: "V prezentaci: vypne ukazovátko." },
+  { gesto: "pest", ikona: "i-pest", kratce: "Pěst", nazev: "Sevři pěst",
+    jak: "Zvedni ruku a sevři všechny prsty.", co: "V prezentaci: ukončí promítání." }
+];
+const elZkouska = document.getElementById("zkouska");
+const elZkouskaUkol = document.getElementById("zkouskaUkol");
+const elZkouskaKroky = document.getElementById("zkouskaKroky");
+let zkouskaKrok = 0;          // který krok se právě zkouší
+let zkouskaPauza = false;     // krátká chvíle po splnění, než přijde další gesto
+let zkouskaNavrat = "ceka";   // kam se vrátit po zavření
+
+function ikonaZnacka(id, dvojity) {
+  const jedna = '<svg class="ik"><use href="#' + id + '"/></svg>';
+  return dvojity ? jedna + jedna : jedna;
+}
+
+function zkouskaVykresliKroky() {
+  elZkouskaKroky.innerHTML = ZKOUSKA_KROKY.map(krok =>
+    "<div>" + ikonaZnacka(krok.ikona, false) + "<span>" + tr(krok.kratce) + "</span></div>").join("");
+}
+zkouskaVykresliKroky();
+
+function zkouskaUkaz() {
+  const konec = zkouskaKrok >= ZKOUSKA_KROKY.length;
+  elZkouska.classList.toggle("konec", konec);
+  elZkouskaUkol.classList.remove("splneno");
+  Array.from(elZkouskaKroky.children).forEach((prvek, i) => {
+    prvek.classList.toggle("hotovo", i < zkouskaKrok);
+    prvek.classList.toggle("ted", i === zkouskaKrok);
+  });
+  if (konec) return;
+  const krok = ZKOUSKA_KROKY[zkouskaKrok];
+  document.getElementById("zkouskaPoradi").textContent = tr("Gesto {0} ze {1}", zkouskaKrok + 1, ZKOUSKA_KROKY.length);
+  document.getElementById("zkouskaIkona").innerHTML = ikonaZnacka(krok.ikona, krok.dvojity);
+  document.getElementById("zkouskaNazev").textContent = tr(krok.nazev);
+  document.getElementById("zkouskaJak").textContent = tr(krok.jak);
+  document.getElementById("zkouskaCo").textContent = tr(krok.co);
+}
+
+function zkouskaDalsi() {
+  zkouskaPauza = false;
+  zkouskaKrok++;
+  zkouskaUkaz();
+}
+
+function zkouskaSplneno() {
+  zkouskaPauza = true;
+  elZkouskaUkol.classList.add("splneno");
+  elZkouskaKroky.children[zkouskaKrok].classList.add("hotovo");
+  const krokPriSplneni = zkouskaKrok;
+  setTimeout(() => {
+    if (stav === "zkouska" && zkouskaKrok === krokPriSplneni && zkouskaPauza) zkouskaDalsi();
+  }, 1100);
+}
+
+async function zkouskaOtevri() {
+  if (stav !== "ceka" && stav !== "pripraveno") return;
+  const odkud = stav;
+  try {
+    await zapniKameru();
+  } catch (chyba) {
+    console.log(chyba);
+    hlaseni("Kameru se nepodařilo zapnout: {0}", "chyba", chyba.message || String(chyba));
+    return;
+  }
+  if (stav !== odkud) return;
+  zkouskaNavrat = odkud;
+  if (hudbaHraje) hudbaStop();
+  stav = "zkouska";
+  zkouskaKrok = 0;
+  zkouskaPauza = false;
+  document.body.classList.remove("sNapovedou");
+  document.body.classList.add("zkouska");
+  document.getElementById("zkouskaKam").appendChild(elNahledBox);
+  zkouskaUkaz();
+}
+
+function zkouskaZavri() {
+  if (stav !== "zkouska") return;
+  stav = zkouskaNavrat;
+  zkouskaPauza = false;
+  kruhSkryj();
+  document.body.classList.remove("zkouska");
+  elKamMisto.appendChild(elNahledBox);
+}
+
+for (const tlacitko of document.querySelectorAll(".ucit")) tlacitko.addEventListener("click", zkouskaOtevri);
+document.getElementById("zkouskaZavrit").addEventListener("click", zkouskaZavri);
+document.getElementById("zkouskaPreskocit").addEventListener("click", () => { if (stav === "zkouska") zkouskaDalsi(); });
+document.getElementById("zkouskaZnovu").addEventListener("click", () => { zkouskaKrok = 0; zkouskaPauza = false; zkouskaUkaz(); });
+document.getElementById("zkouskaPustit").addEventListener("click", () => {
+  const uzBezelo = zkouskaNavrat === "pripraveno";
+  zkouskaZavri();
+  if (!uzBezelo) spust();
+});
+
+// ---------------------------------------------------------------
+// ROZPOZNÁNÍ GESTA (čistá geometrie nad body ruky)
+// ---------------------------------------------------------------
+function vzdalenost(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y, (a.z || 0) - (b.z || 0));
+}
+
+// Prst je natažený, když je jeho špička od kořene prstu výrazně dál než prostřední kloub.
+// U skrčeného prstu se špička vrací ke kořeni. Nezávisí to na natočení ruky.
+function jeNatazeny(body, koren, kloub, spicka) {
+  return vzdalenost(body[spicka], body[koren]) > vzdalenost(body[kloub], body[koren]) * 1.6;
+}
+
+// Srdce z obou rukou: špičky ukazováků se dotýkají, špičky palců se dotýkají,
+// palce jsou pod ukazováky s mezerou (otvor srdce) a ruce jsou vedle sebe.
+// Ostatní prsty se neposuzují, u srdce nejsou vidět.
+function velikostRuky(body, pomerStran) {
+  return Math.hypot((body[9].x - body[0].x) * pomerStran, body[9].y - body[0].y);
+}
+function vzdalenostVObraze(a, b, pomerStran) {
+  return Math.hypot((a.x - b.x) * pomerStran, a.y - b.y);
+}
+function jeSrdce(rukaA, rukaB, pomerStran) {
+  const ruka = (velikostRuky(rukaA, pomerStran) + velikostRuky(rukaB, pomerStran)) / 2;
+  if (!ruka) return false;
+  if (vzdalenostVObraze(rukaA[8], rukaB[8], pomerStran) > 0.5 * ruka) return false;   // ukazováky u sebe
+  if (vzdalenostVObraze(rukaA[4], rukaB[4], pomerStran) > 0.5 * ruka) return false;   // palce u sebe
+  const ukazovaky = (rukaA[8].y + rukaB[8].y) / 2;
+  const palce = (rukaA[4].y + rukaB[4].y) / 2;
+  if (palce - ukazovaky < 0.45 * ruka) return false;                                  // palce dole, mezi nimi otvor
+  return vzdalenostVObraze(rukaA[0], rukaB[0], pomerStran) > 0.9 * ruka;              // ruce vedle sebe
+}
+// Ruce těsně u sebe: gesta jedné ruky se v tu chvíli neberou, aby se při skládání srdce nelistovalo.
+function ruceUSebe(rukaA, rukaB, pomerStran) {
+  const ruka = (velikostRuky(rukaA, pomerStran) + velikostRuky(rukaB, pomerStran)) / 2;
+  return vzdalenostVObraze(rukaA[8], rukaB[8], pomerStran) < 1.0 * ruka;
+}
+
+// body3d: body ruky v prostoru, bodyObraz: body v obraze kamery (0 až 1), pomerStran: šířka / výška obrazu
+function urciGesto(body3d, bodyObraz, pomerStran) {
+  const ukazovak    = jeNatazeny(body3d, 5, 6, 8);
+  const prostrednik = jeNatazeny(body3d, 9, 10, 12);
+  const prstenik    = jeNatazeny(body3d, 13, 14, 16);
+  const malik       = jeNatazeny(body3d, 17, 18, 20);
+
+
+  // Listování: stačí natažený ukazovák, který míří do strany. Ostatní prsty se
+  // neposuzují, protože při ukázání do strany je ruka ke kameře bokem a skrčené
+  // prsty nejsou vidět. Funguje tak ukázání prstem i celou rukou, dlaní i hřbetem.
+  if (ukazovak) {
+    const dx = (bodyObraz[8].x - bodyObraz[5].x) * pomerStran;
+    const dy = bodyObraz[8].y - bodyObraz[5].y;
+    if (Math.abs(dx) > Math.abs(dy) * 0.8) {
+      // Kamera vidí řečníka zepředu, jeho pravá strana je v obraze vlevo.
+      let doprava = dx < 0;
+      if (OTOCIT_SMER) doprava = !doprava;
+      return doprava ? "vpravo" : "vlevo";
+    }
+    // Ukazovák svisle: nahoru (ostatní prsty skrčené) nebo dolů. Slouží k zapnutí
+    // a vypnutí ukazovátka oběma rukama. Dolů se ostatní prsty neposuzují,
+    // protože u ruky otočené dolů nebývají vidět.
+    if (Math.abs(dy) > Math.abs(dx) * 1.2) {
+      if (dy < 0 && !prostrednik && !malik) return "nahoru";
+      if (dy > 0) return "dolu";
+    }
+  }
+
+  if (ukazovak && prostrednik && prstenik && malik) return "dlan";
+  if (!ukazovak && !prostrednik && !prstenik && !malik) return "pest";
+  return null;
+}
+
+// ---------------------------------------------------------------
+// AKCE
+// ---------------------------------------------------------------
+function ukazStranu(cislo) {
+  cisloStrany = Math.max(0, Math.min(stranky.length - 1, cislo));
+  elStrana.src = stranky[cisloStrany];
+}
+
+function proved(gesto) {
+  if (stav === "zkouska") {          // ve zkoušce se gesto jen potvrdí, nic se nespouští
+    if (plati(gesto)) zkouskaSplneno();
+    return;
+  }
+  if (gesto === "dlan" && stav === "pripraveno") {
+    ukazStranu(0);
+    elUvod.style.display = "none";
+    elPrezentace.style.display = "block";
+    document.body.classList.add("prezentace");
+    document.body.appendChild(elNahledBox);
+    stav = "prezentace";
+  } else if (gesto === "vpravo" && stav === "prezentace") {
+    ukazStranu(cisloStrany + 1);
+  } else if (gesto === "vlevo" && stav === "prezentace") {
+    ukazStranu(cisloStrany - 1);
+  } else if (gesto === "ukazZapnout" && stav === "prezentace") {
+    nastavUkazovatko(true);
+  } else if (gesto === "ukazVypnout" && stav === "prezentace") {
+    nastavUkazovatko(false);
+  } else if (gesto === "pest" && stav === "prezentace") {
+    nastavUkazovatko(false);
+    elPrezentace.style.display = "none";
+    elUvod.style.display = "block";
+    document.body.classList.remove("prezentace");
+    elKamMisto.appendChild(elNahledBox);
+    stav = "pripraveno";
+  }
+}
+
+function plati(gesto) {
+  if (stav === "zkouska") {
+    return !zkouskaPauza && zkouskaKrok < ZKOUSKA_KROKY.length && gesto === ZKOUSKA_KROKY[zkouskaKrok].gesto;
+  }
+  if (stav === "pripraveno") return gesto === "dlan";
+  if (stav === "prezentace") {
+    if (gesto === "pest") return true;
+    // Se zapnutým ukazovátkem se gesty nelistuje, aby se stránka neotočila při ukazování do strany.
+    if (ukazovatko) return gesto === "ukazVypnout";
+    return gesto === "vpravo" || gesto === "vlevo" || gesto === "ukazZapnout";
+  }
+  return false;
+}
+
+// ---------------------------------------------------------------
+// UKAZOVÁTKO
+// ---------------------------------------------------------------
+function nastavUkazovatko(zapnout) {
+  ukazovatko = zapnout;
+  elUkazStav.style.display = zapnout ? "inline-flex" : "none";
+  if (!zapnout) { elTecka.style.display = "none"; teckaX = null; teckaY = null; }
+}
+
+// Tečka sleduje špičku nataženého ukazováku. Když jsou v záběru dvě ruce,
+// drží se té, která je blíž poslední poloze tečky.
+function pohniTeckou(seznamRukou, seznam3d, ted) {
+  if (!ukazovatko || stav !== "prezentace") return;
+  let cil = null, nejblize = Infinity;
+  for (let i = 0; i < seznamRukou.length; i++) {
+    if (!jeNatazeny(seznam3d[i], 5, 6, 8)) continue;
+    const spicka = seznamRukou[i][8];
+    let x = (1 - spicka.x - UKAZ_OKRAJ_X) / (1 - 2 * UKAZ_OKRAJ_X);   // zrcadlově, jako v zrcadle
+    let y = (spicka.y - UKAZ_OKRAJ_NAHORE) / (1 - UKAZ_OKRAJ_NAHORE - UKAZ_OKRAJ_DOLE);
+    x = Math.max(0, Math.min(1, x));
+    y = Math.max(0, Math.min(1, y));
+    const d = teckaX === null ? 0 : Math.hypot(x - teckaX, y - teckaY);
+    if (d < nejblize) { nejblize = d; cil = { x, y }; }
+  }
+  if (cil) {
+    if (teckaX === null) { teckaX = cil.x; teckaY = cil.y; }
+    else {
+      teckaX += (cil.x - teckaX) * UKAZ_VYHLAZENI;
+      teckaY += (cil.y - teckaY) * UKAZ_VYHLAZENI;
+    }
+    teckaNaposled = ted;
+    elTecka.style.display = "block";
+    elTecka.style.transform = "translate(" + (teckaX * window.innerWidth) + "px, " + (teckaY * window.innerHeight) + "px)";
+  } else if (ted - teckaNaposled > TOLERANCE_VYPADKU) {
+    elTecka.style.display = "none";
+    teckaX = null; teckaY = null;
+  }
+}
+
+function hudbaStart() {
+  hudbaHraje = true;
+  if (!hudba) return;
+  hudba.currentTime = 0;
+  hudba.play().catch(chyba => console.log(chyba));
+}
+
+function hudbaStop() {
+  hudbaHraje = false;
+  if (!hudba) return;
+  hudba.pause();
+}
+
+function kruhUkaz(gesto, postup) {
+  elKruh.style.display = "block";
+  if (elKruhZnak.dataset.gesto !== gesto) {
+    elKruhZnak.dataset.gesto = gesto;
+    elKruhZnak.innerHTML = ZNAKY[gesto] ? '<svg class="ik"><use href="#' + ZNAKY[gesto] + '"/></svg>' : "";
+  }
+  elKruhPostup.setAttribute("stroke-dashoffset", String(OBVOD * (1 - postup)));
+}
+
+function kruhSkryj() {
+  elKruh.style.display = "none";
+}
+
+// ---------------------------------------------------------------
+// DRŽENÍ GESTA
+// ---------------------------------------------------------------
+let kandidat = null, kandidatOd = 0, kandidatNaposled = 0, odpaleno = false, dalsiOpakovani = 0;
+let parohOd = 0, parohNaposled = 0;   // odkdy trvá srdce a kdy bylo naposledy vidět
+
+function krok(gesto, ted) {
+  // Srdce: hudba hraje, dokud gesto trvá. Při zkoušce gest se nic nespouští.
+  if (gesto === "srdce" && stav !== "zkouska") {
+    if (!parohOd) parohOd = ted;
+    parohNaposled = ted;
+    if (!hudbaHraje && ted - parohOd >= SRDCE_NABEH) hudbaStart();
+  } else if (parohOd && (ted - parohNaposled > SRDCE_TOLERANCE || gesto)) {
+    parohOd = 0;
+    if (hudbaHraje) hudbaStop();
+  }
+
+  // Ostatní gesta: musí se podržet
+  const akcni = gesto && gesto !== "srdce" && plati(gesto) ? gesto : null;
+  if (akcni && akcni === kandidat) {
+    kandidatNaposled = ted;
+  } else if (akcni) {
+    kandidat = akcni; kandidatOd = ted; kandidatNaposled = ted; odpaleno = false;
+  } else if (kandidat && ted - kandidatNaposled > TOLERANCE_VYPADKU) {
+    kandidat = null;
+  }
+
+  if (!kandidat) { kruhSkryj(); return; }
+
+  const postup = Math.min(1, (ted - kandidatOd) / DRZENI[kandidat]);
+  kruhUkaz(kandidat, odpaleno ? 1 : postup);
+  const listovani = kandidat === "vpravo" || kandidat === "vlevo";
+  if (!odpaleno && postup >= 1) {
+    odpaleno = true;
+    dalsiOpakovani = ted + OPAKOVANI_LISTOVANI;
+    const puvodniStav = stav;
+    proved(kandidat);
+    if (stav !== puvodniStav) { kandidat = null; kruhSkryj(); }
+  } else if (odpaleno && listovani && ted >= dalsiOpakovani) {
+    dalsiOpakovani = ted + OPAKOVANI_LISTOVANI;
+    proved(kandidat);
+  }
+}
+
+// ---------------------------------------------------------------
+// NÁHLED KAMERY (zrcadlově, s body ruky)
+// ---------------------------------------------------------------
+function kresliNahled(seznamRukou) {
+  const s = elNahled.width, v = elNahled.height;
+  kresba.save();
+  kresba.translate(s, 0);
+  kresba.scale(-1, 1);
+  kresba.drawImage(elKamera, 0, 0, s, v);
+  for (const body of seznamRukou) {
+    kresba.strokeStyle = "#22c55e";
+    kresba.lineWidth = Math.max(2, s / 250);
+    kresba.beginPath();
+    for (const spoj of HandLandmarker.HAND_CONNECTIONS) {
+      kresba.moveTo(body[spoj.start].x * s, body[spoj.start].y * v);
+      kresba.lineTo(body[spoj.end].x * s, body[spoj.end].y * v);
+    }
+    kresba.stroke();
+    kresba.fillStyle = "#ef4444";
+    for (const bod of body) {
+      kresba.beginPath();
+      kresba.arc(bod.x * s, bod.y * v, Math.max(3, s / 160), 0, Math.PI * 2);
+      kresba.fill();
+    }
+  }
+  kresba.restore();
+}
+
+// Skrytí náhledu do ikony a jeho opětovné zobrazení myší
+document.getElementById("nahledZavrit").addEventListener("click", () => document.body.classList.add("bezNahledu"));
+document.getElementById("nahledIkona").addEventListener("click", () => document.body.classList.remove("bezNahledu"));
+document.getElementById("nahledObnovit").addEventListener("click", () => document.body.classList.remove("bezNahledu"));
+
+// Nápověda ke klávesnici pod tlačítkem s otazníkem
+document.getElementById("napoveda").addEventListener("click", () => document.body.classList.toggle("sNapovedou"));
+
+// Úvodní obrazovka je navržená na plochu 1600 x 900 a podle okna se celá zvětší nebo zmenší
+function prizpusobScenu() {
+  const m = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+  elScena.style.transform = "translate(-50%, -50%) scale(" + m + ")";
+}
+window.addEventListener("resize", prizpusobScenu);
+prizpusobScenu();
+
+// ---------------------------------------------------------------
+// ZÁLOHA NA KLÁVESNICI
+// ---------------------------------------------------------------
+let hudbaKlavesou = false;
+
+document.addEventListener("keydown", udalost => {
+  const k = udalost.key;
+  if (stav === "zkouska") {
+    if (k === "Escape" || k === "Backspace") { udalost.preventDefault(); zkouskaZavri(); }
+    else if (k === "Enter" || k === " " || k === "ArrowRight") {
+      udalost.preventDefault();
+      if (zkouskaKrok < ZKOUSKA_KROKY.length) zkouskaDalsi();
+    }
+    return;
+  }
+  if (stav === "ceka") {
+    if (k === "Enter" && !(document.activeElement && document.activeElement.tagName === "BUTTON")) elStart.click();
+    return;
+  }
+  if (stav !== "pripraveno" && stav !== "prezentace") return;
+
+  if (k === "m" || k === "M") {
+    if (!udalost.repeat && !hudbaHraje) { hudbaKlavesou = true; hudbaStart(); }
+  } else if ((k === "u" || k === "U") && stav === "prezentace") {
+    nastavUkazovatko(!ukazovatko);
+  } else if (k === "k" || k === "K") {
+    document.body.classList.toggle("bezNahledu");
+  } else if (k === "f" || k === "F") {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(chyba => console.log(chyba));
+  } else if (stav === "pripraveno") {
+    if (k === "Enter" || k === " ") { udalost.preventDefault(); proved("dlan"); }
+  } else {
+    if (k === "ArrowRight" || k === "ArrowDown" || k === "PageDown" || k === " " || k === "Enter") {
+      udalost.preventDefault(); proved("vpravo");
+    } else if (k === "ArrowLeft" || k === "ArrowUp" || k === "PageUp") {
+      udalost.preventDefault(); proved("vlevo");
+    } else if (k === "Backspace" || k === "Escape") {
+      udalost.preventDefault(); proved("pest");
+    }
+  }
+});
+
+document.addEventListener("keyup", udalost => {
+  if ((udalost.key === "m" || udalost.key === "M") && hudbaKlavesou) {
+    hudbaKlavesou = false;
+    hudbaStop();
+  }
+});
+
+// ---------------------------------------------------------------
+// HLAVNÍ SMYČKA
+// ---------------------------------------------------------------
+let casSnimku = -1;
+let smyckaBezi = false;
+
+// Tlačítko Zpět: návrat z pracovní obrazovky na úvodní, kde se dá vyměnit prezentace a hudba. Kamera běží dál.
+document.getElementById("zmenit").addEventListener("click", () => {
+  if (stav !== "pripraveno") return;
+  if (hudbaHraje) hudbaStop();
+  stav = "ceka";
+  document.body.classList.remove("bezi");
+  elStart.disabled = false;
+  zpravaPole("");
+  hlaseni(TEXT_NACTENO);
+});
+
+function smycka() {
+  const ted = performance.now();
+  if (elKamera.readyState >= 2 && elKamera.currentTime !== casSnimku) {
+    casSnimku = elKamera.currentTime;
+    let gesto = null;
+    let seznamRukou = [];
+    let seznam3d = [];
+    try {
+      const vysledek = ruce.detectForVideo(elKamera, ted);
+      seznamRukou = vysledek.landmarks;
+      seznam3d = vysledek.worldLandmarks;
+      const pomerStran = elKamera.videoWidth / elKamera.videoHeight || 16 / 9;
+      const gestaRukou = [];
+      for (let i = 0; i < seznamRukou.length; i++) {
+        gestaRukou.push(urciGesto(seznam3d[i], seznamRukou[i], pomerStran));
+      }
+      // Gesta oběma rukama mají přednost, jinak platí první poznané gesto jedné ruky.
+      const dveRuce = seznamRukou.length >= 2;
+      if (dveRuce && jeSrdce(seznamRukou[0], seznamRukou[1], pomerStran)) gesto = "srdce";
+      else if (dveRuce && ruceUSebe(seznamRukou[0], seznamRukou[1], pomerStran)) gesto = null;
+      else if (gestaRukou.filter(g => g === "nahoru").length >= 2) gesto = "ukazZapnout";
+      else if (gestaRukou.filter(g => g === "dolu").length >= 2) gesto = "ukazVypnout";
+      else gesto = gestaRukou.find(g => g) || null;
+    } catch (chyba) {
+      console.log(chyba);
+    }
+    pohniTeckou(seznamRukou, seznam3d, ted);
+    kresliNahled(seznamRukou);
+    elNahledText.textContent = gesto ? tr("Vidím: {0}", tr(NAZVY_GEST[gesto]))
+      : tr(seznamRukou.length ? "Vidím ruku, gesto nepoznáno" : "Ruka není v záběru");
+    krok(gesto, ted);
+  }
+  requestAnimationFrame(smycka);
+}
+
+// Přepnutí jazyka je odkaz na druhou jazykovou verzi. Volba se zapamatuje, aby se příště nepřesměrovávalo.
+document.getElementById("jazyk").addEventListener("click", () => {
+  try { localStorage.setItem("jazyk", "{{lang_other}}"); } catch (chyba) { console.log(chyba); }
+});
+
+prelozPevneTexty();
+
+doFronty(nactiVse);
+</script>
+</body>
+</html>

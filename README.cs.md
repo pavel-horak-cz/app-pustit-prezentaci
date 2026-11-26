@@ -4,9 +4,9 @@
 
 **Pusť prezentaci rukou.** Bez ovladače, bez instalace, bez účtu. Běží v prohlížeči a nic neopouští tvůj počítač.
 
-**[Vyzkoušej na slidesbyhand.com](https://slidesbyhand.com)** · [English](README.md)
+**[Vyzkoušej na slidesbyhand.com/cs/](https://slidesbyhand.com/cs/)** · [English](README.md)
 
-[![Úvodní obrazovka SlidesByHand](docs/screenshot-cs.png)](https://slidesbyhand.com)
+[![Úvodní obrazovka SlidesByHand](docs/screenshot-cs.png)](https://slidesbyhand.com/cs/)
 
 ## Co to je
 
@@ -54,11 +54,14 @@ Na úvodní obrazovce je tlačítko **Nauč se gesta**. Provede tě všemi šest
 - První načtení má asi 30 MB, většinu tvoří model pro rozpoznávání rukou. Po načtení už stránka připojení nepotřebuje.
 - Kamera notebooku musí vidět řečníka. Natoč notebook k sobě.
 - Gesta potřebují rozumné světlo. Když rozpoznávání selže, funguje záloha na klávesnici: Enter spustí, šipky listují, Backspace ukončí, U přepíná ukazovátko.
-- Česky a anglicky, přepíná se v patičce.
+- Česky na [slidesbyhand.com/cs/](https://slidesbyhand.com/cs/) a anglicky na [slidesbyhand.com](https://slidesbyhand.com).
+- Další čtení: [co to je a časté otázky](https://slidesbyhand.com/cs/o-projektu/), [návod krok za krokem](https://slidesbyhand.com/cs/jak-ovladat-prezentaci-gesty/), [srovnání s ovladačem](https://slidesbyhand.com/cs/prezentace-bez-ovladace/).
 
 ## Vlastní kopie
 
-Celá aplikace jsou statické soubory. Udělej si fork repozitáře, zapni GitHub Pages pro větev `main` a máš vlastní kopii. Žádné sestavování, žádný server, nic k instalaci.
+Celý web jsou statické soubory. Udělej si fork repozitáře, zapni GitHub Pages pro větev `main` a máš vlastní kopii. Žádný server, nic k instalaci.
+
+Anglická verze je v kořeni webu, česká ve složce `/cs/`. Obě, spolu s obsahovými stránkami, mapou webu a souborem `llms.txt`, vyrábí z jednoho zdroje skript `build.py`. Vygenerované soubory jsou v repozitáři, takže `python3 build.py` stačí spustit jen po změně něčeho ve složce `src/`.
 
 ## Postaveno na
 

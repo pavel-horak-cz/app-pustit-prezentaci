@@ -1,7 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://slidesbyhand.com/</loc>
     <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/"/>
+  </url>
+  <url>
+    <loc>https://slidesbyhand.com/cs/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/"/>
+  </url>
+  <url>
+    <loc>https://slidesbyhand.com/about/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/about/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/o-projektu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/about/"/>
+  </url>
+  <url>
+    <loc>https://slidesbyhand.com/cs/o-projektu/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/about/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/o-projektu/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/about/"/>
+  </url>
+  <url>
+    <loc>https://slidesbyhand.com/how-to-control-slides-with-hand-gestures/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/how-to-control-slides-with-hand-gestures/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/jak-ovladat-prezentaci-gesty/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/how-to-control-slides-with-hand-gestures/"/>
+  </url>
+  <url>
+    <loc>https://slidesbyhand.com/cs/jak-ovladat-prezentaci-gesty/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/how-to-control-slides-with-hand-gestures/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/jak-ovladat-prezentaci-gesty/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/how-to-control-slides-with-hand-gestures/"/>
+  </url>
+  <url>
+    <loc>https://slidesbyhand.com/presentation-clicker-alternative/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/presentation-clicker-alternative/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/prezentace-bez-ovladace/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/presentation-clicker-alternative/"/>
+  </url>
+  <url>
+    <loc>https://slidesbyhand.com/cs/prezentace-bez-ovladace/</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://slidesbyhand.com/presentation-clicker-alternative/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://slidesbyhand.com/cs/prezentace-bez-ovladace/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://slidesbyhand.com/presentation-clicker-alternative/"/>
   </url>
 </urlset>
