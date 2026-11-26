@@ -6,7 +6,7 @@
 
 **[Vyzkoušej na slidesbyhand.com/cs/](https://slidesbyhand.com/cs/)** · [English](README.md)
 
-[![Úvodní obrazovka SlidesByHand](docs/screenshot-cs.png)](https://slidesbyhand.com/cs/)
+[![Zkouška gest v SlidesByHand: otevřená dlaň, ukazovák doprava, ukazovák doleva](docs/demo.gif)](https://slidesbyhand.com/cs/)
 
 ## Co to je
 
