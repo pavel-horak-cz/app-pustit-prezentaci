@@ -14,14 +14,14 @@ html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--papir); color: var(--cerna); font-family: "Inter", system-ui, "Segoe UI", Arial, sans-serif;
   font-size: 18px; line-height: 1.6; }
 a { color: inherit; text-underline-offset: 3px; }
-.obal { width: min(100% - 40px, 820px); margin-inline: auto; }
+.obal { width: min(100% - 40px, 1240px); margin-inline: auto; }
 .sada { position: absolute; width: 0; height: 0; overflow: hidden; }
 .ik { width: 1em; height: 1em; display: inline-block; vertical-align: -0.18em; fill: none; stroke: currentColor; stroke-width: 1.6;
   stroke-linecap: round; stroke-linejoin: round; }
 
 /* Záhlaví */
 .zahlavi { background: var(--zluta); padding: 22px 0 54px; }
-.zahlavi .radek { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; width: min(100% - 40px, 1080px); }
+.zahlavi .radek { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
 .znacka { display: inline-flex; align-items: center; gap: .35em; font-weight: 900; font-size: 22px; letter-spacing: -.03em; text-decoration: none; }
 .znacka .ik { font-size: 1.3em; stroke-width: 2; }
 nav { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; font-weight: 600; font-size: 16px; }
@@ -66,6 +66,19 @@ td .ik { font-size: 1.5em; margin-right: .3em; vertical-align: -0.3em; }
 .zapati p { margin: 0 0 6px; }
 .zapati a { color: var(--zluta); font-weight: 600; }
 .zapati span { opacity: .5; margin: 0 .4em; }
+
+/* Široká obrazovka: text přes celou šířku, otázky a tipy ve dvou sloupcích */
+@media (min-width: 1000px) {
+  body { font-size: 19px; }
+  .lead { font-size: 25px; }
+  .faq { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
+  .faq > div { break-inside: avoid; }
+  .faq h3 { margin-top: 0; }
+  .faq p { margin-bottom: 26px; }
+  .vyzva { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px 48px; }
+  .vyzva p { margin-bottom: 0; }
+  .vyzva .text { flex: 1; }
+}
 
 @media (max-width: 560px) {
   body { font-size: 17px; }

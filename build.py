@@ -288,7 +288,7 @@ def ikony(zdroj):
 
 
 def otazky(telo):
-    blok = re.search(r'<div class="faq">(.*?)</div>', telo, re.S)
+    blok = re.search(r'<div class="faq">(.*)</div>', telo, re.S)
     if not blok:
         return None
     pary = re.findall(r"<h3>(.*?)</h3>\s*<p>(.*?)</p>", blok.group(1), re.S)
@@ -320,6 +320,10 @@ def sestav_stranku(klic, jazyk, sada):
     for cil in ("app", "about", "howto", "alt"):
         telo = telo.replace("{{" + cil + "}}", na(cil))
     telo = re.sub(r"\{\{ik:(\w+)\}\}", r'<svg class="ik" aria-hidden="true"><use href="#i-\1"/></svg>', telo)
+    # Každá otázka s odpovědí dostane vlastní obal, aby se na široké obrazovce daly řadit do dvou sloupců
+    telo = re.sub(r'(<div class="faq">)(.*?)(</div>)',
+                  lambda n: n.group(1) + re.sub(r"(<h3>.*?</h3>\s*<p>.*?</p>)", r"<div>\1</div>", n.group(2), flags=re.S) + n.group(3),
+                  telo, flags=re.S)
     assert "{{" not in telo, f"Nevyplněná značka v {klic}.{jazyk}"
 
     navic = []
@@ -367,8 +371,10 @@ def sestav_stranku(klic, jazyk, sada):
 {telo.strip()}
 </article>
 <aside class="vyzva">
-  <h2>{t['vyzva_nadpis']}</h2>
-  <p>{t['vyzva_text']}</p>
+  <div class="text">
+    <h2>{t['vyzva_nadpis']}</h2>
+    <p>{t['vyzva_text']}</p>
+  </div>
   <a class="tlacitko" href="{na('app')}">{html.escape(STRANKY['app'][jazyk]['menu'])}</a>
 </aside>
 </main>
