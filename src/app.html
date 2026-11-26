@@ -74,7 +74,9 @@
   body.tahne .pole { border-style: solid; background: #fff; }
   #poleZprava { min-height: 44px; font-size: 15px; font-weight: 600; line-height: 1.4; }
   #poleZprava.chyba { color: #8a0015; font-weight: 800; }
-  #pracovni .nahore .vlevo { display: flex; align-items: center; gap: 22px; }
+  #pracovni .nahore .vlevo, #pracovni .nahore .vpravo { display: flex; align-items: center; gap: 22px; }
+  #celaObrazovka { font-size: 18px; padding: .55em 1.2em; border-width: 2.5px; background: var(--cerna); color: var(--zluta); }
+  body.celaObrazovka #celaObrazovka { display: none; }
   #zmenit { display: inline-flex; align-items: center; gap: .4em; font-size: 18px; padding: .55em 1.2em .55em .9em; border-width: 2.5px; }
   #zmenit .ik { font-size: 1.3em; stroke-width: 2.2; }
   footer .vpravo { display: flex; align-items: center; gap: 14px; }
@@ -275,7 +277,10 @@
           <button id="zmenit" class="obrys" title="Zpět na úvodní obrazovku"><svg class="ik"><use href="#i-zpet"/></svg>Zpět</button>
           <h2>Ovládej rukou</h2>
         </div>
-        <div class="stitek"><i></i>Kamera běží</div>
+        <div class="vpravo">
+          <button id="celaObrazovka" class="obrys" title="Celá obrazovka (klávesa F)">Celá obrazovka</button>
+          <div class="stitek"><i></i>Kamera běží</div>
+        </div>
       </div>
       <div class="rozvrh">
         <div id="gesta">
@@ -473,6 +478,8 @@ const EN = {
   "Weby, o kterých ví Google i umělá inteligence:": "Websites that Google and AI know about:",
   "Přepnout jazyk": "Switch language",
   "O projektu": "About",
+  "Celá obrazovka": "Full screen",
+  "Celá obrazovka (klávesa F)": "Full screen (F key)",
   "Vše je načteno.": "Everything is loaded.",
   "Připravuji stránku {0} z {1}...": "Preparing page {0} of {1}...",
   "Načítám hudbu...": "Loading music...",
@@ -973,12 +980,20 @@ async function zapniKameru() {
   if (!smyckaBezi) { smyckaBezi = true; requestAnimationFrame(smycka); }
 }
 
+function naCelouObrazovku() {
+  if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(chyba => console.log(chyba));
+  }
+}
+function oznacCelouObrazovku() {
+  document.body.classList.toggle("celaObrazovka", !!document.fullscreenElement);
+}
+document.addEventListener("fullscreenchange", oznacCelouObrazovku);
+document.getElementById("celaObrazovka").addEventListener("click", naCelouObrazovku);
+
 async function spust() {
   elStart.disabled = true;
   try {
-    if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(chyba => console.log(chyba));
-    }
     // Odemknutí zvuku, aby ho později šlo spustit gestem
     if (hudba) {
       hudba.muted = true;
@@ -989,6 +1004,10 @@ async function spust() {
     }
     hlaseni("Zapínám kameru...");
     await zapniKameru();
+    // Celá obrazovka až po zapnutí kamery. Kdyby se o ni požádalo dřív, dotaz prohlížeče
+    // na povolení kamery by ji hned zase zrušil. Když to nevyjde (odpověď na dotaz trvala
+    // dlouho), zůstane na obrazovce gest tlačítko Celá obrazovka.
+    naCelouObrazovku();
     stav = "pripraveno";
     hlaseni("Připraveno. Ukaž otevřenou dlaň.", "ok");
     document.body.classList.add("bezi");   // plakát vystřídá pracovní obrazovka s gesty a kamerou
