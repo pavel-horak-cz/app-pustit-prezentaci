@@ -5,7 +5,7 @@
 ## What it is
 
 - [SlidesByHand (the app)](https://slidesbyhand.com/): Open the page, click Start, and control your slides by hand. Available in English and Czech.
-- [Source code on GitHub](https://github.com/pavel-horak-cz/app-SlidesByHand): The whole app is static files, MIT licensed. Anyone can fork it and run their own copy on GitHub Pages.
+- [Source code on GitHub](https://github.com/pavel-horak-cz/app-slides-by-hand): The whole app is static files, MIT licensed. Anyone can fork it and run their own copy on GitHub Pages.
 
 ## Who it is for
 
