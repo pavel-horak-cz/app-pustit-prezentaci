@@ -6,7 +6,7 @@
 
 **[Try it at slidesbyhand.com](https://slidesbyhand.com)** · [Česky](README.cs.md)
 
-[![SlidesByHand start screen](docs/screenshot.png)](https://slidesbyhand.com)
+[![Practising the gestures in SlidesByHand: open palm, index finger right, index finger left](docs/demo.gif)](https://slidesbyhand.com)
 
 ## What it is
 
