@@ -1,0 +1,46 @@
+name: Something does not work
+description: A gesture is not recognized, the camera does not start, a file will not load...
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. Czech is fine too, pište klidně česky.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Which part
+      options:
+        - Starting the camera
+        - A gesture is not recognized
+        - A gesture fires when it should not
+        - The pointer
+        - Loading my PDF or MP3
+        - Learn the gestures
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: sees
+    attributes:
+      label: What the line under the camera preview said
+      description: 'For example "I see: open palm", "I see a hand, gesture not recognized" or "No hand in view".'
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and system
+      description: For example Chrome 131 on Windows 11.
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Camera and room
+      description: Laptop camera or external? Roughly how far from the camera were you, and how was the light?

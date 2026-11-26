@@ -1,5 +1,7 @@
 # SlidesByHand
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-0b0b0b)](LICENSE) [![Live demo](https://img.shields.io/badge/live%20demo-slidesbyhand.com-FFB20F)](https://slidesbyhand.com)
+
 **Run your slides with hand gestures.** No clicker, no install, no account. It runs in your browser and nothing leaves your computer.
 
 **[Try it at slidesbyhand.com](https://slidesbyhand.com)** · [Česky](README.cs.md)

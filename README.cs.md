@@ -1,5 +1,7 @@
 # SlidesByHand
 
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-0b0b0b)](LICENSE) [![Živá ukázka](https://img.shields.io/badge/%C5%BEiv%C3%A1%20uk%C3%A1zka-slidesbyhand.com-FFB20F)](https://slidesbyhand.com)
+
 **Pusť prezentaci rukou.** Bez ovladače, bez instalace, bez účtu. Běží v prohlížeči a nic neopouští tvůj počítač.
 
 **[Vyzkoušej na slidesbyhand.com](https://slidesbyhand.com)** · [English](README.md)

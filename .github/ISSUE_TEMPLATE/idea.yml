@@ -1,0 +1,19 @@
+name: Idea or request
+description: A gesture, a feature or an improvement you would like to see.
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Czech is fine too, pište klidně česky.
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Where would you use it
+      description: A meetup, a classroom, a company training... It helps to know the situation.
