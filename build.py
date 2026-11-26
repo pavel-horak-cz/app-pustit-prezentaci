@@ -69,6 +69,14 @@ STRANKY = {
 }
 OBSAHOVE = ("about", "howto", "alt")
 
+# Ukázkové video na stránce O projektu (soubory jsou ve složce docs/)
+VIDEO = {
+    "en": {"soubor": "docs/demo-en.mp4", "nahled": "docs/demo-en.jpg", "delka": "PT29S", "nazev": "SlidesByHand in action",
+           "popis": "An open palm starts the slides, an index finger turns the pages and a fist ends the presentation. Recorded in the browser, no clicker involved."},
+    "cs": {"soubor": "docs/demo-cs.mp4", "nahled": "docs/demo-cs.jpg", "delka": "PT22S", "nazev": "SlidesByHand v akci",
+           "popis": "Otevřená dlaň spustí prezentaci, ukazovák listuje a pěst ji ukončí. Natočeno v prohlížeči, bez ovladače."},
+}
+
 TEXTY = {
     "en": {"locale": "en_US", "og": "og-image.png", "druhy": "Česky", "domu": "Home",
            "vyzva_nadpis": "Try it now", "vyzva_text": "It takes a minute, costs nothing and needs no install.",
@@ -324,9 +332,21 @@ def sestav_stranku(klic, jazyk, sada):
     telo = re.sub(r'(<div class="faq">)(.*?)(</div>)',
                   lambda n: n.group(1) + re.sub(r"(<h3>.*?</h3>\s*<p>.*?</p>)", r"<div>\1</div>", n.group(2), flags=re.S) + n.group(3),
                   telo, flags=re.S)
+    navic = []
+    if "{{video}}" in telo:
+        v = VIDEO[jazyk]
+        telo = telo.replace("{{video}}", f'''<figure class="ukazka">
+  <video autoplay muted loop playsinline controls preload="metadata" width="1280" height="648" poster="{koren}{v['nahled']}" aria-label="{html.escape(v['nazev'])}">
+    <source src="{koren}{v['soubor']}" type="video/mp4">
+  </video>
+  <figcaption>{html.escape(v['popis'])}</figcaption>
+</figure>''')
+        navic.append({"@type": "VideoObject", "@id": url + "#video", "name": v["nazev"], "description": v["popis"],
+                      "thumbnailUrl": WEB + "/" + v["nahled"], "contentUrl": WEB + "/" + v["soubor"],
+                      "uploadDate": ZMENENO + "T00:00:00" + POSUN, "duration": v["delka"], "inLanguage": jazyk,
+                      "isPartOf": {"@id": url + "#webpage"}, "author": autor()})
     assert "{{" not in telo, f"Nevyplněná značka v {klic}.{jazyk}"
 
-    navic = []
     seznam_otazek = otazky(telo)
     if seznam_otazek:
         navic.append({"@type": "FAQPage", "@id": url + "#faq", "inLanguage": jazyk,
@@ -485,6 +505,7 @@ Last updated: {ZMENENO}
 def llms_plny():
     def na_text(telo):
         telo = re.sub(r"\{\{ik:\w+\}\}", "", telo)
+        telo = telo.replace("{{video}}", "")
         telo = re.sub(r"\{\{\w+\}\}", WEB + "/", telo)
         telo = re.sub(r"<h2>(.*?)</h2>", r"\n\n### \1\n\n", telo, flags=re.S)
         telo = re.sub(r"<h3>(.*?)</h3>", r"\n\n**\1**\n\n", telo, flags=re.S)

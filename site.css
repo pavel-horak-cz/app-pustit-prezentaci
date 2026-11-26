@@ -56,6 +56,11 @@ th { font-weight: 800; border-bottom: 2.5px solid var(--cerna); }
 td .ik { font-size: 1.5em; margin-right: .3em; vertical-align: -0.3em; }
 .faq h3 { border-top: 1.5px solid rgba(11, 11, 11, .16); padding-top: 20px; margin-top: 20px; }
 
+/* Ukázkové video */
+.ukazka { margin: 30px 0 8px; }
+.ukazka video { display: block; width: 100%; height: auto; border-radius: 20px; background: var(--cerna); border: 2.5px solid var(--cerna); }
+.ukazka figcaption { margin-top: 10px; font-size: 15px; opacity: .75; }
+
 /* Výzva na konci */
 .vyzva { margin-top: 64px; background: var(--zluta); border-radius: 28px; padding: 36px 32px; }
 .vyzva h2 { margin: 0 0 6px; }
