@@ -140,7 +140,9 @@
   .stitek i { width: .6em; height: .6em; border-radius: 50%; background: var(--zluta); display: block; }
 
   /* Plakát před kliknutím na Start */
-  #plakat .nahore { display: flex; justify-content: flex-end; }
+  #plakat .nahore { display: flex; justify-content: space-between; align-items: center; }
+  #plakat .znacka { display: flex; align-items: center; gap: .35em; font-weight: 900; font-size: 28px; letter-spacing: -.03em; }
+  #plakat .znacka .ik { font-size: 1.3em; stroke-width: 2; }
   #plakat h1 { font-weight: 900; font-size: 158px; line-height: .92; letter-spacing: -.06em; margin: 22px 0 0; }
   #plakat .pod { font-size: 24px; line-height: 1.4; margin: 24px 0 0; max-width: 30em; }
   #plakat .pod b { font-weight: 800; }
@@ -329,7 +331,10 @@
 
     <!-- Plakát před kliknutím na Start -->
     <section id="plakat">
-      <div class="nahore"><div class="stitek"><i></i>Ovládáno gesty</div></div>
+      <div class="nahore">
+        <div class="znacka"><svg class="ik"><use href="#i-dlan"/></svg>SlidesByHand</div>
+        <div class="stitek"><i></i>Ovládáno gesty</div>
+      </div>
       <div class="ruka"><svg class="ik"><use href="#i-dlan"/></svg></div>
       <h1>Pusť<br>prezentaci<br>rukou.</h1>
       <p class="pod">Žádné hledání oken, žádný ovladač. Stačí kamera notebooku a pár gest před obrazovkou.
