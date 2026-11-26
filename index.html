@@ -3,11 +3,104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pusť prezentaci rukou</title>
-<meta name="description" content="Prezentace, která se ovládá gesty ruky před kamerou notebooku. Žádné hledání oken, žádný ovladač.">
-<meta name="author" content="Pavel Horák">
-<meta property="article:author" content="https://phorak.cz/#pavel-horak">
 <meta name="theme-color" content="#FFB20F">
+<!-- Základní SEO -->
+<title>SlidesByHand | Run your slides by hand</title>
+<meta name="description" content="Control your presentation with hand gestures in front of a laptop camera. No clicker, no install, no account. Runs in the browser and nothing leaves your computer.">
+<meta name="keywords" content="SlidesByHand, hand gestures, gesture control, presentation, slides, PDF, webcam, hand tracking, no clicker, ovládání prezentace gesty, Pavel Horák">
+<meta name="author" content="Pavel Horák">
+<meta name="creator" content="Pavel Horák">
+<meta name="publisher" content="Pavel Horák">
+<meta name="copyright" content="© 2026 Pavel Horák">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://slidesbyhand.com/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="license" href="https://opensource.org/licenses/MIT">
+<!-- Časové údaje -->
+<meta name="date" content="2026-11-25">
+<meta name="dcterms.modified" content="2026-11-26">
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SlidesByHand">
+<meta property="og:title" content="SlidesByHand | Run your slides by hand">
+<meta property="og:description" content="Control your presentation with hand gestures. No clicker, no install, nothing leaves your computer.">
+<meta property="og:image" content="https://slidesbyhand.com/og-image.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://slidesbyhand.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="article:author" content="https://phorak.cz/#pavel-horak">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SlidesByHand | Run your slides by hand">
+<meta name="twitter:description" content="Control your presentation with hand gestures. No clicker, no install, nothing leaves your computer.">
+<meta name="twitter:image" content="https://slidesbyhand.com/og-image.png">
+<meta name="twitter:creator" content="@PavelHorakCZ">
+<!-- Schema.org: webová aplikace, zdrojový kód a web. Autor odkazuje na centrální identitu na phorak.cz. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://slidesbyhand.com/#website",
+      "url": "https://slidesbyhand.com/",
+      "name": "SlidesByHand",
+      "description": "Run your slides with hand gestures in front of a laptop camera.",
+      "inLanguage": ["en", "cs"],
+      "publisher": {"@id": "https://phorak.cz/#pavel-horak"},
+      "copyrightYear": 2026,
+      "copyrightHolder": {"@id": "https://phorak.cz/#pavel-horak"},
+      "dateCreated": "2026-11-25T00:00:00+01:00",
+      "dateModified": "2026-11-26T00:00:00+01:00"
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://slidesbyhand.com/#app",
+      "name": "SlidesByHand",
+      "url": "https://slidesbyhand.com/",
+      "description": "A free web app that lets a speaker control a PDF presentation with hand gestures in front of a laptop camera. No clicker, no install, no account. Everything runs in the browser and nothing leaves the computer.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any (runs in a web browser)",
+      "browserRequirements": "Requires JavaScript, a camera and a modern browser. Tested in Chrome.",
+      "inLanguage": ["en", "cs"],
+      "isAccessibleForFree": true,
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+      "featureList": [
+        "Start, page through and end a presentation with hand gestures",
+        "Pointer that follows the fingertip",
+        "Own PDF presentation and MP3 sound stored in the browser",
+        "Guided practice of the gestures",
+        "Keyboard backup",
+        "English and Czech interface",
+        "Camera image, slides and sound never leave the computer"
+      ],
+      "image": "https://slidesbyhand.com/og-image.png",
+      "screenshot": "https://slidesbyhand.com/docs/screenshot.png",
+      "license": "https://opensource.org/licenses/MIT",
+      "isPartOf": {"@id": "https://slidesbyhand.com/#website"},
+      "datePublished": "2026-11-25",
+      "dateModified": "2026-11-26",
+      "author": {"@type": "Person", "@id": "https://phorak.cz/#pavel-horak", "name": "Pavel Horák", "url": "https://phorak.cz"},
+      "creator": {"@id": "https://phorak.cz/#pavel-horak"}
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://slidesbyhand.com/#code",
+      "name": "SlidesByHand",
+      "description": "Source code of SlidesByHand, a browser app for controlling presentations with hand gestures.",
+      "url": "https://slidesbyhand.com/",
+      "codeRepository": "https://github.com/pavel-horak-cz/app-SlidesByHand",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": "JavaScript",
+      "targetProduct": {"@id": "https://slidesbyhand.com/#app"},
+      "author": {"@type": "Person", "@id": "https://phorak.cz/#pavel-horak", "name": "Pavel Horák", "url": "https://phorak.cz"}
+    }
+  ]
+}
+</script>
 <style>
   @font-face { font-family: "Inter"; font-weight: 400; font-display: swap;
     src: url("lib/fonts/inter-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
@@ -377,6 +470,7 @@ import * as pdfjsLib from "./lib/pdfjs/pdf.min.mjs";
 // ---------------------------------------------------------------
 const EN = {
   "Pusť prezentaci rukou": "Run your slides by hand",
+  "Ovládej prezentaci gesty ruky před kamerou notebooku. Bez ovladače, bez instalace, bez účtu. Běží v prohlížeči a nic neopouští tvůj počítač.": "Control your presentation with hand gestures in front of a laptop camera. No clicker, no install, no account. Runs in the browser and nothing leaves your computer.",
   "Ovládáno gesty": "Gesture controlled",
   "Pusť": "Run your",
   "prezentaci": "slides",
@@ -541,7 +635,8 @@ const pevneAtributy = [];
 
 function prelozPevneTexty() {
   document.documentElement.lang = jazyk;
-  document.title = tr("Pusť prezentaci rukou");
+  document.title = "SlidesByHand | " + tr("Pusť prezentaci rukou");
+  document.querySelector('meta[name="description"]').setAttribute("content", tr("Ovládej prezentaci gesty ruky před kamerou notebooku. Bez ovladače, bez instalace, bez účtu. Běží v prohlížeči a nic neopouští tvůj počítač."));
   for (const t of pevneTexty) t.uzel.nodeValue = (t.pred ? " " : "") + tr(t.cesky) + (t.po ? " " : "");
   for (const a of pevneAtributy) a.prvek.setAttribute(a.atribut, tr(a.cesky));
   document.getElementById("jazyk").textContent = jazyk === "cs" ? "EN" : "CS";

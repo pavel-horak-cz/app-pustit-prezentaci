@@ -1,0 +1,60 @@
+# SlidesByHand
+
+> SlidesByHand is a free web app that lets a speaker control a PDF presentation with hand gestures in front of a laptop camera. No clicker, no install, no account. Everything runs in the browser and nothing leaves the user's computer. Made by Pavel Horák. Open source under the MIT License.
+
+## What it is
+
+- [SlidesByHand (the app)](https://slidesbyhand.com/): Open the page, click Start, and control your slides by hand. Available in English and Czech.
+- [Source code on GitHub](https://github.com/pavel-horak-cz/app-SlidesByHand): The whole app is static files, MIT licensed. Anyone can fork it and run their own copy on GitHub Pages.
+
+## Who it is for
+
+Speakers at meetups, trainers, teachers and anyone who connects a laptop to a TV or projector and does not want to hunt for the right window or hold a clicker.
+
+## Gestures
+
+- Open palm: starts the presentation
+- Index finger pointing right: next page
+- Index finger pointing left: previous page
+- Both index fingers up: turns on a pointer, a red dot that follows the fingertip
+- Both index fingers down: turns the pointer off
+- Fist: ends the presentation
+
+Every gesture has to be held for about a second while a ring on the screen fills up, so nothing fires by accident. A keyboard backup is always available (Enter, arrows, Backspace).
+
+## Features
+
+- Own presentation: drag a PDF onto the page. PowerPoint, Keynote and Google Slides can export to PDF.
+- Own sound: drag an MP3 onto the page.
+- Files are stored in the browser on the user's computer and stay there for the next visit.
+- "Learn the gestures": a guided practice of all six gestures with live feedback from the camera.
+- A sample presentation that teaches the gestures is built in.
+- English and Czech interface.
+
+## Privacy
+
+- The camera image is processed in the browser. It is not recorded, stored or sent anywhere.
+- The presentation and the sound stay in the browser's storage on the user's computer.
+- No accounts, no cookies, no tracking.
+
+## How it works
+
+- Hand tracking: MediaPipe Hand Landmarker, running in the browser, returns 21 points for each hand.
+- Gesture recognition: plain geometry over those points (distances and directions of fingers).
+- Slides: PDF.js renders the pages in the browser.
+- Requirements: a modern browser (tested in Chrome), a camera, and an HTTPS connection. The first load is about 30 MB.
+
+## Author
+
+- Pavel Horák builds websites and web apps.
+- [Portfolio of projects](https://pprojects.cz)
+- [Websites that Google and AI know about (webseoai.cz)](https://webseoai.cz)
+- [Personal site and CV](https://phorak.cz)
+- [Custom work and contact (hodinovyvibecoder.cz)](https://hodinovyvibecoder.cz)
+- [LinkedIn](https://www.linkedin.com/in/pavelhorakeu)
+- [X](https://x.com/PavelHorakCZ)
+- [GitHub](https://github.com/pavel-horak-cz)
+
+## License
+
+MIT. If you use SlidesByHand or build on it, the author asks you to keep a visible link to https://slidesbyhand.com.
